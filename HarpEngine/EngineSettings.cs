@@ -8,14 +8,22 @@ namespace HarpEngine;
 
 public struct EngineSettings
 {
+	// Window
 	public int WindowWidth;
 	public int WindowHeight;
 	public string WindowName;
 
+	// Game
+	public int GameWidth;
+	public int GameHeight;
+
 	public EngineSettings()
 	{
-		WindowWidth = 500;
-		WindowHeight = 500;
+		WindowWidth = 800;
+		WindowHeight = 800;
 		WindowName = "Harp Engine";
+
+		GameWidth = 256;
+		GameHeight = 256;
 	}
 }
