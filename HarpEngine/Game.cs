@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace HarpEngine;
 
-public abstract class Runtime
+public abstract class Game
 {
-	protected abstract void Update(float frameTime);
-	protected abstract void Draw();
+	public abstract void Update(float frameTime);
+	public abstract void Draw();
 }

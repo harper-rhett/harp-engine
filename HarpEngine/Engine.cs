@@ -5,16 +5,37 @@ namespace HarpEngine;
 
 public static class Engine
 {
-	public static void Start(Runtime runtime)
-	{
-		
-	}
+	private static Game game;
+	private static EngineSettings settings;
 
-	private static void Update()
+	public static void Start(Game game, EngineSettings engineSettings)
 	{
+		Engine.game = game;
+		settings = engineSettings;
+		Initialize();
 		while (!WindowShouldClose())
 		{
-
+			RunUpdate();
+			RunDraw();
 		}
+	}
+
+	private static void Initialize()
+	{
+		InitWindow(settings.WindowWidth, settings.WindowHeight, settings.WindowName);
+	}
+
+	private static void RunUpdate()
+	{
+		float frameTime = GetFrameTime();
+		game.Update(frameTime);
+	}
+
+	private static void RunDraw()
+	{
+		game.Draw();
+
+		BeginDrawing();
+		EndDrawing();
 	}
 }

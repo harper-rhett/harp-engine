@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace HarpEngine;
 
-public class Entity
+public abstract class Entity
 {
-
+	public abstract void Update(float frameTime);
+	public abstract void Draw();
 }
