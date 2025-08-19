@@ -8,11 +8,44 @@ namespace HarpEngine;
 
 internal abstract class Window
 {
+	// Window fields
+	protected int windowWidth;
+	protected int windowHeight;
+	private int previousWindowWidth;
+	private int previousWindowHeight;
+
+	// Game fields
+	protected int gameWidth;
+	protected int gameHeight;
+
+	protected bool DidResize
+	{
+		get
+		{
+			bool result = windowWidth != previousWindowWidth || windowHeight != previousWindowHeight;
+			previousWindowWidth = windowWidth;
+			previousWindowHeight = windowHeight;
+			return result;
+		}
+	}
+
+	// Fetch new values
+	protected void RefreshValues(RenderTexture2D gameRenderTexture)
+	{
+		windowWidth = GetScreenWidth();
+		windowHeight = GetScreenHeight();
+		gameWidth = gameRenderTexture.Texture.Width;
+		gameHeight = gameRenderTexture.Texture.Height;
+	}
+
+	// Custom implementation for game sizing
 	public abstract void DrawWindow(RenderTexture2D gameRenderTexture);
 
+	// No clipping
 	public class Bordered : Window
 	{
 		private Color borderColor;
+		private Rectangle viewportRectangle;
 
 		public Bordered(Color borderColor)
 		{
@@ -21,41 +54,50 @@ internal abstract class Window
 
 		public override void DrawWindow(RenderTexture2D gameRenderTexture)
 		{
-			int windowWidth = GetScreenWidth();
-			int windowHeight = GetScreenHeight();
-			int gameWidth = gameRenderTexture.Texture.Width;
-			int gameHeight = gameRenderTexture.Texture.Height;
-
-			// Does not need to be recreated every frame.
-			// Can be stored as field and calculation called when game width or height is updated.
+			// Initialize
+			RefreshValues(gameRenderTexture);
 			Rectangle gameRectangle = new(0, 0, gameWidth, -gameHeight);
 
-			// Does not need to be calculated every frame.
-			// Can check if window size has changed since last frame.
-			Rectangle viewportRectangle = new();
+			// Only calculate viewport rectangle if window has been resized
+			if (DidResize) CalculateViewportRectangle(windowWidth, windowHeight);
+
+			// Clear background to draw border before drawing game
+			ClearBackground(borderColor);
+			DrawTexturePro(gameRenderTexture.Texture, gameRectangle, viewportRectangle, Vector2.Zero, 0, White);
+		}
+
+		private void CalculateViewportRectangle(int windowWidth, int windowHeight)
+		{
+			viewportRectangle = new();
 			int minimumDimension = Math.Min(windowWidth, windowHeight);
 			viewportRectangle.X = (windowWidth - minimumDimension) / 2f;
 			viewportRectangle.Y = (windowHeight - minimumDimension) / 2f;
 			viewportRectangle.Width = minimumDimension;
 			viewportRectangle.Height = minimumDimension;
-
-			ClearBackground(borderColor);
-			DrawTexturePro(gameRenderTexture.Texture, gameRectangle, viewportRectangle, Vector2.Zero, 0, White);
 		}
 	}
 
+	// Clip the smallest dimension
 	public class Clipped : Window
 	{
+		private Rectangle gameRectangle;
+
 		public override void DrawWindow(RenderTexture2D gameRenderTexture)
 		{
-			int windowWidth = GetScreenWidth();
-			int windowHeight = GetScreenHeight();
+			// Initialize
+			RefreshValues(gameRenderTexture);
+			Rectangle viewportRectangle = new(0, 0, windowWidth, windowHeight);
+
+			// Only calculare game rectangle if window has been resized
+			if (DidResize) CalculateGameRectangle(windowWidth, windowHeight, gameWidth, gameHeight);
+
+			// Draw game clipped
+			DrawTexturePro(gameRenderTexture.Texture, gameRectangle, viewportRectangle, Vector2.Zero, 0, White);
+		}
+
+		private void CalculateGameRectangle(int windowWidth, int windowHeight, int gameWidth, int gameHeight)
+		{
 			float windowAspect = (float)windowWidth / windowHeight;
-
-			int gameWidth = gameRenderTexture.Texture.Width;
-			int gameHeight = gameRenderTexture.Texture.Height;
-
-			Rectangle gameRectangle;
 			if (windowWidth > windowHeight)
 			{
 				float newGameHeight = gameHeight / windowAspect;
@@ -70,10 +112,6 @@ internal abstract class Window
 				float xOffset = widthDifference / 2f;
 				gameRectangle = new(xOffset, 0, newGameWidth, -gameHeight);
 			}
-
-			Rectangle viewportRectangle = new(0, 0, windowWidth, windowHeight);
-
-			DrawTexturePro(gameRenderTexture.Texture, gameRectangle, viewportRectangle, Vector2.Zero, 0, White);
 		}
 	}
 }
