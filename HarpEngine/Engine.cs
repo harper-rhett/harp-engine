@@ -10,12 +10,11 @@ public static class Engine
 {
 	// Input
 	private static Game game;
-	private static EngineSettings settings;
+	private static EngineSettings settings; // This may be a mistake... perhaps every value should be accesible from Game. (i.e. Engine.GameWidth)
 
 	// General
 	private static RenderTexture2D gameRenderTexture;
-	private static Rectangle gameRectangle;
-	private static Rectangle windowRectangle;
+	private static Window window = new Window.Bordered(Black);
 
 	public static void Start(Game game, EngineSettings engineSettings)
 	{
@@ -33,11 +32,9 @@ public static class Engine
 	{
 		// Initialize window
 		InitWindow(settings.WindowWidth, settings.WindowHeight, settings.WindowName);
-		windowRectangle = new(0, 0, settings.WindowWidth, settings.WindowHeight);
 
 		// Initialize game
 		gameRenderTexture = LoadRenderTexture(settings.GameWidth, settings.GameHeight);
-		gameRectangle = new(0, 0, settings.GameWidth, -settings.GameHeight);
 	}
 
 	private static void MasterUpdate()
@@ -53,7 +50,10 @@ public static class Engine
 		EndTextureMode();
 
 		BeginDrawing();
-		DrawTexturePro(gameRenderTexture.Texture, gameRectangle, windowRectangle, Vector2.Zero, 0, White);
+		window.DrawWindow(gameRenderTexture);
 		EndDrawing();
 	}
+
+	public static void SetWindowBordered(Color borderColor) => window = new Window.Bordered(borderColor);
+	public static void SetWindowClipped() => window = new Window.Clipped();
 }
