@@ -10,16 +10,16 @@ public sealed class Scene
 {
 	private List<Entity> entitiesToAdd = new();
 	private List<Entity> entities = new();
-	private List<Entity> entitiesToRemove = new();
+	private HashSet<Entity> entitiesToRemove = new();
 
 	public void Update(float frameTime)
 	{
-		foreach (Entity entity in entitiesToAdd) entities.Add(entity);
+		entities.AddRange(entitiesToAdd);
 		entitiesToAdd.Clear();
 
 		foreach (Entity entity in entities) entity.Update(frameTime);
 
-		foreach (Entity entity in entitiesToRemove) entities.Remove(entity);
+		entities.RemoveAll(entity => entitiesToRemove.Contains(entity));
 		entitiesToRemove.Clear();
 	}
 
