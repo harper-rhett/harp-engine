@@ -7,6 +7,7 @@ public struct Particle
 	public float RotationSpeed;
 	public float Lifespan;
 	public float SpawnTime;
+	public Color color;
 }
 
 public class ParticleEmitter : Entity
