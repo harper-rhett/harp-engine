@@ -50,7 +50,7 @@ public static class Engine
 		EndTextureMode();
 
 		BeginDrawing();
-		window.DrawWindow(gameRenderTexture);
+		window.Draw(gameRenderTexture);
 		EndDrawing();
 	}
 

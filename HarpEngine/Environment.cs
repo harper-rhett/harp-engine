@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace HarpEngine;
 
-namespace HarpEngine;
-
-public sealed class World
+public sealed class Environment
 {
 	// General
 	private List<Entity> entitiesToAdd = new();
@@ -20,7 +14,7 @@ public sealed class World
 	/// <summary>If the update loop is paused. The draw loop is unaffected/</summary>
 	public bool IsPaused;
 
-	public World()
+	public Environment()
 	{
 		Entities = entities.AsReadOnly();
 	}

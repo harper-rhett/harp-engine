@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HarpEngine;
+﻿namespace HarpEngine;
 
 public struct Particle
 {
@@ -19,12 +13,19 @@ public class ParticleEmitter : Entity
 {
 	private Particle[] particles;
 	private int count;
+	private int initialCount = 100;
 
-	private const int InitialCount = 100;
+	private ParticleRenderer particleRenderer = new ParticleRenderer.Circle(8);
 
 	public ParticleEmitter()
 	{
-		particles = new Particle[InitialCount];
+		particles = new Particle[initialCount];
+	}
+
+	public ParticleEmitter(int initialCount)
+	{
+		this.initialCount = initialCount;
+		particles = new Particle[initialCount];
 	}
 
 	public override void Update(float frameTime)
@@ -37,27 +38,31 @@ public class ParticleEmitter : Entity
 
 	public override void Draw()
 	{
-
+		for (int particleIndex = 0; particleIndex < count; particleIndex++)
+		{
+			Particle particle = particles[particleIndex];
+			particleRenderer.Draw(particle);
+		}
 	}
 
 	public void RenderAsPixel()
 	{
-
-	}
-
-	public void RenderAsTexture(Texture2D texture2D)
-	{
-
+		particleRenderer = new ParticleRenderer.Pixel();
 	}
 
 	public void RenderAsCircle(float radius)
 	{
-
+		particleRenderer = new ParticleRenderer.Circle(radius);
 	}
 
 	public void RenderAsPolygon(int sides, float radius)
 	{
-		
+		particleRenderer = new ParticleRenderer.Polygon(sides, radius);
+	}
+
+	public void RenderAsTexture(Texture2D texture2D)
+	{
+		particleRenderer = new ParticleRenderer.Texture(texture2D);
 	}
 
 	private void ResizeParticles()

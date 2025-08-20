@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HarpEngine;
+﻿namespace HarpEngine;
 
 internal abstract class Window
 {
@@ -39,7 +33,7 @@ internal abstract class Window
 	}
 
 	// Custom implementation for game sizing
-	public abstract void DrawWindow(RenderTexture2D gameRenderTexture);
+	public abstract void Draw(RenderTexture2D gameRenderTexture);
 
 	// No clipping
 	public class Bordered : Window
@@ -52,7 +46,7 @@ internal abstract class Window
 			this.borderColor = borderColor;
 		}
 
-		public override void DrawWindow(RenderTexture2D gameRenderTexture)
+		public override void Draw(RenderTexture2D gameRenderTexture)
 		{
 			// Initialize
 			RefreshValues(gameRenderTexture);
@@ -82,7 +76,7 @@ internal abstract class Window
 	{
 		private Rectangle gameRectangle;
 
-		public override void DrawWindow(RenderTexture2D gameRenderTexture)
+		public override void Draw(RenderTexture2D gameRenderTexture)
 		{
 			// Initialize
 			RefreshValues(gameRenderTexture);
