@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HarpEngine;
 
-public sealed class Scene
+public sealed class Environment
 {
 	private List<Entity> entitiesToAdd = new();
 	private List<Entity> entities = new();
