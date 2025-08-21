@@ -24,8 +24,9 @@ public class ParticleEmitter : Entity
 {
 	// General
 	private Particle[] particles;
+	public IReadOnlyCollection<Particle> Particles;
 	private int count;
-	private int initialCount = 100;
+	private const int defaultInitialCount = 100;
 	private ParticleRenderer particleRenderer = new ParticleRenderer.Circle(4);
 	Random random = new();
 
@@ -47,15 +48,12 @@ public class ParticleEmitter : Entity
 	public float ParticleLifespan = Particle.DefaultLifespan;
 	public bool IsExhausted => count == 0;
 
-	public ParticleEmitter(Scene scene) : base(scene)
-	{
-		particles = new Particle[initialCount];
-	}
+	public ParticleEmitter(Scene scene) : this(scene, defaultInitialCount) { }
 
 	public ParticleEmitter(Scene scene, int initialCount) : base(scene)
 	{
-		this.initialCount = initialCount;
 		particles = new Particle[initialCount];
+		Particles = particles.AsReadOnly();
 	}
 
 	public override void Update(float frameTime)
