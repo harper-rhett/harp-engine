@@ -29,14 +29,21 @@ public class ParticleEmitter : Entity
 	private ParticleRenderer particleRenderer = new ParticleRenderer.Circle(4);
 	Random random = new();
 
-	// Interface
+	// Movement
 	public float BaseSpeed = 0;
 	public float RandomSpeed = 0;
 	public float SpawnRadius = 0;
 	public Vector2 Gravity = Vector2.Zero;
+
+	// Rotation
 	public float StartRotation = 0;
 	public bool GenerateRandomRotations;
 	public float RotationSpeed = 0;
+
+	// Extras
+	public Color Color = White;
+
+	// Lifespan
 	public float ParticleLifespan = Particle.DefaultLifespan;
 	public bool IsExhausted => count == 0;
 
@@ -135,6 +142,7 @@ public class ParticleEmitter : Entity
 		Vector2 direction = random.NextVector2();
 		Vector2 spawnPosition = GetSpawnPosition(position, direction);
 		particle.Position = spawnPosition;
+		particle.Color = Color;
 		particle.Lifespan = ParticleLifespan;
 
 		// Velocity
