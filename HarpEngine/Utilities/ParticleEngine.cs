@@ -20,7 +20,7 @@ public struct Particle
 	}
 }
 
-public class ParticleEmitter : Entity
+public class ParticleEngine : Entity
 {
 	// General
 	private Particle[] particles;
@@ -48,9 +48,9 @@ public class ParticleEmitter : Entity
 	public float ParticleLifespan = Particle.DefaultLifespan;
 	public bool IsExhausted => count == 0;
 
-	public ParticleEmitter(Scene scene) : this(scene, defaultInitialCount) { }
+	public ParticleEngine(Scene scene) : this(scene, defaultInitialCount) { }
 
-	public ParticleEmitter(Scene scene, int initialCount) : base(scene)
+	public ParticleEngine(Scene scene, int initialCount) : base(scene)
 	{
 		particles = new Particle[initialCount];
 		Particles = particles.AsReadOnly();
