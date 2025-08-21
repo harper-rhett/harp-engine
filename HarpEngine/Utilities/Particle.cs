@@ -36,6 +36,7 @@ public struct Particle3D
 	public Quaternion Rotation;
 	public float SpawnTime;
 	public float LifeSpan = Particle.DefaultLifespan;
+	public Color Color = White;
 
 	public Particle3D(float time)
 	{
