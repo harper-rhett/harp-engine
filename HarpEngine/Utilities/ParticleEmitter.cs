@@ -1,4 +1,4 @@
-﻿namespace HarpEngine;
+﻿namespace HarpEngine.Utilities;
 
 public struct Particle
 {
