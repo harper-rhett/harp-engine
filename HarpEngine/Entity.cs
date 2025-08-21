@@ -2,7 +2,12 @@
 
 public abstract class Entity
 {
-	public Environment World;
+	protected Scene scene;
+
+	public Entity(Scene scene)
+	{
+		this.scene = scene;
+	}
 
 	public abstract void Update(float frameTime);
 	public abstract void Draw();

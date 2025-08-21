@@ -1,6 +1,6 @@
 ﻿namespace HarpEngine;
 
-public sealed class Environment
+public sealed class Scene
 {
 	// General
 	private List<Entity> entitiesToAdd = new();
@@ -14,7 +14,7 @@ public sealed class Environment
 	/// <summary>If the update loop is paused. The draw loop is unaffected/</summary>
 	public bool IsPaused;
 
-	public Environment()
+	public Scene()
 	{
 		Entities = entities.AsReadOnly();
 	}
@@ -45,7 +45,6 @@ public sealed class Environment
 
 	public void AddEntity(Entity entity)
 	{
-		entity.World = this;
 		entitiesToAdd.Add(entity);
 	}
 

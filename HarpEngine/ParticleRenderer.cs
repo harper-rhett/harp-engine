@@ -8,7 +8,7 @@ internal abstract class ParticleRenderer
 	{
 		public override void Draw(Particle particle)
 		{
-			DrawPixelV(particle.Position, particle.color);
+			DrawPixelV(particle.Position, particle.Color);
 		}
 	}
 
@@ -23,7 +23,7 @@ internal abstract class ParticleRenderer
 
 		public override void Draw(Particle particle)
 		{
-			DrawCircleV(particle.Position, radius, particle.color);
+			DrawCircleV(particle.Position, radius, particle.Color);
 		}
 	}
 
@@ -40,7 +40,7 @@ internal abstract class ParticleRenderer
 
 		public override void Draw(Particle particle)
 		{
-			DrawPoly(particle.Position, sides, radius, particle.Rotation, particle.color);
+			DrawPoly(particle.Position, sides, radius, particle.Rotation, particle.Color);
 		}
 	}
 
@@ -60,7 +60,7 @@ internal abstract class ParticleRenderer
 		public override void Draw(Particle particle)
 		{
 			Rectangle drawRectangle = new(particle.Position, texture2D.Width, texture2D.Height);
-			DrawTexturePro(texture2D, particleRectangle, drawRectangle, textureOrigin, particle.Rotation, particle.color);
+			DrawTexturePro(texture2D, particleRectangle, drawRectangle, textureOrigin, particle.Rotation, particle.Color);
 		}
 	}
 }
