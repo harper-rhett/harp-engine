@@ -1,13 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>disable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Raylib-cs" Version="7.0.1" />
-  </ItemGroup>
+	<PropertyGroup>
+		<PackageId>HarpEngine</PackageId>
+		<Version>0.1.0</Version>
+		<Authors>Harper Rhett</Authors>
+		<Description>A utility-packed game framework built on Raylib-cs.</Description>
+		<PackageTags>game framework csharp raylib graphics utility tool</PackageTags>
+		<RepositoryUrl>https://github.com/harper-rhett/harp-engine</RepositoryUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Raylib-cs" Version="7.0.1" />
+	</ItemGroup>
 
 </Project>
