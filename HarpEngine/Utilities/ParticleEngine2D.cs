@@ -1,13 +1,13 @@
 ﻿namespace HarpEngine.Utilities;
 
-public class ParticleEngine : Entity
+public class ParticleEngine2D : Entity
 {
 	// General
-	private Particle[] particles;
-	public IReadOnlyCollection<Particle> Particles;
+	private Particle2D[] particles;
+	public IReadOnlyCollection<Particle2D> Particles;
 	private int count;
 	private const int defaultInitialCount = 100;
-	private ParticleRenderer particleRenderer = new ParticleRenderer.Circle(4);
+	private ParticleRenderer2D particleRenderer = new ParticleRenderer2D.Circle(4);
 	Random random = new();
 
 	// Movement
@@ -28,11 +28,11 @@ public class ParticleEngine : Entity
 	public float ParticleLifespan = Particle.DefaultLifespan;
 	public bool IsExhausted => count == 0;
 
-	public ParticleEngine(Scene scene) : this(scene, defaultInitialCount) { }
+	public ParticleEngine2D(Scene scene) : this(scene, defaultInitialCount) { }
 
-	public ParticleEngine(Scene scene, int initialCount) : base(scene)
+	public ParticleEngine2D(Scene scene, int initialCount) : base(scene)
 	{
-		particles = new Particle[initialCount];
+		particles = new Particle2D[initialCount];
 		Particles = particles.AsReadOnly();
 	}
 
@@ -41,7 +41,7 @@ public class ParticleEngine : Entity
 		for (int particleIndex = count - 1; particleIndex >= 0; particleIndex--)
 		{
 			// Get reference
-			ref Particle particle = ref particles[particleIndex];
+			ref Particle2D particle = ref particles[particleIndex];
 
 			// Check if particle has died
 			if (scene.Time > particle.SpawnTime + particle.Lifespan)
@@ -61,39 +61,39 @@ public class ParticleEngine : Entity
 	{
 		for (int particleIndex = 0; particleIndex < count; particleIndex++)
 		{
-			Particle particle = particles[particleIndex];
+			Particle2D particle = particles[particleIndex];
 			particleRenderer.Draw(particle);
 		}
 	}
 
 	public void RenderAsPixel()
 	{
-		particleRenderer = new ParticleRenderer.Pixel();
+		particleRenderer = new ParticleRenderer2D.Pixel();
 	}
 
 	public void RenderAsCircle(float radius)
 	{
-		particleRenderer = new ParticleRenderer.Circle(radius);
+		particleRenderer = new ParticleRenderer2D.Circle(radius);
 	}
 
 	public void RenderAsPolygon(int sides, float radius)
 	{
-		particleRenderer = new ParticleRenderer.Polygon(sides, radius);
+		particleRenderer = new ParticleRenderer2D.Polygon(sides, radius);
 	}
 
 	public void RenderAsTexture(Texture2D texture2D)
 	{
-		particleRenderer = new ParticleRenderer.Texture(texture2D);
+		particleRenderer = new ParticleRenderer2D.Texture(texture2D);
 	}
 
 	private void ResizeParticles()
 	{
-		Particle[] oldParticles = particles;
-		particles = new Particle[oldParticles.Length * 2];
+		Particle2D[] oldParticles = particles;
+		particles = new Particle2D[oldParticles.Length * 2];
 		Array.Copy(oldParticles, particles, oldParticles.Length);
 	}
 
-	public void AddParticle(Particle particle)
+	public void AddParticle(Particle2D particle)
 	{
 		if (count == particles.Length) ResizeParticles();
 		particles[count++] = particle;
@@ -116,7 +116,7 @@ public class ParticleEngine : Entity
 	public void SpawnParticle(Vector2 position, Vector2? velocity = null)
 	{
 		// Create particle
-		Particle particle = new(scene.Time);
+		Particle2D particle = new(scene.Time);
 		Vector2 direction = random.NextVector2();
 		Vector2 spawnPosition = GetSpawnPosition(position, direction);
 		particle.Position = spawnPosition;

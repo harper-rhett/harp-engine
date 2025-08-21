@@ -1,18 +1,18 @@
 ﻿namespace HarpEngine.Utilities;
 
-internal abstract class ParticleRenderer
+internal abstract class ParticleRenderer2D
 {
-	public abstract void Draw(Particle particle);
+	public abstract void Draw(Particle2D particle);
 
-	public class Pixel : ParticleRenderer
+	public class Pixel : ParticleRenderer2D
 	{
-		public override void Draw(Particle particle)
+		public override void Draw(Particle2D particle)
 		{
 			DrawPixelV(particle.Position, particle.Color);
 		}
 	}
 
-	public class Circle : ParticleRenderer
+	public class Circle : ParticleRenderer2D
 	{
 		private float radius;
 
@@ -21,13 +21,13 @@ internal abstract class ParticleRenderer
 			this.radius = radius;
 		}
 
-		public override void Draw(Particle particle)
+		public override void Draw(Particle2D particle)
 		{
 			DrawCircleV(particle.Position, radius, particle.Color);
 		}
 	}
 
-	public class Polygon : ParticleRenderer
+	public class Polygon : ParticleRenderer2D
 	{
 		private int sides;
 		private float radius;
@@ -38,13 +38,13 @@ internal abstract class ParticleRenderer
 			this.radius = radius;
 		}
 
-		public override void Draw(Particle particle)
+		public override void Draw(Particle2D particle)
 		{
 			DrawPoly(particle.Position, sides, radius, particle.Rotation, particle.Color);
 		}
 	}
 
-	public class Texture : ParticleRenderer
+	public class Texture : ParticleRenderer2D
 	{
 		private Texture2D texture2D;
 		private Rectangle particleRectangle;
@@ -57,7 +57,7 @@ internal abstract class ParticleRenderer
 			textureOrigin = new(texture2D.Width / 2f, texture2D.Height / 2f);
 		}
 
-		public override void Draw(Particle particle)
+		public override void Draw(Particle2D particle)
 		{
 			Rectangle drawRectangle = new(particle.Position, texture2D.Width, texture2D.Height);
 			DrawTexturePro(texture2D, particleRectangle, drawRectangle, textureOrigin, particle.Rotation, particle.Color);

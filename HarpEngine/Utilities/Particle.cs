@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace HarpEngine.Utilities;
 
-public struct Particle
+public static class Particle
+{
+	public const float DefaultLifespan = 10;
+}
+
+public struct Particle2D
 {
 	// General
 	public Vector2 Position;
@@ -14,13 +19,25 @@ public struct Particle
 	public float Rotation;
 	public float RotationSpeed;
 	public float SpawnTime;
-	public float Lifespan = DefaultLifespan;
+	public float Lifespan = Particle.DefaultLifespan;
 	public Color Color = White;
 
-	// Settings
-	public const float DefaultLifespan = 10;
+	public Particle2D(float time)
+	{
+		SpawnTime = time;
+	}
+}
 
-	public Particle(float time)
+public struct Particle3D
+{
+	// General
+	public Vector3 Position;
+	public Vector3 Velocity;
+	public Quaternion Rotation;
+	public float SpawnTime;
+	public float LifeSpan = Particle.DefaultLifespan;
+
+	public Particle3D(float time)
 	{
 		SpawnTime = time;
 	}
