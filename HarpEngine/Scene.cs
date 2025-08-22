@@ -1,6 +1,6 @@
 ﻿namespace HarpEngine;
 
-public sealed class Scene
+public class Scene
 {
 	// General
 	private List<Entity> entitiesToAdd = new();
