@@ -1,8 +1,8 @@
 ﻿global using Raylib_cs;
 global using System.Numerics;
-global using static Raylib_cs.Raylib;
-global using static Raylib_cs.Raymath;
 global using static Raylib_cs.Color;
+global using static HarpEngine.Graphics;
+global using static HarpEngine.Input;
 
 namespace HarpEngine;
 
@@ -26,12 +26,12 @@ public static class Engine
 	{
 		// Initialize window
 		settings = engineSettings;
-		InitWindow(settings.WindowWidth, settings.WindowHeight, settings.WindowName);
+		Raylib.InitWindow(settings.WindowWidth, settings.WindowHeight, settings.WindowName);
 		HalfGameWidth = GameWidth / 2;
 		HalfGameHeight = GameHeight / 2;
 
 		// Initialize game
-		gameRenderTexture = LoadRenderTexture(settings.GameWidth, settings.GameHeight);
+		gameRenderTexture = Raylib.LoadRenderTexture(settings.GameWidth, settings.GameHeight);
 	}
 
 	public static void Start(Game game)
@@ -40,7 +40,7 @@ public static class Engine
 		Engine.game = game;
 
 		// Game loop
-		while (!WindowShouldClose())
+		while (!Raylib.WindowShouldClose())
 		{
 			MasterUpdate();
 			MasterDraw();
@@ -49,19 +49,19 @@ public static class Engine
 
 	private static void MasterUpdate()
 	{
-		float frameTime = GetFrameTime();
+		float frameTime = Raylib.GetFrameTime();
 		game.Update(frameTime);
 	}
 
 	private static void MasterDraw()
 	{
-		BeginTextureMode(gameRenderTexture);
+		Raylib.BeginTextureMode(gameRenderTexture);
 		game.Draw();
-		EndTextureMode();
+		Raylib.EndTextureMode();
 
-		BeginDrawing();
+		Raylib.BeginDrawing();
 		window.Draw(gameRenderTexture);
-		EndDrawing();
+		Raylib.EndDrawing();
 	}
 
 	public static void SetWindowBordered(Color borderColor) => window = new Window.Bordered(borderColor);

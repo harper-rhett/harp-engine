@@ -26,8 +26,8 @@ internal abstract class Window
 	// Fetch new values
 	protected void RefreshValues(RenderTexture2D gameRenderTexture)
 	{
-		windowWidth = GetScreenWidth();
-		windowHeight = GetScreenHeight();
+		windowWidth = Raylib.GetScreenWidth();
+		windowHeight = Raylib.GetScreenHeight();
 		gameWidth = gameRenderTexture.Texture.Width;
 		gameHeight = gameRenderTexture.Texture.Height;
 	}
@@ -56,8 +56,8 @@ internal abstract class Window
 			if (DidResize) CalculateViewportRectangle(windowWidth, windowHeight);
 
 			// Clear background to draw border before drawing game
-			ClearBackground(borderColor);
-			DrawTexturePro(gameRenderTexture.Texture, gameRectangle, viewportRectangle, Vector2.Zero, 0, White);
+			Raylib.ClearBackground(borderColor);
+			Raylib.DrawTexturePro(gameRenderTexture.Texture, gameRectangle, viewportRectangle, Vector2.Zero, 0, White);
 		}
 
 		private void CalculateViewportRectangle(int windowWidth, int windowHeight)
@@ -86,7 +86,7 @@ internal abstract class Window
 			if (DidResize) CalculateGameRectangle(windowWidth, windowHeight, gameWidth, gameHeight);
 
 			// Draw game clipped
-			DrawTexturePro(gameRenderTexture.Texture, gameRectangle, viewportRectangle, Vector2.Zero, 0, White);
+			Raylib.DrawTexturePro(gameRenderTexture.Texture, gameRectangle, viewportRectangle, Vector2.Zero, 0, White);
 		}
 
 		private void CalculateGameRectangle(int windowWidth, int windowHeight, int gameWidth, int gameHeight)
