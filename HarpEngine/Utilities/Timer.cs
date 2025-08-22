@@ -17,7 +17,7 @@ public class FireTimer : Entity
 		int backloggedActions = (int)MathF.Floor(backloggedTime / timeCooldown);
 		backloggedTime -= backloggedActions * timeCooldown;
 
-		foreach (int actionCount in Enumerable.Range(0, backloggedActions)) Fired();
+		for (int actionNumber = 1; actionNumber <= backloggedActions; actionNumber++) Fired();
 	}
 
 	public override void Draw() { }
