@@ -20,6 +20,11 @@ public static class Camera
 
 	// 2D
 	private static Camera2D camera2D;
+	public static Vector2 Position2D
+	{
+		get => camera2D.Target;
+		set => camera2D.Target = value;
+	}
 
 	public static void RenderWindow()
 	{
