@@ -29,7 +29,7 @@ public static class Engine
 		Raylib.InitWindow(settings.WindowWidth, settings.WindowHeight, settings.WindowName);
 		HalfGameWidth = GameWidth / 2;
 		HalfGameHeight = GameHeight / 2;
-
+		
 		// Initialize game
 		gameRenderTexture = Raylib.LoadRenderTexture(settings.GameWidth, settings.GameHeight);
 	}
@@ -51,12 +51,15 @@ public static class Engine
 	{
 		float frameTime = Raylib.GetFrameTime();
 		game.Update(frameTime);
+		Camera.Update(frameTime);
 	}
 
 	private static void MasterDraw()
 	{
 		Raylib.BeginTextureMode(gameRenderTexture);
+		Camera.Begin();
 		game.Draw();
+		Camera.End();
 		Raylib.EndTextureMode();
 
 		Raylib.BeginDrawing();
