@@ -6,6 +6,7 @@ public class Scene
 	private List<Entity> entitiesToAdd = new();
 	private List<Entity> entities = new();
 	private HashSet<Entity> entitiesToRemove = new();
+	private Dictionary<Type, List<Entity>> entityReferences = new();
 
 	// Interface
 	public IReadOnlyList<Entity> Entities;
@@ -42,6 +43,29 @@ public class Scene
 	{
 		foreach (Entity entity in entities) entity.Draw();
 	}
+
+	// not sure if happy with this system:
+
+	//private void RegisterEntity<EntityType>(Entity entity) where EntityType : Entity
+	//{
+	//	Type type = typeof(EntityType);
+	//	List<Entity> entityList;
+	//	bool setExists = entityReferences.TryGetValue(type, out entityList);
+	//	if (!setExists)
+	//	{
+	//		entityList = new();
+	//		entityReferences[type] = entityList;
+	//	}
+	//	entityList.Add(entity);
+	//}
+
+	//public EntityType[] GetEntities<EntityType>()
+	//{
+	//	Type type = typeof(EntityType);
+	//	bool setExists = entityReferences.TryGetValue(type, out List<Entity> entityList);
+	//	if (setExists) return entityList.Cast<EntityType>().ToArray();
+	//	else return Array.Empty<EntityType>();
+	//}
 
 	public void InsertEntity(Entity entity, int index)
 	{

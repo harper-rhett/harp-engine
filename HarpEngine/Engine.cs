@@ -69,4 +69,10 @@ public static class Engine
 
 	public static void SetWindowBordered(Color borderColor) => window = new Window.Bordered(borderColor);
 	public static void SetWindowClipped() => window = new Window.Clipped();
+
+	public static void SetWindowResizable(bool isResizable)
+	{
+		if (isResizable) Raylib.SetWindowState(ConfigFlags.ResizableWindow);
+		else Raylib.ClearWindowState(ConfigFlags.ResizableWindow);
+	}
 }
