@@ -13,42 +13,42 @@ public enum CameraMode
 	RenderSpace3D
 }
 
-public static class Camera
+public class Camera
 {
 	// General
-	internal static CameraMode Mode;
+	internal CameraMode Mode;
 
 	// 2D
-	private static Camera2D camera2D;
-	public static Vector2 Position2D
+	private Camera2D camera2D;
+	public Vector2 Position2D
 	{
 		get => camera2D.Target;
 		set => camera2D.Target = value;
 	}
 
-	public static void RenderWindow()
+	public void RenderWindow()
 	{
 		Mode = CameraMode.RenderWindow;
 	}
 
-	public static void RenderSpace2D()
+	public void RenderSpace2D()
 	{
 		Vector2 centeredOffset = new(Engine.HalfGameWidth, Engine.HalfGameHeight);
 		camera2D = new(centeredOffset, Vector2.Zero, 0, 1);
 		Mode = CameraMode.RenderSpace2D;
 	}
 
-	internal static void Update(float frameTime)
+	internal void Update(float frameTime)
 	{
 		if (Mode is CameraMode.RenderWindow) return;
 	}
 
-	internal static void Begin()
+	internal void Begin()
 	{
 		if (Mode is CameraMode.RenderSpace2D) Raylib.BeginMode2D(camera2D);
 	}
 
-	internal static void End()
+	internal void End()
 	{
 		if (Mode is CameraMode.RenderSpace2D) Raylib.EndMode2D();
 	}

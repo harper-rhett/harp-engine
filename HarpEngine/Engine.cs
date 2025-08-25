@@ -51,15 +51,12 @@ public static class Engine
 	{
 		float frameTime = Raylib.GetFrameTime();
 		game.Update(frameTime);
-		Camera.Update(frameTime);
 	}
 
 	private static void MasterDraw()
 	{
 		Raylib.BeginTextureMode(gameRenderTexture);
-		Camera.Begin();
 		game.Draw();
-		Camera.End();
 		Raylib.EndTextureMode();
 
 		Raylib.BeginDrawing();

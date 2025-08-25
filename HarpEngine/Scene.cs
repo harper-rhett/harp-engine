@@ -7,6 +7,7 @@ public class Scene
 	private List<Entity> entities = new();
 	private HashSet<Entity> entitiesToRemove = new();
 	private Dictionary<Type, List<Entity>> entityReferences = new();
+	public Camera Camera;
 
 	// Interface
 	public IReadOnlyList<Entity> Entities;
@@ -18,6 +19,7 @@ public class Scene
 	public Scene()
 	{
 		Entities = entities.AsReadOnly();
+		Camera = new();
 	}
 
 	public void Update(float frameTime)
@@ -26,6 +28,7 @@ public class Scene
 		Time += frameTime;
 
 		UpdateEntities(frameTime);
+		Camera.Update(frameTime);
 	}
 
 	private void UpdateEntities(float frameTime)
@@ -41,7 +44,9 @@ public class Scene
 
 	public void Draw()
 	{
+		Camera.Begin();
 		foreach (Entity entity in entities) entity.Draw();
+		Camera.End();
 	}
 
 	// not sure if happy with this system:
