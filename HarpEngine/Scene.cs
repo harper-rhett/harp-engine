@@ -43,6 +43,11 @@ public class Scene
 		foreach (Entity entity in entities) entity.Draw();
 	}
 
+	public void InsertEntity(Entity entity, int index)
+	{
+		entitiesToAdd.Insert(index, entity);
+	}
+
 	public void AddEntity(Entity entity)
 	{
 		entitiesToAdd.Add(entity);
