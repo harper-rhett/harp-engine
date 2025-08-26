@@ -39,7 +39,10 @@ public class Scene
 		entities.AddRange(entitiesToAdd);
 		entitiesToAdd.Clear();
 
-		foreach (Entity entity in entities) entity.Update(frameTime);
+		foreach (Entity entity in entities)
+		{
+			if (entity.IsUpdating) entity.Update(frameTime);
+		}
 
 		entities.RemoveAll(entitiesToRemove.Contains);
 		entitiesToRemove.Clear();
@@ -48,7 +51,10 @@ public class Scene
 	public void Draw()
 	{
 		Camera.Begin();
-		foreach (Entity entity in entities) entity.Draw();
+		foreach (Entity entity in entities)
+		{
+			if (entity.IsRendering) entity.Draw();
+		}
 		Camera.End();
 	}
 

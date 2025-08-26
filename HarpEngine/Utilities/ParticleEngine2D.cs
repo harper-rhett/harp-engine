@@ -18,7 +18,7 @@ public class ParticleEngine2D : Entity
 
 	// Rotation
 	public float StartRotation = 0;
-	public bool GenerateRandomRotations;
+	public bool RandomRotations;
 	public float RotationSpeed = 0;
 
 	// Extras
@@ -130,7 +130,7 @@ public class ParticleEngine2D : Entity
 
 		// Rotation
 		particle.Rotation = StartRotation;
-		if (GenerateRandomRotations) particle.Rotation += random.NextDegrees();
+		if (RandomRotations) particle.Rotation += random.NextDegrees();
 		if (RotationSpeed != 0)
 		{
 			int rotationDirection = random.NextBool() ? 1 : -1;

@@ -3,6 +3,8 @@
 public abstract class Entity
 {
 	protected Scene scene;
+	public bool IsUpdating = true;
+	public bool IsRendering = true;
 
 	public Entity(Scene scene)
 	{
