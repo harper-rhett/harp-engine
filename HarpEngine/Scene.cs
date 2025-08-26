@@ -6,7 +6,8 @@ public class Scene
 	private List<Entity> entitiesToAdd = new();
 	private List<Entity> entities = new();
 	private HashSet<Entity> entitiesToRemove = new();
-	private Dictionary<Type, List<Entity>> entityReferences = new();
+	private Dictionary<Type, object> entityLists = new();
+	private Dictionary<Type, Entity> latestEntities = new();
 	public Camera Camera;
 
 	// Interface
@@ -49,28 +50,47 @@ public class Scene
 		Camera.End();
 	}
 
-	// not sure if happy with this system:
+	private void RegisterEntity<EntityType>(EntityType entity) where EntityType : Entity
+	{
+		// Get the entity list
+		Type type = typeof(EntityType);
+		bool setExists = entityLists.TryGetValue(type, out object entityListObject);
 
-	//private void RegisterEntity<EntityType>(Entity entity) where EntityType : Entity
-	//{
-	//	Type type = typeof(EntityType);
-	//	List<Entity> entityList;
-	//	bool setExists = entityReferences.TryGetValue(type, out entityList);
-	//	if (!setExists)
-	//	{
-	//		entityList = new();
-	//		entityReferences[type] = entityList;
-	//	}
-	//	entityList.Add(entity);
-	//}
+		// Register as latest
+		latestEntities[type] = entity;
 
-	//public EntityType[] GetEntities<EntityType>()
-	//{
-	//	Type type = typeof(EntityType);
-	//	bool setExists = entityReferences.TryGetValue(type, out List<Entity> entityList);
-	//	if (setExists) return entityList.Cast<EntityType>().ToArray();
-	//	else return Array.Empty<EntityType>();
-	//}
+		// Create list if needed
+		List<EntityType> entityList;
+		if (!setExists)
+		{
+			entityList = new();
+			entityLists[type] = entityList;
+		}
+		else
+		{
+			entityList = (List<EntityType>)entityListObject;
+		}
+
+		// Add entity to list
+		entityList.Add(entity);
+	}
+
+	public IReadOnlyList<EntityType> GetEntities<EntityType>() where EntityType : Entity
+	{
+		// Get the entity list
+		Type type = typeof(EntityType);
+		bool setExists = entityLists.TryGetValue(type, out object entityListObject);
+
+		// Return
+		if (setExists) return (List<EntityType>)entityListObject;
+		else return Array.Empty<EntityType>();
+	}
+
+	public EntityType GetEntity<EntityType>() where EntityType : Entity
+	{
+		Type type = typeof(EntityType);
+		return (EntityType)latestEntities[type];
+	}
 
 	public void InsertEntity(Entity entity, int index)
 	{
