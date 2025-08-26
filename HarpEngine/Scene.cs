@@ -1,4 +1,6 @@
-﻿namespace HarpEngine;
+﻿using System.Collections;
+
+namespace HarpEngine;
 
 public class Scene
 {
@@ -50,29 +52,25 @@ public class Scene
 		Camera.End();
 	}
 
-	private void RegisterEntity<EntityType>(EntityType entity) where EntityType : Entity
+	private void RegisterEntity(Entity entity)
 	{
 		// Get the entity list
-		Type type = typeof(EntityType);
+		Type type = entity.GetType();
 		bool setExists = entityLists.TryGetValue(type, out object entityListObject);
 
 		// Register as latest
 		latestEntities[type] = entity;
 
 		// Create list if needed
-		List<EntityType> entityList;
 		if (!setExists)
 		{
-			entityList = new();
-			entityLists[type] = entityList;
-		}
-		else
-		{
-			entityList = (List<EntityType>)entityListObject;
+			Type listType = typeof(List<>).MakeGenericType(type);
+			entityListObject = (IList)Activator.CreateInstance(listType);
+			entityLists[type] = entityListObject;
 		}
 
 		// Add entity to list
-		entityList.Add(entity);
+		((IList)entityListObject).Add(entity);
 	}
 
 	public IReadOnlyList<EntityType> GetEntities<EntityType>() where EntityType : Entity
@@ -95,11 +93,13 @@ public class Scene
 	public void InsertEntity(Entity entity, int index)
 	{
 		entitiesToAdd.Insert(index, entity);
+		RegisterEntity(entity);
 	}
 
 	public void AddEntity(Entity entity)
 	{
 		entitiesToAdd.Add(entity);
+		RegisterEntity(entity);
 	}
 
 	public void RemoveEntity(Entity entity)
