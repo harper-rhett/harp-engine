@@ -7,6 +7,7 @@ public abstract class Entity
 	public Entity(Scene scene)
 	{
 		this.scene = scene;
+		scene.AddEntity(this);
 	}
 
 	public abstract void Update(float frameTime);

@@ -90,13 +90,7 @@ public class Scene
 		return (EntityType)latestEntities[type];
 	}
 
-	public void InsertEntity(Entity entity, int index)
-	{
-		entitiesToAdd.Insert(index, entity);
-		RegisterEntity(entity);
-	}
-
-	public void AddEntity(Entity entity)
+	internal void AddEntity(Entity entity)
 	{
 		entitiesToAdd.Add(entity);
 		RegisterEntity(entity);
