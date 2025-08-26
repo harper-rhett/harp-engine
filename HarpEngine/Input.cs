@@ -19,6 +19,6 @@ public static class Input
 
 	public static bool IsKeyReleased(KeyboardKey keyboardKey)
 	{
-		return IsKeyReleased(keyboardKey);
+		return Raylib.IsKeyReleased(keyboardKey);
 	}
 }

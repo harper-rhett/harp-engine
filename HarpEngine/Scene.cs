@@ -38,7 +38,7 @@ public class Scene
 
 		foreach (Entity entity in entities) entity.Update(frameTime);
 
-		entities.RemoveAll(entity => entitiesToRemove.Contains(entity));
+		entities.RemoveAll(entitiesToRemove.Contains);
 		entitiesToRemove.Clear();
 	}
 

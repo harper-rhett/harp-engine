@@ -4,7 +4,7 @@ public class ParticleEngine2D : Entity
 {
 	// General
 	private Particle2D[] particles;
-	public IReadOnlyCollection<Particle2D> Particles;
+	public IReadOnlyList<Particle2D> Particles;
 	private int count;
 	private const int defaultInitialCount = 100;
 	private ParticleRenderer2D particleRenderer = new ParticleRenderer2D.Circle(4);
