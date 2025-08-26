@@ -12,5 +12,11 @@ public abstract class Entity
 
 	public abstract void Update(float frameTime);
 	public abstract void Draw();
+
+	public void Remove()
+	{
+		scene.RemoveEntity(this);
+	}
+
 	public virtual void OnRemove() { }
 }

@@ -96,7 +96,7 @@ public class Scene
 		RegisterEntity(entity);
 	}
 
-	public void RemoveEntity(Entity entity)
+	internal void RemoveEntity(Entity entity)
 	{
 		entity.OnRemove();
 		entitiesToRemove.Add(entity);
