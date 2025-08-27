@@ -1,0 +1,51 @@
+﻿using System.Runtime.InteropServices;
+
+namespace HarpEngine.Windowing;
+
+public static class Window
+{
+	private enum WindowFlags : uint
+	{
+		VSync = 0x00000040,
+		Fullscreen = 0x00000002,
+		Resizable = 0x00000004,
+		Undecorated = 0x00000008,
+		Hidden = 0x00000080,
+		Minimized = 0x00000200,
+		Maximized = 0x00000400,
+		Unfocused = 0x00000800,
+		Topmost = 0x00001000,
+		AlwaysRun = 0x00000100,
+		Transparent = 0x00000010,
+		HighDpi = 0x00002000,
+		MousePassthrough = 0x00004000,
+		Borderless = 0x00008000,
+		Msaa4x = 0x00000020,
+		Interlaced = 0x00010000,
+	}
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void InitWindow(int width, int height, string title);
+
+	public static void Initialize(int width, int height, string title) => InitWindow(width, height, title);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern bool WindowShouldClose();
+
+	public static bool ShouldClose() => WindowShouldClose();
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void SetWindowState(WindowFlags flags);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void ClearWindowState(WindowFlags flags);
+
+	private static void SetState(WindowFlags flags, bool isEnabled)
+	{
+		if (isEnabled) SetWindowState(flags);
+		else ClearWindowState(flags);
+	}
+
+	public static void SetResizable(bool isResizable) => SetState(WindowFlags.Resizable, isResizable);
+	public static void SetMaximized(bool isMaximized) => SetState(WindowFlags.Maximized, isMaximized);
+}

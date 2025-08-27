@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HarpEngine;
+namespace HarpEngine.Windowing;
 
-internal class ClippedWindow : Window
+internal class ClippedRenderer : WindowRenderer
 {
 	private Rectangle gameRectangle;
 

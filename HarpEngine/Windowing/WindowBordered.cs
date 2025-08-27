@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HarpEngine;
+namespace HarpEngine.Windowing;
 
-internal class BorderedWindow : Window
+internal class BorderedRenderer : WindowRenderer
 {
 	private Color borderColor;
 	private Rectangle viewportRectangle;
 
-	public BorderedWindow(Color borderColor)
+	public BorderedRenderer(Color borderColor)
 	{
 		this.borderColor = borderColor;
 	}

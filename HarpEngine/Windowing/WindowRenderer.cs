@@ -1,6 +1,6 @@
-﻿namespace HarpEngine;
+﻿namespace HarpEngine.Windowing;
 
-public abstract class Window
+public abstract class WindowRenderer
 {
 	// Window fields
 	protected int windowWidth;
@@ -34,13 +34,4 @@ public abstract class Window
 
 	// Custom implementation for game sizing
 	internal abstract void Draw(RenderTexture2D gameRenderTexture);
-
-	private static void SetState(ConfigFlags configFlags, bool isEnabled)
-	{
-		if (isEnabled) Raylib.SetWindowState(configFlags);
-		else Raylib.ClearWindowState(configFlags);
-	}
-
-	public static void SetResizable(bool isResizable) => SetState(ConfigFlags.ResizableWindow, isResizable);
-	public static void SetMaximized(bool isMaximized) => SetState(ConfigFlags.MaximizedWindow, isMaximized);
 }
