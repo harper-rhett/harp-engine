@@ -5,19 +5,20 @@ namespace HarpEngine;
 public class Scene
 {
 	// General
-	private List<Entity> entitiesToAdd = new();
+	private List<EntityToAdd> entitiesToAdd = new();
 	private List<Entity> entities = new();
 	private HashSet<Entity> entitiesToRemove = new();
 	private Dictionary<Type, object> entityLists = new();
 	private Dictionary<Type, Entity> latestEntities = new();
-	public Camera Camera;
 
 	// Interface
 	public IReadOnlyList<Entity> Entities;
+	public Camera Camera;
 	/// <summary>Seconds since creation that this world has been unpaused.</summary>
 	public float Time { get; private set; }
 	/// <summary>If the update loop is paused. The draw loop is unaffected/</summary>
 	public bool IsPaused;
+	public int NextEntityIndex = 0;
 
 	public Scene()
 	{
@@ -36,7 +37,7 @@ public class Scene
 
 	private void UpdateEntities(float frameTime)
 	{
-		entities.AddRange(entitiesToAdd);
+		foreach (EntityToAdd entityToAdd in entitiesToAdd) entities.Insert(entityToAdd.Index, entityToAdd.Entity);
 		entitiesToAdd.Clear();
 
 		foreach (Entity entity in entities)
@@ -112,13 +113,25 @@ public class Scene
 
 	internal void AddEntity(Entity entity)
 	{
-		entitiesToAdd.Add(entity);
+		EntityToAdd entityToInsert = new()
+		{
+			Entity = entity,
+			Index = NextEntityIndex
+		};
+		entitiesToAdd.Add(entityToInsert);
 		RegisterEntity(entity);
+		NextEntityIndex = entities.Count + entitiesToAdd.Count;
 	}
 
 	internal void RemoveEntity(Entity entity)
 	{
 		entity.OnRemove();
 		entitiesToRemove.Add(entity);
+	}
+
+	private struct EntityToAdd
+	{
+		public Entity Entity;
+		public int Index;
 	}
 }

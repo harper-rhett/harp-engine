@@ -1,4 +1,4 @@
-﻿namespace HarpEngine.Easing;
+﻿namespace HarpEngine.Animation;
 
 // Some of these functions are sourced from https://easings.net/
 // I would recommend checking it out for more curves

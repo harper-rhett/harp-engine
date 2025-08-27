@@ -1,4 +1,4 @@
-﻿namespace HarpEngine.Easing;
+﻿namespace HarpEngine.Animation;
 
 public class Easer : Entity
 {
