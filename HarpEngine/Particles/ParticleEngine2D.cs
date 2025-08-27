@@ -24,7 +24,7 @@ public sealed class ParticleEngine2D : Entity
 	public float RotationSpeed = 0;
 
 	// Extras
-	public Color Color = White;
+	public Color Color = Color.White;
 
 	// Lifespan
 	public float ParticleLifespan = Particle.DefaultLifespan;

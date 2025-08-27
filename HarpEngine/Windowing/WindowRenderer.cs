@@ -26,8 +26,8 @@ public abstract class WindowRenderer
 	// Fetch new values
 	protected void RefreshValues(RenderTexture2D gameRenderTexture)
 	{
-		windowWidth = Raylib.GetScreenWidth();
-		windowHeight = Raylib.GetScreenHeight();
+		windowWidth = Window.Width;
+		windowHeight = Window.Height;
 		gameWidth = gameRenderTexture.Texture.Width;
 		gameHeight = gameRenderTexture.Texture.Height;
 	}

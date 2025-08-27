@@ -8,7 +8,7 @@ internal abstract class ParticleRenderer2D
 	{
 		public override void Draw(Particle2D particle)
 		{
-			DrawPixel(particle.Position, particle.Color);
+			Drawing.DrawPixel(particle.Position, particle.Color);
 		}
 	}
 
@@ -23,7 +23,7 @@ internal abstract class ParticleRenderer2D
 
 		public override void Draw(Particle2D particle)
 		{
-			Raylib.DrawCircleV(particle.Position, radius, particle.Color);
+			Drawing.DrawCircle(particle.Position, radius, particle.Color);
 		}
 	}
 
@@ -40,7 +40,7 @@ internal abstract class ParticleRenderer2D
 
 		public override void Draw(Particle2D particle)
 		{
-			DrawPolygon(particle.Position, sides, radius, particle.Rotation, particle.Color);
+			Drawing.DrawPolygon(particle.Position, sides, radius, particle.Rotation, particle.Color);
 		}
 	}
 
@@ -60,7 +60,7 @@ internal abstract class ParticleRenderer2D
 		public override void Draw(Particle2D particle)
 		{
 			Rectangle drawRectangle = new(particle.Position, texture2D.Width, texture2D.Height);
-			Raylib.DrawTexturePro(texture2D, particleRectangle, drawRectangle, textureOrigin, particle.Rotation, particle.Color);
+			Drawing.DrawTexture(texture2D, particleRectangle, drawRectangle, textureOrigin, particle.Rotation, particle.Color);
 		}
 	}
 }

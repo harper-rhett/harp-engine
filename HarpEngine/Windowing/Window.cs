@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace HarpEngine.Windowing;
+﻿namespace HarpEngine.Windowing;
 
 public static class Window
 {
@@ -48,4 +46,12 @@ public static class Window
 
 	public static void SetResizable(bool isResizable) => SetState(WindowFlags.Resizable, isResizable);
 	public static void SetMaximized(bool isMaximized) => SetState(WindowFlags.Maximized, isMaximized);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern int GetScreenWidth();
+	public static int Width => GetScreenWidth();
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern int GetScreenHeight();
+	public static int Height => GetScreenHeight();
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HarpEngine.Windowing;
+﻿namespace HarpEngine.Windowing;
 
 internal class ClippedRenderer : WindowRenderer
 {
@@ -20,7 +14,7 @@ internal class ClippedRenderer : WindowRenderer
 		if (DidResize) CalculateGameRectangle(windowWidth, windowHeight, gameWidth, gameHeight);
 
 		// Draw game clipped
-		Raylib.DrawTexturePro(gameRenderTexture.Texture, gameRectangle, viewportRectangle, Vector2.Zero, 0, White);
+		Drawing.DrawTexture(gameRenderTexture.Texture, gameRectangle, viewportRectangle, Vector2.Zero, 0, Color.White);
 	}
 
 	private void CalculateGameRectangle(int windowWidth, int windowHeight, int gameWidth, int gameHeight)

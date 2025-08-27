@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HarpEngine.Windowing;
+﻿namespace HarpEngine.Windowing;
 
 internal class BorderedRenderer : WindowRenderer
 {
@@ -26,8 +20,8 @@ internal class BorderedRenderer : WindowRenderer
 		if (DidResize) CalculateViewportRectangle(windowWidth, windowHeight);
 
 		// Clear background to draw border before drawing game
-		Raylib.ClearBackground(borderColor);
-		Raylib.DrawTexturePro(gameRenderTexture.Texture, gameRectangle, viewportRectangle, Vector2.Zero, 0, White);
+		Drawing.Clear(borderColor);
+		Drawing.DrawTexture(gameRenderTexture.Texture, gameRectangle, viewportRectangle, Vector2.Zero, 0, Color.White);
 	}
 
 	private void CalculateViewportRectangle(int windowWidth, int windowHeight)

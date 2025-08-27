@@ -20,7 +20,7 @@ public struct Particle2D
 	public float RotationSpeed;
 	public float SpawnTime;
 	public float Lifespan = Particle.DefaultLifespan;
-	public Color Color = White;
+	public Color Color = Color.White;
 
 	public Particle2D(float time)
 	{
@@ -36,7 +36,7 @@ public struct Particle3D
 	public Quaternion Rotation;
 	public float SpawnTime;
 	public float LifeSpan = Particle.DefaultLifespan;
-	public Color Color = White;
+	public Color Color = Color.White;
 
 	public Particle3D(float time)
 	{

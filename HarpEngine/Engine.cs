@@ -1,11 +1,9 @@
-﻿global using Raylib_cs;
-global using System.Numerics;
+﻿global using System.Numerics;
 global using HarpEngine.Utilities;
 global using HarpEngine.Animation;
 global using HarpEngine.Windowing;
-global using static Raylib_cs.Color;
-global using static HarpEngine.Graphics;
-global using static HarpEngine.Input;
+global using HarpEngine.Graphics;
+global using System.Runtime.InteropServices;
 
 namespace HarpEngine;
 
@@ -17,7 +15,7 @@ public static class Engine
 
 	// General
 	private static RenderTexture2D gameRenderTexture;
-	public static WindowRenderer WindowRenderer { get; private set; } = new BorderedRenderer(Black);
+	public static WindowRenderer WindowRenderer { get; private set; } = new BorderedRenderer(Color.Black);
 
 	// Interface
 	public static int GameWidth => settings.GameWidth;
@@ -34,7 +32,7 @@ public static class Engine
 		HalfGameHeight = GameHeight / 2;
 		
 		// Initialize game
-		gameRenderTexture = Raylib.LoadRenderTexture(settings.GameWidth, settings.GameHeight);
+		gameRenderTexture = Textures.LoadRenderTexture(settings.GameWidth, settings.GameHeight);
 	}
 
 	public static void Start(Game game)
@@ -52,20 +50,23 @@ public static class Engine
 
 	private static void MasterUpdate()
 	{
-		float frameTime = Raylib.GetFrameTime();
+		float frameTime = GetFrameTime();
 		game.Update(frameTime);
 	}
 
 	private static void MasterDraw()
 	{
-		Raylib.BeginTextureMode(gameRenderTexture);
+		RenderTexture2D.BeginDrawing(gameRenderTexture);
 		game.Draw();
-		Raylib.EndTextureMode();
+		RenderTexture2D.EndDrawing();
 
-		Raylib.BeginDrawing();
+		Drawing.Begin();
 		WindowRenderer.Draw(gameRenderTexture);
-		Raylib.EndDrawing();
+		Drawing.End();
 	}
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern float GetFrameTime();
 
 	public static void SetRenderingBordered(Color borderColor) => WindowRenderer = new BorderedRenderer(borderColor);
 	public static void SetRenderingClipped() => WindowRenderer = new ClippedRenderer();

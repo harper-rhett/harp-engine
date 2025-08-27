@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HarpEngine;
+﻿namespace HarpEngine;
 
 public enum CameraMode
 {
@@ -45,11 +39,11 @@ public sealed class Camera
 
 	internal void Begin()
 	{
-		if (Mode is CameraMode.RenderSpace2D) Raylib.BeginMode2D(camera2D);
+		if (Mode is CameraMode.RenderSpace2D) Camera2D.BeginRendering(camera2D);
 	}
 
 	internal void End()
 	{
-		if (Mode is CameraMode.RenderSpace2D) Raylib.EndMode2D();
+		if (Mode is CameraMode.RenderSpace2D) Camera2D.EndRendering();
 	}
 }
