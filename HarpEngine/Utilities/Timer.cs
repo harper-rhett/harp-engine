@@ -1,6 +1,6 @@
 ﻿namespace HarpEngine.Utilities;
 
-public class FireTimer : Entity
+public sealed class FireTimer : Entity
 {
 	private float timeCooldown;
 	private float backloggedTime;

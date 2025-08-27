@@ -1,4 +1,4 @@
-﻿namespace HarpEngine.Utilities;
+﻿namespace HarpEngine.Easing;
 
 // Some of these functions are sourced from https://easings.net/
 // I would recommend checking it out for more curves
@@ -38,7 +38,7 @@ public static class Curves
 		const float finalMultiplier = baseMultiplier * 1.525f;
 
 		return x < 0.5
-		  ? (float.Pow(2f * x, 2f) * ((finalMultiplier + 1f) * 2f * x - finalMultiplier)) / 2f
+		  ? float.Pow(2f * x, 2f) * ((finalMultiplier + 1f) * 2f * x - finalMultiplier) / 2f
 		  : (float.Pow(2f * x - 2f, 2f) * ((finalMultiplier + 1f) * (x * 2f - 2f) + finalMultiplier) + 2f) / 2f;
 	}
 

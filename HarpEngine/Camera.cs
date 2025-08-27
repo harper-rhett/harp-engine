@@ -13,7 +13,7 @@ public enum CameraMode
 	RenderSpace3D
 }
 
-public class Camera
+public sealed class Camera
 {
 	// General
 	internal CameraMode Mode;
