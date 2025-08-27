@@ -33,7 +33,6 @@ public partial struct Color
 	public static readonly Color Black = new Color(0, 0, 0, 255);
 	public static readonly Color Blank = new Color(0, 0, 0, 0);
 	public static readonly Color Magenta = new Color(255, 0, 255, 255);
-	public static readonly Color RayWhite = new Color(245, 245, 245, 255);
 
 	public Color(byte r, byte g, byte b, byte a)
 	{
