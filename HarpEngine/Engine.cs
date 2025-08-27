@@ -14,7 +14,7 @@ public static class Engine
 
 	// General
 	private static RenderTexture2D gameRenderTexture;
-	private static Window window = new Window.Bordered(Black);
+	public static Window Window { get; private set; } = new BorderedWindow(Black);
 
 	// Interface
 	public static int GameWidth => settings.GameWidth;
@@ -60,19 +60,10 @@ public static class Engine
 		Raylib.EndTextureMode();
 
 		Raylib.BeginDrawing();
-		window.Draw(gameRenderTexture);
+		Window.Draw(gameRenderTexture);
 		Raylib.EndDrawing();
 	}
 
-	public static void SetWindowBordered(Color borderColor) => window = new Window.Bordered(borderColor);
-	public static void SetWindowClipped() => window = new Window.Clipped();
-
-	private static void SetWindowState(ConfigFlags configFlags, bool isEnabled)
-	{
-		if (isEnabled) Raylib.SetWindowState(configFlags);
-		else Raylib.ClearWindowState(configFlags);
-	}
-
-	public static void SetWindowResizable(bool isResizable) => SetWindowState(ConfigFlags.ResizableWindow, isResizable);
-	public static void SetWindowMaximized(bool isMaximized) => SetWindowState(ConfigFlags.MaximizedWindow, isMaximized);
+	public static void SetRenderingBordered(Color borderColor) => Window = new BorderedWindow(borderColor);
+	public static void SetRenderingClipped() => Window = new ClippedWindow();
 }

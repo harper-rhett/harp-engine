@@ -20,4 +20,10 @@
 		<PackageReference Include="Raylib-cs" Version="7.0.1" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="raylib.dll">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>
