@@ -74,5 +74,5 @@ public static class Engine
 	}
 
 	public static void SetWindowResizable(bool isResizable) => SetWindowState(ConfigFlags.ResizableWindow, isResizable);
-	public static void SetWindowMaximized(bool isMaximized) => SetWindowState(ConfigFlags.MinimizedWindow, isMaximized);
+	public static void SetWindowMaximized(bool isMaximized) => SetWindowState(ConfigFlags.MaximizedWindow, isMaximized);
 }
