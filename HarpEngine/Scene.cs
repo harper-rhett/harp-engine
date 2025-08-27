@@ -50,12 +50,26 @@ public class Scene
 
 	public void Draw()
 	{
+		DrawGame();
+		DrawGUI();
+	}
+
+	private void DrawGame()
+	{
 		Camera.Begin();
 		foreach (Entity entity in entities)
 		{
 			if (entity.IsRendering) entity.Draw();
 		}
 		Camera.End();
+	}
+
+	private void DrawGUI()
+	{
+		foreach (Entity entity in entities)
+		{
+			if (entity.IsRendering) entity.DrawGUI();
+		}
 	}
 
 	private void RegisterEntity(Entity entity)

@@ -1,4 +1,4 @@
-﻿namespace HarpEngine.Utilities;
+﻿namespace HarpEngine.Particles;
 
 internal abstract class ParticleRenderer2D
 {

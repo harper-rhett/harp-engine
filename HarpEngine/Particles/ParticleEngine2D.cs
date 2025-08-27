@@ -1,4 +1,6 @@
-﻿namespace HarpEngine.Utilities;
+﻿using HarpEngine.Utilities;
+
+namespace HarpEngine.Particles;
 
 public sealed class ParticleEngine2D : Entity
 {
