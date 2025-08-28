@@ -2,7 +2,7 @@
 
 namespace HarpEngine;
 
-public class Scene
+public class Scene : IEnumerable<Entity>
 {
 	// General
 	private List<EntityToAdd> entitiesToAdd = new();
@@ -23,7 +23,7 @@ public class Scene
 
 	public Scene()
 	{
-		Entities = entityLayers.Keys.ToList().AsReadOnly();
+		Entities = this.ToList();
 		Camera = new();
 	}
 
@@ -67,12 +67,10 @@ public class Scene
 
 	private void UpdateEntities(float frameTime)
 	{
-		// I should probably make this class enumerable so that it can be looped through in this manner more easily
-		foreach (List<Entity> entityLayer in updateLayers.Values)
-			foreach (Entity entity in entityLayer)
-			{
-				if (entity.IsUpdating) entity.Update(frameTime);
-			}
+		foreach (Entity entity in this)
+		{
+			if (entity.IsUpdating) entity.Update(frameTime);
+		}
 	}
 
 	public void Draw()
@@ -84,21 +82,19 @@ public class Scene
 	private void DrawGame()
 	{
 		Camera.Begin();
-		foreach (List<Entity> entityLayer in updateLayers.Values)
-			foreach (Entity entity in entityLayer)
-			{
-				if (entity.IsRendering) entity.Draw();
-			}
+		foreach (Entity entity in this)
+		{
+			if (entity.IsRendering) entity.Draw();
+		}
 		Camera.End();
 	}
 
 	private void DrawGUI()
 	{
-		foreach (List<Entity> entityLayer in updateLayers.Values)
-			foreach (Entity entity in entityLayer)
-			{
-				if (entity.IsRendering) entity.DrawGUI();
-			}
+		foreach (Entity entity in this)
+		{
+			if (entity.IsRendering) entity.DrawGUI();
+		}
 	}
 
 	private void RegisterEntity(Entity entity)
@@ -139,6 +135,12 @@ public class Scene
 		return (EntityType)latestEntities[type];
 	}
 
+	private struct EntityToAdd
+	{
+		public Entity Entity;
+		public int UpdateLayer;
+	}
+
 	internal void AddEntity(Entity entity)
 	{
 		EntityToAdd entityToInsert = new()
@@ -157,9 +159,12 @@ public class Scene
 		entitiesToRemove.Add(entity);
 	}
 
-	private struct EntityToAdd
+	public IEnumerator<Entity> GetEnumerator()
 	{
-		public Entity Entity;
-		public int UpdateLayer;
+		foreach (List<Entity> entityLayer in updateLayers.Values)
+			foreach (Entity entity in entityLayer)
+				yield return entity;
 	}
+
+	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }
