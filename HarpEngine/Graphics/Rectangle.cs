@@ -42,10 +42,7 @@ public struct Rectangle
 
 	public Vector2 Position
 	{
-		readonly get
-		{
-			return new Vector2(X, Y);
-		}
+		readonly get => new Vector2(X, Y);
 		set
 		{
 			X = value.X;
@@ -55,10 +52,7 @@ public struct Rectangle
 
 	public Vector2 Size
 	{
-		readonly get
-		{
-			return new Vector2(Width, Height);
-		}
+		readonly get => new Vector2(Width, Height);
 		set
 		{
 			Width = value.X;
@@ -68,6 +62,6 @@ public struct Rectangle
 
 	public override string ToString()
 	{
-		return $"{{X:{X} Y:{Y} Width:{Width} Height:{Height}}}";
+		return $"({X}, {Y}, {Width}, {Height})";
 	}
 }

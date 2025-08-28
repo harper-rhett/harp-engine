@@ -36,6 +36,19 @@ public static class Primitives
 	private static extern void DrawCircleV(Vector2 position, float radius, Color color);
 	public static void DrawCircle(Vector2 position, float radius, Color color) => DrawCircleV(position, radius, color);
 
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	public static extern void DrawCircleLines(int x, int y, float radius, Color color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void DrawCircleLinesV(Vector2 position, float radius, Color color);
+	public static void DrawCircleLines(Vector2 position, float radius, Color color) => DrawCircleLinesV(position, radius, color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	public static extern void DrawRing(Vector2 center, float innerRadius, float outerRadius, float startAngle, float endAngle, int segments, Color color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	public static extern void DrawRingLines(Vector2 center, float innerRadius, float outerRadius, float startAngle, float endAngle, int segments, Color color);
+
 	// Polygons
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]

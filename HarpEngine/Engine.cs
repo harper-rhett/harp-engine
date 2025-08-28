@@ -54,6 +54,7 @@ public static class Engine
 	private static void MasterUpdate()
 	{
 		float frameTime = GetFrameTime();
+		if (frameTime > 1) frameTime = 0.1f;
 		game.Update(frameTime);
 	}
 

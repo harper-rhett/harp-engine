@@ -4,6 +4,7 @@ public sealed class FireTimer : Entity
 {
 	private float timeCooldown;
 	private float backloggedTime;
+	private bool isStarted;
 	public Action Fired;
 
 	public FireTimer(Scene scene, float timeCooldown) : base(scene)
@@ -11,8 +12,15 @@ public sealed class FireTimer : Entity
 		this.timeCooldown = timeCooldown;
 	}
 
+	public void Start()
+	{
+		isStarted = true;
+	}
+
 	public override void Update(float frameTime)
 	{
+		if (!isStarted) return;
+
 		backloggedTime += frameTime;
 		int backloggedActions = (int)MathF.Floor(backloggedTime / timeCooldown);
 		backloggedTime -= backloggedActions * timeCooldown;

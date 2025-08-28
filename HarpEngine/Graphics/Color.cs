@@ -31,59 +31,69 @@ public struct Color
 	public static readonly Color DarkBrown = new Color(76, 63, 47, 255);
 	public static readonly Color White = new Color(255, 255, 255, 255);
 	public static readonly Color Black = new Color(0, 0, 0, 255);
-	public static readonly Color Blank = new Color(0, 0, 0, 0);
+	public static readonly Color Clear = new Color(0, 0, 0, 0);
 	public static readonly Color Magenta = new Color(255, 0, 255, 255);
 
 	public Color(byte r, byte g, byte b, byte a)
 	{
-		this.R = r;
-		this.G = g;
-		this.B = b;
-		this.A = a;
+		R = r;
+		G = g;
+		B = b;
+		A = a;
 	}
 
 	public Color(byte r, byte g, byte b)
 	{
-		this.R = r;
-		this.G = g;
-		this.B = b;
-		this.A = 255;
+		R = r;
+		G = g;
+		B = b;
+		A = 255;
 	}
 
 	public Color(int r, int g, int b, int a)
 	{
-		this.R = Convert.ToByte(r);
-		this.G = Convert.ToByte(g);
-		this.B = Convert.ToByte(b);
-		this.A = Convert.ToByte(a);
+		R = Convert.ToByte(r);
+		G = Convert.ToByte(g);
+		B = Convert.ToByte(b);
+		A = Convert.ToByte(a);
 	}
 
 	public Color(int r, int g, int b)
 	{
-		this.R = Convert.ToByte(r);
-		this.G = Convert.ToByte(g);
-		this.B = Convert.ToByte(b);
-		this.A = 255;
+		R = Convert.ToByte(r);
+		G = Convert.ToByte(g);
+		B = Convert.ToByte(b);
+		A = 255;
 	}
 
 	public Color(float r, float g, float b, float a)
 	{
-		this.R = (byte)((r < 0) ? 0 : ((r > 1) ? 255 : ((r * 255) + .5f)));
-		this.G = (byte)((g < 0) ? 0 : ((g > 1) ? 255 : ((g * 255) + .5f)));
-		this.B = (byte)((b < 0) ? 0 : ((b > 1) ? 255 : ((b * 255) + .5f)));
-		this.A = (byte)((a < 0) ? 0 : ((a > 1) ? 255 : ((a * 255) + .5f)));
+		R = (byte)(float.Clamp(r, 0f, 1f) * 255f + 0.5f);
+		G = (byte)(float.Clamp(g, 0f, 1f) * 255f + 0.5f);
+		B = (byte)(float.Clamp(b, 0f, 1f) * 255f + 0.5f);
+		A = (byte)(float.Clamp(a, 0f, 1f) * 255f + 0.5f);
 	}
 
 	public Color(float r, float g, float b)
 	{
-		this.R = (byte)((r < 0) ? 0 : ((r > 1) ? 255 : ((r * 255) + .5f)));
-		this.G = (byte)((g < 0) ? 0 : ((g > 1) ? 255 : ((g * 255) + .5f)));
-		this.B = (byte)((b < 0) ? 0 : ((b > 1) ? 255 : ((b * 255) + .5f)));
-		this.A = 255;
+		R = (byte)(float.Clamp(r, 0f, 1f) * 255f + 0.5f);
+		G = (byte)(float.Clamp(g, 0f, 1f) * 255f + 0.5f);
+		B = (byte)(float.Clamp(b, 0f, 1f) * 255f + 0.5f);
+		A = 255;
+	}
+
+	public static Color Lerp(Color from, Color to, float amount)
+	{
+		Color color = new();
+		color.R = (byte)(float.Lerp(from.R, to.R, amount) + 0.5f);
+		color.G = (byte)(float.Lerp(from.G, to.G, amount) + 0.5f);
+		color.B = (byte)(float.Lerp(from.B, to.B, amount) + 0.5f);
+		color.A = (byte)(float.Lerp(from.A, to.A, amount) + 0.5f);
+		return color;
 	}
 
 	public override string ToString()
 	{
-		return $"{{R:{R} G:{G} B:{B} A:{A}}}";
+		return $"({R}, {G}, {B}, {A})";
 	}
 }
