@@ -16,9 +16,19 @@ public struct AudioStream
 	public uint Channels;
 }
 
-public class AudioDevice
+public static class AudioDevice
 {
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void InitAudioDevice();
-	public static void Initialize() => InitAudioDevice();
+	internal static void Initialize() => InitAudioDevice();
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void CloseAudioDevice();
+	internal static void Close() => CloseAudioDevice();
+
+	public static void Restart()
+	{
+		Close();
+		Initialize();
+	}
 }

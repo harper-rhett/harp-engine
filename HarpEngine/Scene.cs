@@ -118,9 +118,9 @@ public class Scene
 			Entity = entity,
 			Index = NextEntityIndex
 		};
+		NextEntityIndex = entities.Count + entitiesToAdd.Count;
 		entitiesToAdd.Add(entityToInsert);
 		RegisterEntity(entity);
-		NextEntityIndex = entities.Count + entitiesToAdd.Count;
 	}
 
 	internal void RemoveEntity(Entity entity)

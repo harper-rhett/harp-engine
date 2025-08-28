@@ -4,6 +4,7 @@ global using HarpEngine.Utilities;
 global using HarpEngine.Windowing;
 global using System.Numerics;
 global using System.Runtime.InteropServices;
+using HarpEngine.Audio;
 using HarpEngine.Input;
 
 namespace HarpEngine;
@@ -31,8 +32,9 @@ public static class Engine
 		Window.Initialize(settings.WindowWidth, settings.WindowHeight, settings.WindowName);
 		HalfGameWidth = GameWidth / 2;
 		HalfGameHeight = GameHeight / 2;
-		
+
 		// Initialize game
+		AudioDevice.Initialize();
 		gameRenderTexture = RenderTexture.Load(settings.GameWidth, settings.GameHeight);
 	}
 
