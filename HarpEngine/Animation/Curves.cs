@@ -3,6 +3,8 @@
 // Some of these functions are sourced from https://easings.net/
 // I would recommend checking it out for more curves
 
+public delegate float CurveFunction(float valueToCurve);
+
 public static class Curves
 {
 	public static float Linear(float x) => x;

@@ -6,7 +6,8 @@ public class Scene
 {
 	// General
 	private List<EntityToAdd> entitiesToAdd = new();
-	private List<Entity> entities = new();
+	private SortedList<int, List<Entity>> updateLayers = new();
+	private Dictionary<Entity, int> entityLayers = new();
 	private HashSet<Entity> entitiesToRemove = new();
 	private Dictionary<Type, object> entityLists = new();
 	private Dictionary<Type, Entity> latestEntities = new();
@@ -18,11 +19,11 @@ public class Scene
 	public float Time { get; private set; }
 	/// <summary>If the update loop is paused. The draw loop is unaffected/</summary>
 	public bool IsPaused;
-	public int NextEntityIndex = 0;
+	public int NextEntityUpdateLayer = 0;
 
 	public Scene()
 	{
-		Entities = entities.AsReadOnly();
+		Entities = entityLayers.Keys.ToList().AsReadOnly();
 		Camera = new();
 	}
 
@@ -31,22 +32,47 @@ public class Scene
 		if (IsPaused) return;
 		Time += frameTime;
 
+		AddEntities();
+		RemoveEntities();
 		UpdateEntities(frameTime);
 		Camera.Update(frameTime);
 	}
 
+	private void AddEntities()
+	{
+		foreach (EntityToAdd entityToAdd in entitiesToAdd)
+		{
+			bool layerExists = updateLayers.TryGetValue(entityToAdd.UpdateLayer, out List<Entity> updateLayer);
+			if (layerExists) updateLayer.Add(entityToAdd.Entity);
+			else
+			{
+				updateLayer = new();
+				updateLayers[entityToAdd.UpdateLayer] = updateLayer;
+			}
+			entityLayers[entityToAdd.Entity] = entityToAdd.UpdateLayer;
+			updateLayer.Add(entityToAdd.Entity);
+		}
+		entitiesToAdd.Clear();
+	}
+
+	private void RemoveEntities()
+	{
+		foreach (Entity entityToRemove in entitiesToRemove)
+		{
+			int updateLayer = entityLayers[entityToRemove];
+			updateLayers[updateLayer].Remove(entityToRemove);
+		}
+		entitiesToRemove.Clear();
+	}
+
 	private void UpdateEntities(float frameTime)
 	{
-		foreach (EntityToAdd entityToAdd in entitiesToAdd) entities.Insert(entityToAdd.Index, entityToAdd.Entity);
-		entitiesToAdd.Clear();
-
-		foreach (Entity entity in entities)
-		{
-			if (entity.IsUpdating) entity.Update(frameTime);
-		}
-
-		entities.RemoveAll(entitiesToRemove.Contains);
-		entitiesToRemove.Clear();
+		// I should probably make this class enumerable so that it can be looped through in this manner more easily
+		foreach (List<Entity> entityLayer in updateLayers.Values)
+			foreach (Entity entity in entityLayer)
+			{
+				if (entity.IsUpdating) entity.Update(frameTime);
+			}
 	}
 
 	public void Draw()
@@ -58,19 +84,21 @@ public class Scene
 	private void DrawGame()
 	{
 		Camera.Begin();
-		foreach (Entity entity in entities)
-		{
-			if (entity.IsRendering) entity.Draw();
-		}
+		foreach (List<Entity> entityLayer in updateLayers.Values)
+			foreach (Entity entity in entityLayer)
+			{
+				if (entity.IsRendering) entity.Draw();
+			}
 		Camera.End();
 	}
 
 	private void DrawGUI()
 	{
-		foreach (Entity entity in entities)
-		{
-			if (entity.IsRendering) entity.DrawGUI();
-		}
+		foreach (List<Entity> entityLayer in updateLayers.Values)
+			foreach (Entity entity in entityLayer)
+			{
+				if (entity.IsRendering) entity.DrawGUI();
+			}
 	}
 
 	private void RegisterEntity(Entity entity)
@@ -116,9 +144,9 @@ public class Scene
 		EntityToAdd entityToInsert = new()
 		{
 			Entity = entity,
-			Index = NextEntityIndex
+			UpdateLayer = NextEntityUpdateLayer
 		};
-		NextEntityIndex = entities.Count + entitiesToAdd.Count;
+		NextEntityUpdateLayer = 0;
 		entitiesToAdd.Add(entityToInsert);
 		RegisterEntity(entity);
 	}
@@ -132,6 +160,6 @@ public class Scene
 	private struct EntityToAdd
 	{
 		public Entity Entity;
-		public int Index;
+		public int UpdateLayer;
 	}
 }

@@ -8,9 +8,8 @@ public class Easer : Entity
 	private float easeTime;
 
 	// Interface
-	public delegate float CurveFunction(float valueToCurve);
 	public CurveFunction Curve = Curves.Linear;
-	public Action Easing;
+	public Action<Easer> Easing;
 	public Action Finished;
 	public bool IsEasing { get; private set; }
 	public float Progress { get; private set; }
@@ -36,7 +35,7 @@ public class Easer : Entity
 	{
 		Progress = (scene.Time - startTime) / easeTime;
 		CurveProgress = Curve(Progress);
-		Easing?.Invoke();
+		Easing?.Invoke(this);
 	}
 
 	public void Start()
