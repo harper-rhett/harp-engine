@@ -9,7 +9,7 @@ public abstract class Entity
 	public Entity(Scene scene)
 	{
 		this.scene = scene;
-		scene.AddEntity(this);
+		scene.Entities.Add(this);
 	}
 
 	public virtual void Update(float frameTime) { }
@@ -18,7 +18,7 @@ public abstract class Entity
 
 	public void Remove()
 	{
-		scene.RemoveEntity(this);
+		scene.Entities.Remove(this);
 	}
 
 	public virtual void OnRemove() { }

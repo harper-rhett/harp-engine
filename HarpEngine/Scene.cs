@@ -11,7 +11,6 @@ public class Scene
 	public float Time { get; private set; }
 	/// <summary>If the update loop is paused. The draw loop is unaffected/</summary>
 	public bool IsPaused;
-	public int NextEntityUpdateLayer = 0;
 
 	public Scene()
 	{
@@ -60,8 +59,4 @@ public class Scene
 			if (entity.IsRendering) entity.DrawGUI();
 		}
 	}
-
-	internal void AddEntity(Entity entity) => Entities.Add(entity);
-
-	internal void RemoveEntity(Entity entity) => Entities.Remove(entity);
 }

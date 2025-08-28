@@ -17,7 +17,7 @@ public class TriggerTimer : Entity
 		if (scene.Time >= startTime + triggerTime)
 		{
 			Triggered();
-			scene.RemoveEntity(this);
+			Remove();
 		}
 	}
 

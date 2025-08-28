@@ -47,8 +47,7 @@ public class Entities : IEnumerable<Entity>
 		foreach (EntityToAdd entityToAdd in entitiesToAdd)
 		{
 			bool layerExists = updateLayers.TryGetValue(entityToAdd.UpdateLayer, out List<Entity> updateLayer);
-			if (layerExists) updateLayer.Add(entityToAdd.Entity);
-			else
+			if (!layerExists)
 			{
 				updateLayer = new();
 				updateLayers[entityToAdd.UpdateLayer] = updateLayer;

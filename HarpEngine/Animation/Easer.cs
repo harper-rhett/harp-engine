@@ -15,6 +15,7 @@ public class Easer : Entity
 	public float Progress { get; private set; }
 	public float CurveProgress { get; private set; }
 	public bool RemoveOnFinish = true;
+	public bool Rewind;
 
 	public Easer(Scene scene, float easeTime) : base(scene)
 	{
@@ -35,6 +36,7 @@ public class Easer : Entity
 	{
 		Progress = (scene.Time - startTime) / easeTime;
 		CurveProgress = Curve(Progress);
+		if (Rewind) CurveProgress = float.Sin(CurveProgress * float.Pi);
 		Easing?.Invoke(this);
 	}
 
