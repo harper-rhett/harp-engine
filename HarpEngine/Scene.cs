@@ -2,18 +2,10 @@
 
 namespace HarpEngine;
 
-public class Scene : IEnumerable<Entity>
+public class Scene
 {
-	// General
-	private List<EntityToAdd> entitiesToAdd = new();
-	private SortedList<int, List<Entity>> updateLayers = new();
-	private Dictionary<Entity, int> entityLayers = new();
-	private HashSet<Entity> entitiesToRemove = new();
-	private Dictionary<Type, object> entityLists = new();
-	private Dictionary<Type, Entity> latestEntities = new();
-
 	// Interface
-	public IReadOnlyList<Entity> Entities;
+	public Entities Entities { get; private set; } = new();
 	public Camera Camera;
 	/// <summary>Seconds since creation that this world has been unpaused.</summary>
 	public float Time { get; private set; }
@@ -23,7 +15,6 @@ public class Scene : IEnumerable<Entity>
 
 	public Scene()
 	{
-		Entities = this.ToList();
 		Camera = new();
 	}
 
@@ -32,42 +23,15 @@ public class Scene : IEnumerable<Entity>
 		if (IsPaused) return;
 		Time += frameTime;
 
-		AddEntities();
-		RemoveEntities();
+		Entities.ProcessAdditions();
 		UpdateEntities(frameTime);
+		Entities.ProcessRemovals();
 		Camera.Update(frameTime);
-	}
-
-	private void AddEntities()
-	{
-		foreach (EntityToAdd entityToAdd in entitiesToAdd)
-		{
-			bool layerExists = updateLayers.TryGetValue(entityToAdd.UpdateLayer, out List<Entity> updateLayer);
-			if (layerExists) updateLayer.Add(entityToAdd.Entity);
-			else
-			{
-				updateLayer = new();
-				updateLayers[entityToAdd.UpdateLayer] = updateLayer;
-			}
-			entityLayers[entityToAdd.Entity] = entityToAdd.UpdateLayer;
-			updateLayer.Add(entityToAdd.Entity);
-		}
-		entitiesToAdd.Clear();
-	}
-
-	private void RemoveEntities()
-	{
-		foreach (Entity entityToRemove in entitiesToRemove)
-		{
-			int updateLayer = entityLayers[entityToRemove];
-			updateLayers[updateLayer].Remove(entityToRemove);
-		}
-		entitiesToRemove.Clear();
 	}
 
 	private void UpdateEntities(float frameTime)
 	{
-		foreach (Entity entity in this)
+		foreach (Entity entity in Entities)
 		{
 			if (entity.IsUpdating) entity.Update(frameTime);
 		}
@@ -82,7 +46,7 @@ public class Scene : IEnumerable<Entity>
 	private void DrawGame()
 	{
 		Camera.Begin();
-		foreach (Entity entity in this)
+		foreach (Entity entity in Entities)
 		{
 			if (entity.IsRendering) entity.Draw();
 		}
@@ -91,80 +55,13 @@ public class Scene : IEnumerable<Entity>
 
 	private void DrawGUI()
 	{
-		foreach (Entity entity in this)
+		foreach (Entity entity in Entities)
 		{
 			if (entity.IsRendering) entity.DrawGUI();
 		}
 	}
 
-	private void RegisterEntity(Entity entity)
-	{
-		// Get the entity list
-		Type type = entity.GetType();
-		bool setExists = entityLists.TryGetValue(type, out object entityListObject);
+	internal void AddEntity(Entity entity) => Entities.Add(entity);
 
-		// Register as latest
-		latestEntities[type] = entity;
-
-		// Create list if needed
-		if (!setExists)
-		{
-			Type listType = typeof(List<>).MakeGenericType(type);
-			entityListObject = (IList)Activator.CreateInstance(listType);
-			entityLists[type] = entityListObject;
-		}
-
-		// Add entity to list
-		((IList)entityListObject).Add(entity);
-	}
-
-	public IReadOnlyList<EntityType> GetEntities<EntityType>() where EntityType : Entity
-	{
-		// Get the entity list
-		Type type = typeof(EntityType);
-		bool setExists = entityLists.TryGetValue(type, out object entityListObject);
-
-		// Return
-		if (setExists) return (List<EntityType>)entityListObject;
-		else return Array.Empty<EntityType>();
-	}
-
-	public EntityType GetEntity<EntityType>() where EntityType : Entity
-	{
-		Type type = typeof(EntityType);
-		return (EntityType)latestEntities[type];
-	}
-
-	private struct EntityToAdd
-	{
-		public Entity Entity;
-		public int UpdateLayer;
-	}
-
-	internal void AddEntity(Entity entity)
-	{
-		EntityToAdd entityToInsert = new()
-		{
-			Entity = entity,
-			UpdateLayer = NextEntityUpdateLayer
-		};
-		NextEntityUpdateLayer = 0;
-		entitiesToAdd.Add(entityToInsert);
-		RegisterEntity(entity);
-	}
-
-	internal void RemoveEntity(Entity entity)
-	{
-		entity.OnRemove();
-		entitiesToRemove.Add(entity);
-	}
-
-	public IEnumerator<Entity> GetEnumerator()
-	{
-		foreach (List<Entity> entityLayer in updateLayers.Values)
-			foreach (Entity entity in entityLayer)
-				yield return entity;
-	}
-
-	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+	internal void RemoveEntity(Entity entity) => Entities.Remove(entity);
 }
