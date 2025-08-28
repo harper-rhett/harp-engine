@@ -30,7 +30,7 @@ public static class Window
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern bool WindowShouldClose();
 
-	public static bool ShouldClose() => WindowShouldClose();
+	internal static bool ShouldClose() => WindowShouldClose();
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void SetWindowState(WindowFlags flags);

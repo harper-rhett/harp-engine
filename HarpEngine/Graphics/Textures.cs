@@ -73,3 +73,13 @@ public struct RenderTexture
 	private static extern RenderTexture LoadRenderTexture(int width, int height);
 	public static RenderTexture Load(int width, int height) => LoadRenderTexture(width, height);
 }
+
+[StructLayout(LayoutKind.Sequential)]
+public unsafe partial struct Image
+{
+	public void* Data;
+	public int Width;
+	public int Height;
+	public int Mipmaps;
+	public PixelFormat Format;
+}
