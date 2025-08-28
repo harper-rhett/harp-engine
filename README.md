@@ -1,4 +1,4 @@
-# Harp Engine
+# HarpEngine
 Harp Engine is a C# game development framework built on the [Raylib Graphics Library](https://www.raylib.com/). It is designed to contain all of the boilerplate code most scalable Raylib projects use, and more. It is also a learning platform for the developer, Harper. At some point Raylib's systems may be replaced by (similar) custom systems designed to best suit the development environment.
 
 # Features
