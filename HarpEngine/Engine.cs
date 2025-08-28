@@ -1,9 +1,10 @@
-﻿global using System.Numerics;
-global using HarpEngine.Utilities;
-global using HarpEngine.Animation;
-global using HarpEngine.Windowing;
+﻿global using HarpEngine.Animation;
 global using HarpEngine.Graphics;
+global using HarpEngine.Utilities;
+global using HarpEngine.Windowing;
+global using System.Numerics;
 global using System.Runtime.InteropServices;
+using HarpEngine.Input;
 
 namespace HarpEngine;
 
@@ -14,7 +15,7 @@ public static class Engine
 	private static EngineSettings settings;
 
 	// General
-	private static RenderTexture2D gameRenderTexture;
+	private static RenderTexture gameRenderTexture;
 	public static WindowRenderer WindowRenderer { get; private set; } = new BorderedRenderer(Color.Black);
 
 	// Interface
@@ -32,7 +33,7 @@ public static class Engine
 		HalfGameHeight = GameHeight / 2;
 		
 		// Initialize game
-		gameRenderTexture = Textures.LoadRenderTexture(settings.GameWidth, settings.GameHeight);
+		gameRenderTexture = RenderTexture.Load(settings.GameWidth, settings.GameHeight);
 	}
 
 	public static void Start(Game game)
@@ -56,17 +57,23 @@ public static class Engine
 
 	private static void MasterDraw()
 	{
-		RenderTexture2D.BeginDrawing(gameRenderTexture);
+		RenderTexture.BeginDrawing(gameRenderTexture);
 		game.Draw();
-		RenderTexture2D.EndDrawing();
+		RenderTexture.EndDrawing();
 
-		Drawing.Begin();
+		Primitives.Begin();
 		WindowRenderer.Draw(gameRenderTexture);
-		Drawing.End();
+		Primitives.End();
 	}
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	public static extern void SetExitKey(KeyboardKey key);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern float GetFrameTime();
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	public static extern void SetTargetFPS(int fps);
 
 	public static void SetRenderingBordered(Color borderColor) => WindowRenderer = new BorderedRenderer(borderColor);
 	public static void SetRenderingClipped() => WindowRenderer = new ClippedRenderer();

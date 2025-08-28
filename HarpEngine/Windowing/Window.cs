@@ -18,7 +18,7 @@ public static class Window
 		HighDpi = 0x00002000,
 		MousePassthrough = 0x00004000,
 		Borderless = 0x00008000,
-		Msaa4x = 0x00000020,
+		MSAA4x = 0x00000020,
 		Interlaced = 0x00010000,
 	}
 

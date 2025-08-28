@@ -10,7 +10,7 @@ internal class BorderedRenderer : WindowRenderer
 		this.borderColor = borderColor;
 	}
 
-	internal override void Draw(RenderTexture2D gameRenderTexture)
+	internal override void Draw(RenderTexture gameRenderTexture)
 	{
 		// Initialize
 		RefreshValues(gameRenderTexture);
@@ -20,8 +20,8 @@ internal class BorderedRenderer : WindowRenderer
 		if (DidResize) CalculateViewportRectangle(windowWidth, windowHeight);
 
 		// Clear background to draw border before drawing game
-		Drawing.Clear(borderColor);
-		Drawing.DrawTexture(gameRenderTexture.Texture, gameRectangle, viewportRectangle, Vector2.Zero, 0, Color.White);
+		Primitives.Clear(borderColor);
+		gameRenderTexture.Texture.Draw(gameRectangle, viewportRectangle, Vector2.Zero, 0, Color.White);
 	}
 
 	private void CalculateViewportRectangle(int windowWidth, int windowHeight)

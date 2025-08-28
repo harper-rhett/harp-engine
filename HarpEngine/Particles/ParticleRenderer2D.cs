@@ -8,7 +8,7 @@ internal abstract class ParticleRenderer2D
 	{
 		public override void Draw(Particle2D particle)
 		{
-			Drawing.DrawPixel(particle.Position, particle.Color);
+			Primitives.DrawPixel(particle.Position, particle.Color);
 		}
 	}
 
@@ -23,7 +23,7 @@ internal abstract class ParticleRenderer2D
 
 		public override void Draw(Particle2D particle)
 		{
-			Drawing.DrawCircle(particle.Position, radius, particle.Color);
+			Primitives.DrawCircle(particle.Position, radius, particle.Color);
 		}
 	}
 
@@ -40,17 +40,17 @@ internal abstract class ParticleRenderer2D
 
 		public override void Draw(Particle2D particle)
 		{
-			Drawing.DrawPolygon(particle.Position, sides, radius, particle.Rotation, particle.Color);
+			Primitives.DrawPolygon(particle.Position, sides, radius, particle.Rotation, particle.Color);
 		}
 	}
 
 	public class Texture : ParticleRenderer2D
 	{
-		private Texture2D texture2D;
+		private Graphics.Texture texture2D;
 		private Rectangle particleRectangle;
 		private Vector2 textureOrigin;
 
-		public Texture(Texture2D texture2D)
+		public Texture(Graphics.Texture texture2D)
 		{
 			this.texture2D = texture2D;
 			particleRectangle = new(0, 0, texture2D.Width, texture2D.Height);
@@ -60,7 +60,7 @@ internal abstract class ParticleRenderer2D
 		public override void Draw(Particle2D particle)
 		{
 			Rectangle drawRectangle = new(particle.Position, texture2D.Width, texture2D.Height);
-			Drawing.DrawTexture(texture2D, particleRectangle, drawRectangle, textureOrigin, particle.Rotation, particle.Color);
+			texture2D.Draw(particleRectangle, drawRectangle, textureOrigin, particle.Rotation, particle.Color);
 		}
 	}
 }

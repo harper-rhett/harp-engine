@@ -83,7 +83,7 @@ public sealed class ParticleEngine2D : Entity
 		particleRenderer = new ParticleRenderer2D.Polygon(sides, radius);
 	}
 
-	public void RenderAsTexture(Texture2D texture2D)
+	public void RenderAsTexture(Texture texture2D)
 	{
 		particleRenderer = new ParticleRenderer2D.Texture(texture2D);
 	}

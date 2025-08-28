@@ -29,33 +29,47 @@ public enum PixelFormat
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public partial struct Texture2D
+public unsafe struct Texture
 {
 	public uint Id;
 	public int Width;
 	public int Height;
 	public int Mipmaps;
 	public PixelFormat Format;
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+	private static extern Texture LoadTexture(string filePath);
+	public static Texture Load(string filePath) => LoadTexture(filePath);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void DrawTexture(Texture texture, int x, int y, Color tint);
+	public void Draw(int x, int y, Color tint) => DrawTexture(this, x, y, tint);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void DrawTextureRec(Texture texture, Rectangle source, Vector2 position, Color tint);
+	public void Draw(Rectangle source, Vector2 position, Color tint) => DrawTextureRec(this, source, position, tint);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void DrawTexturePro(Texture texture, Rectangle source, Rectangle destination, Vector2 origin, float rotation, Color tint);
+	public void Draw(Rectangle source, Rectangle destination, Vector2 origin, float rotation, Color tint) => DrawTexturePro(this, source, destination, origin, rotation, tint);
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public partial struct RenderTexture2D
+public struct RenderTexture
 {
 	public uint Id;
-	public Texture2D Texture;
-	public Texture2D Depth;
+	public Texture Texture;
+	public Texture Depth;
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
-	private static extern void BeginTextureMode(RenderTexture2D renderTexture2D);
-	public static void BeginDrawing(RenderTexture2D renderTexture2D) => BeginTextureMode(renderTexture2D);
+	private static extern void BeginTextureMode(RenderTexture renderTexture2D);
+	public static void BeginDrawing(RenderTexture renderTexture2D) => BeginTextureMode(renderTexture2D);
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void EndTextureMode();
 	public static void EndDrawing() => EndTextureMode();
-}
 
-public static class Textures
-{
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
-	public static extern RenderTexture2D LoadRenderTexture(int width, int height);
+	private static extern RenderTexture LoadRenderTexture(int width, int height);
+	public static RenderTexture Load(int width, int height) => LoadRenderTexture(width, height);
 }

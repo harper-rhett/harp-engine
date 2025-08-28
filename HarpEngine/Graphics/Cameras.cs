@@ -1,7 +1,7 @@
 ﻿namespace HarpEngine.Graphics;
 
 [StructLayout(LayoutKind.Sequential)]
-internal partial struct Camera2D
+internal struct Camera2D
 {
 	public Vector2 Offset;
 	public Vector2 Target;

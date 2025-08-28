@@ -1,6 +1,6 @@
 ﻿namespace HarpEngine.Graphics;
 
-public static class Drawing
+public static class Primitives
 {
 	// Background
 
@@ -41,10 +41,4 @@ public static class Drawing
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void DrawPoly(Vector2 position, int sides, float radius, float rotation, Color color);
 	public static void DrawPolygon(Vector2 position, int sides, float radius, float rotation, Color color) => DrawPoly(position, sides, radius, rotation, color);
-
-	// Textures
-
-	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
-	private static extern void DrawTexturePro(Texture2D texture, Rectangle source, Rectangle dest, Vector2 origin, float rotation, Color tint);
-	public static void DrawTexture(Texture2D texture, Rectangle source, Rectangle destination, Vector2 origin, float rotation, Color tint) => DrawTexturePro(texture, source, destination, origin, rotation, tint);
 }

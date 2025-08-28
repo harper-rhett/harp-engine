@@ -24,7 +24,7 @@ public abstract class WindowRenderer
 	}
 
 	// Fetch new values
-	protected void RefreshValues(RenderTexture2D gameRenderTexture)
+	protected void RefreshValues(RenderTexture gameRenderTexture)
 	{
 		windowWidth = Window.Width;
 		windowHeight = Window.Height;
@@ -33,5 +33,5 @@ public abstract class WindowRenderer
 	}
 
 	// Custom implementation for game sizing
-	internal abstract void Draw(RenderTexture2D gameRenderTexture);
+	internal abstract void Draw(RenderTexture gameRenderTexture);
 }

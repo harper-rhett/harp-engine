@@ -4,7 +4,7 @@ internal class ClippedRenderer : WindowRenderer
 {
 	private Rectangle gameRectangle;
 
-	internal override void Draw(RenderTexture2D gameRenderTexture)
+	internal override void Draw(RenderTexture gameRenderTexture)
 	{
 		// Initialize
 		RefreshValues(gameRenderTexture);
@@ -14,7 +14,7 @@ internal class ClippedRenderer : WindowRenderer
 		if (DidResize) CalculateGameRectangle(windowWidth, windowHeight, gameWidth, gameHeight);
 
 		// Draw game clipped
-		Drawing.DrawTexture(gameRenderTexture.Texture, gameRectangle, viewportRectangle, Vector2.Zero, 0, Color.White);
+		gameRenderTexture.Texture.Draw(gameRectangle, viewportRectangle, Vector2.Zero, 0, Color.White);
 	}
 
 	private void CalculateGameRectangle(int windowWidth, int windowHeight, int gameWidth, int gameHeight)

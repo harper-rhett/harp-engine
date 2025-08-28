@@ -1,7 +1,7 @@
 ﻿namespace HarpEngine.Graphics;
 
 [StructLayout(LayoutKind.Sequential)]
-public partial struct Color
+public struct Color
 {
 	public byte R;
 	public byte G;

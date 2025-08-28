@@ -1,7 +1,7 @@
 ﻿namespace HarpEngine.Graphics;
 
 [StructLayout(LayoutKind.Sequential)]
-public partial struct Rectangle
+public struct Rectangle
 {
 	public float X;
 	public float Y;
