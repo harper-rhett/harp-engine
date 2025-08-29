@@ -5,7 +5,8 @@ public sealed class FireTimer : Entity
 	private float timeCooldown;
 	private float backloggedTime;
 	private bool isStarted;
-	public Action Fired;
+	public delegate void FiredDelegate();
+	public event FiredDelegate Fired;
 
 	public FireTimer(Scene scene, float timeCooldown) : base(scene)
 	{
@@ -25,7 +26,7 @@ public sealed class FireTimer : Entity
 		int backloggedActions = (int)MathF.Floor(backloggedTime / timeCooldown);
 		backloggedTime -= backloggedActions * timeCooldown;
 
-		for (int actionNumber = 1; actionNumber <= backloggedActions; actionNumber++) Fired();
+		for (int actionNumber = 1; actionNumber <= backloggedActions; actionNumber++) Fired?.Invoke();
 	}
 
 	public override void Draw() { }

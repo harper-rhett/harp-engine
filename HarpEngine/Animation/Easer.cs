@@ -9,12 +9,14 @@ public class Easer : Entity
 
 	// Interface
 	public CurveFunction Curve = Curves.Linear;
-	public Action<Easer> Easing;
-	public Action Finished;
+	public delegate void EasingDelegate(Easer easer);
+	public event EasingDelegate Easing;
+	public delegate void FinishedDelegate();
+	public event FinishedDelegate Finished;
 	public bool IsEasing { get; private set; }
 	public float Progress { get; private set; }
 	public float CurveProgress { get; private set; }
-	public bool RemoveOnFinish = true;
+	public bool RemoveOnFinished = true;
 	public bool Rewind;
 
 	public Easer(Scene scene, float easeTime) : base(scene)

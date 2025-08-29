@@ -5,7 +5,10 @@ public sealed class TriggerTimer : Entity
 	private float triggerTime;
 	private float startTime;
 	private float endTime = float.MaxValue;
-	public Action Triggered;
+	private bool isTriggered;
+	public bool RemoveOnTriggered = true;
+	public delegate void TriggeredDelegate();
+	public event TriggeredDelegate Triggered;
 
 	public TriggerTimer(Scene scene, float triggerTime) : base(scene)
 	{
@@ -18,12 +21,21 @@ public sealed class TriggerTimer : Entity
 		endTime = startTime + triggerTime;
 	}
 
+	public void Restart()
+	{
+		isTriggered = false;
+		Start();
+	}
+
 	public override void Update(float frameTime)
 	{
+		if (isTriggered) return;
+
 		if (scene.Time >= endTime)
 		{
-			Triggered();
-			Remove();
+			isTriggered = true;
+			Triggered?.Invoke();
+			if (RemoveOnTriggered) Remove();
 		}
 	}
 
