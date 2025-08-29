@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-namespace HarpEngine;
+﻿namespace HarpEngine;
 
 public class Scene
 {

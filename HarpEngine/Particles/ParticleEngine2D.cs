@@ -16,7 +16,8 @@ public sealed class ParticleEngine2D : Entity
 	public float BaseSpeed = 0;
 	public float RandomSpeed = 0;
 	public float SpawnRadius = 0;
-	public Vector2 Gravity = Vector2.Zero;
+	public Vector2 StartVelocity;
+	public Vector2 Gravity;
 
 	// Rotation
 	public float StartRotation = 0;
@@ -129,6 +130,7 @@ public sealed class ParticleEngine2D : Entity
 		float additionalSpeed = random.NextFloat() * RandomSpeed;
 		if (velocity is null) particle.Velocity = direction * (BaseSpeed + additionalSpeed);
 		else particle.Velocity = velocity.Value;
+		particle.Velocity = StartVelocity + particle.Velocity;
 
 		// Rotation
 		particle.Rotation = StartRotation;
