@@ -2,10 +2,10 @@
 global using HarpEngine.Graphics;
 global using HarpEngine.Utilities;
 global using HarpEngine.Windowing;
+global using HarpEngine.Audio;
+global using HarpEngine.Input;
 global using System.Numerics;
 global using System.Runtime.InteropServices;
-using HarpEngine.Audio;
-using HarpEngine.Input;
 
 namespace HarpEngine;
 
@@ -17,7 +17,6 @@ public static class Engine
 
 	// General
 	private static RenderTexture gameRenderTexture;
-	public static WindowRenderer WindowRenderer { get; private set; } = new BorderedRenderer(Color.Black);
 
 	// Interface
 	public static int GameWidth => settings.GameWidth;
@@ -65,19 +64,13 @@ public static class Engine
 		RenderTexture.EndDrawing();
 
 		Primitives.Begin();
-		WindowRenderer.Draw(gameRenderTexture);
+		Window.Renderer.Draw(gameRenderTexture);
 		Primitives.End();
 	}
-
-	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
-	public static extern void SetExitKey(KeyboardKey key);
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern float GetFrameTime();
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	public static extern void SetTargetFPS(int fps);
-
-	public static void SetRenderingBordered(Color borderColor) => WindowRenderer = new BorderedRenderer(borderColor);
-	public static void SetRenderingClipped() => WindowRenderer = new ClippedRenderer();
 }

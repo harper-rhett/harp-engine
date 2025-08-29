@@ -1,6 +1,6 @@
 ﻿namespace HarpEngine.Windowing;
 
-public abstract class WindowRenderer
+internal abstract class WindowRenderer
 {
 	// Window fields
 	protected int windowWidth;

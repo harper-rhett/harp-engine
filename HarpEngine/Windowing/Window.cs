@@ -2,6 +2,8 @@
 
 public static class Window
 {
+	internal static WindowRenderer Renderer { get; private set; } = new BorderedRenderer(Color.Black);
+
 	private enum WindowFlags : uint
 	{
 		VSync = 0x00000040,
@@ -21,6 +23,9 @@ public static class Window
 		MSAA4x = 0x00000020,
 		Interlaced = 0x00010000,
 	}
+
+	public static void SetBordered(Color borderColor) => Renderer = new BorderedRenderer(borderColor);
+	public static void SetClipped() => Renderer = new ClippedRenderer();
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void InitWindow(int width, int height, string title);
@@ -54,4 +59,7 @@ public static class Window
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern int GetScreenHeight();
 	public static int Height => GetScreenHeight();
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	public static extern void SetExitKey(KeyboardKey key);
 }
