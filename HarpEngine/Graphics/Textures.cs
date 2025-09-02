@@ -37,7 +37,7 @@ public unsafe struct Texture
 	public int Mipmaps;
 	public PixelFormat Format;
 
-	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern Texture LoadTexture(string filePath);
 	public static Texture Load(string filePath) => LoadTexture(filePath);
 

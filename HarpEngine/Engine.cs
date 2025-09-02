@@ -63,9 +63,9 @@ public static class Engine
 		game.Draw();
 		RenderTexture.EndDrawing();
 
-		Primitives.Begin();
+		Drawing.Begin();
 		Window.Renderer.Draw(gameRenderTexture);
-		Primitives.End();
+		Drawing.End();
 	}
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]

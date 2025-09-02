@@ -1,11 +1,11 @@
 ﻿namespace HarpEngine.Windowing;
 
-internal class BorderedRenderer : WindowRenderer
+internal class UnclippedRenderer : WindowRenderer
 {
 	private Color borderColor;
 	private Rectangle viewportRectangle;
 
-	public BorderedRenderer(Color borderColor)
+	public UnclippedRenderer(Color borderColor)
 	{
 		this.borderColor = borderColor;
 	}

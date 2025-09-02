@@ -6,7 +6,7 @@ public unsafe struct Sound
 	public AudioStream Stream;
 	public uint FrameCount;
 
-	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern Sound LoadSound(string filePath);
 	public static Sound Load(string filePath) => LoadSound(filePath);
 

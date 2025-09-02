@@ -14,7 +14,7 @@ public unsafe struct Music
 	public int CtxType;
 	public void* CtxData;
 
-	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern Music LoadMusicStream(string filePath);
 	public static Music Load(string filePath) => LoadMusicStream(filePath);
 

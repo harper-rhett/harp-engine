@@ -8,16 +8,6 @@ public static class Primitives
 	private static extern void ClearBackground(Color color);
 	public static void Clear(Color color) => ClearBackground(color);
 
-	// Drawing
-
-	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
-	private static extern void BeginDrawing();
-	public static void Begin() => BeginDrawing();
-
-	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
-	private static extern void EndDrawing();
-	public static void End() => EndDrawing();
-
 	// Pixels
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
