@@ -73,4 +73,7 @@ public static class Engine
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	public static extern void SetTargetFPS(int fps);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	public static extern void TakeScreenshot(string fileName);
 }

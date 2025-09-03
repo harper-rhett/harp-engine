@@ -23,4 +23,8 @@ internal struct Camera2D
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void EndMode2D();
 	public static void EndRendering() => EndMode2D();
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern Matrix4x4 GetCameraMatrix2D(Camera2D camera2D);
+	public Matrix4x4 Matrix => GetCameraMatrix2D(this);
 }
