@@ -37,4 +37,12 @@ public unsafe struct Music
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void UpdateMusicStream(Music music);
 	public void Update() => UpdateMusicStream(this);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void PauseMusicStream(Music music);
+	public void Pause() => PauseMusicStream(this);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void ResumeMusicStream(Music music);
+	public void Resume() => ResumeMusicStream(this);
 }
