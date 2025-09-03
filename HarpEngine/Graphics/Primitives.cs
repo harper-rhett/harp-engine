@@ -2,12 +2,6 @@
 
 public static class Primitives
 {
-	// Background
-
-	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
-	private static extern void ClearBackground(Color color);
-	public static void Clear(Color color) => ClearBackground(color);
-
 	// Pixels
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]

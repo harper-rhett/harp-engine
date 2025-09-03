@@ -20,7 +20,7 @@ internal class UnclippedRenderer : WindowRenderer
 		if (DidResize) CalculateViewportRectangle(windowWidth, windowHeight);
 
 		// Clear background to draw border before drawing game
-		Primitives.Clear(borderColor);
+		Drawing.Clear(borderColor);
 		gameRenderTexture.Texture.Draw(gameRectangle, viewportRectangle, Vector2.Zero, 0, Color.White);
 	}
 

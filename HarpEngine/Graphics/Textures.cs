@@ -44,6 +44,7 @@ public unsafe struct Texture
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void DrawTexture(Texture texture, int x, int y, Color tint);
 	public void Draw(int x, int y, Color tint) => DrawTexture(this, x, y, tint);
+	public void Draw(Vector2 position, Color tint) => DrawTexture(this, (int)float.Round(position.X), (int)float.Round(position.Y), tint);
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void DrawTextureRec(Texture texture, Rectangle source, Vector2 position, Color tint);
