@@ -1,6 +1,6 @@
 ﻿namespace HarpEngine.Utilities;
 
-public sealed class FireTimer : Entity
+public class FireTimer : Entity
 {
 	private float timeCooldown;
 	private float backloggedTime;
@@ -13,11 +13,6 @@ public sealed class FireTimer : Entity
 		this.timeCooldown = timeCooldown;
 	}
 
-	public void Start()
-	{
-		isStarted = true;
-	}
-
 	public override void Update(float frameTime)
 	{
 		if (!isStarted) return;
@@ -26,8 +21,21 @@ public sealed class FireTimer : Entity
 		int backloggedActions = (int)MathF.Floor(backloggedTime / timeCooldown);
 		backloggedTime -= backloggedActions * timeCooldown;
 
-		for (int actionNumber = 1; actionNumber <= backloggedActions; actionNumber++) Fired?.Invoke();
+		for (int actionNumber = 1; actionNumber <= backloggedActions; actionNumber++) Fire();
 	}
 
 	public override void Draw() { }
+
+	public void Start()
+	{
+		isStarted = true;
+	}
+
+	private void Fire()
+	{
+		OnFired();
+		Fired?.Invoke();
+	}
+
+	public virtual void OnFired() { }
 }

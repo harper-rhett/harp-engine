@@ -1,6 +1,6 @@
 ﻿namespace HarpEngine.Utilities;
 
-public sealed class TriggerTimer : Entity
+public class TriggerTimer : Entity
 {
 	private float triggerTime;
 	private float startTime;
@@ -15,6 +15,15 @@ public sealed class TriggerTimer : Entity
 		this.triggerTime = triggerTime;
 	}
 
+	public override void Update(float frameTime)
+	{
+		if (isTriggered) return;
+
+		if (scene.Time >= endTime) Trigger();
+	}
+
+	public override void Draw() { }
+
 	public void Start()
 	{
 		startTime = scene.Time;
@@ -27,17 +36,13 @@ public sealed class TriggerTimer : Entity
 		Start();
 	}
 
-	public override void Update(float frameTime)
+	private void Trigger()
 	{
-		if (isTriggered) return;
-
-		if (scene.Time >= endTime)
-		{
-			isTriggered = true;
-			Triggered?.Invoke();
-			if (RemoveOnTriggered) Remove();
-		}
+		isTriggered = true;
+		Triggered?.Invoke();
+		if (RemoveOnTriggered) Remove();
+		OnTriggered();
 	}
 
-	public override void Draw() { }
+	public virtual void OnTriggered() { }
 }
