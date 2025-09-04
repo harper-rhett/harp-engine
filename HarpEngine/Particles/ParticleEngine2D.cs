@@ -13,16 +13,17 @@ public sealed class ParticleEngine2D : Entity
 	private List<Particle2DInitializer> initializers = new();
 	private List<Particle2DModifier> modifiers = new();
 	private FireTimer fireTimer;
+	private Particle2D streamParticleTemplate;
 
 	// Lifespan
 	public bool IsExhausted => count == 0;
 
-	public ParticleEngine2D(Scene scene) : this(scene, defaultInitialCount) { }
-
-	public ParticleEngine2D(Scene scene, int initialCount) : base(scene)
+	public ParticleEngine2D(Scene scene, int initialCount = defaultInitialCount) : base(scene)
 	{
 		particles = new Particle2D[initialCount];
 		Particles = particles.AsReadOnly();
+		fireTimer = new();
+		fireTimer.Fired += () => SpawnParticle(streamParticleTemplate);
 	}
 
 	public override void Update(float frameTime)
@@ -107,9 +108,10 @@ public sealed class ParticleEngine2D : Entity
 			SpawnParticle(particleTemplate);
 	}
 
-	public void SpawnStream(Particle2D particleTemplate)
+	public void SpawnStream(Particle2D particleTemplate, float frameTime, float cooldownTime)
 	{
-
+		streamParticleTemplate = particleTemplate;
+		fireTimer.Update(frameTime, cooldownTime);
 	}
 
 	public void RemoveParticle(int particleIndex)
