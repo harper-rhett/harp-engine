@@ -1,5 +1,7 @@
 ﻿namespace HarpEngine.Utilities;
 
+// This also needs a base version like FireTimer has
+
 public class TriggerTimer : Entity
 {
 	private float triggerTime;
@@ -21,8 +23,6 @@ public class TriggerTimer : Entity
 
 		if (scene.Time >= endTime) Trigger();
 	}
-
-	public override void Draw() { }
 
 	public void Start()
 	{

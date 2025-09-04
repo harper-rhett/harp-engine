@@ -89,21 +89,26 @@ public sealed class ParticleEngine2D : Entity
 		Array.Copy(oldParticles, particles, oldParticles.Length);
 	}
 
-	public void InitializeParticle(Particle2D particle)
+	public void SpawnParticle(Particle2D particleTemplate)
 	{
 		// Initialize
-		foreach (Particle2DInitializer initializer in initializers) initializer(ref particle);
+		foreach (Particle2DInitializer initializer in initializers) initializer(ref particleTemplate);
 
 		// Array business
 		if (count == particles.Length) ResizeParticles();
-		particle.spawnTime = scene.Time;
-		particles[count++] = particle;
+		particleTemplate.spawnTime = scene.Time;
+		particles[count++] = particleTemplate;
 	}
 
-	public void InitializeBurst(Particle2D particle, int count)
+	public void SpawnBurst(Particle2D particleTemplate, int count)
 	{
 		for (int particleIndex = 0; particleIndex < count; particleIndex++)
-			InitializeParticle(particle);
+			SpawnParticle(particleTemplate);
+	}
+
+	public void SpawnStream(Particle2D particleTemplate)
+	{
+
 	}
 
 	public void RemoveParticle(int particleIndex)
