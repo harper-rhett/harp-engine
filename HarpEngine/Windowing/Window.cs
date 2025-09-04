@@ -2,7 +2,7 @@
 
 public unsafe static class Window
 {
-	internal static WindowRenderer Renderer { get; private set; } = new UnclippedRenderer(Color.Black);
+	internal static WindowRenderer Renderer { get; private set; } = new UnclippedRenderer(Colors.Black);
 
 	private enum WindowFlags : uint
 	{

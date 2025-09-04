@@ -8,7 +8,7 @@ public class Easer : Entity
 	private float easeTime;
 
 	// Interface
-	public CurveFunction Curve = Curves.Linear;
+	public Curve Curve = Curves.Linear;
 	public delegate void EasingDelegate(Easer easer);
 	public event EasingDelegate Easing;
 	public delegate void FinishedDelegate();

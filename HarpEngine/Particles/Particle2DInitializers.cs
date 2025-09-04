@@ -16,6 +16,17 @@ public static partial class ParticleInitializers
 		return particleInitializer;
 	}
 
+	public static Particle2DInitializer SetSpeed(float speed)
+	{
+		Particle2DInitializer particleInitializer = (ref Particle2D particle) =>
+		{
+			Vector2 direction = Vector2.Normalize(particle.Velocity);
+			particle.Velocity = direction * speed;
+		};
+
+		return particleInitializer;
+	}
+
 	public static Particle2DInitializer RandomizeSpeed(float minimumSpeed, float maximumSpeed)
 	{
 		Particle2DInitializer particleInitializer = (ref Particle2D particle) =>

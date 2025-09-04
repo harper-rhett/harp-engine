@@ -39,7 +39,7 @@ public sealed class ParticleEngine2D : Entity
 			}
 
 			// Apply modifiers
-			foreach (Particle2DModifier modifier in modifiers) modifier(ref particle, frameTime);
+			foreach (Particle2DModifier modifier in modifiers) modifier(ref particle, scene.Time, frameTime);
 		}
 	}
 
