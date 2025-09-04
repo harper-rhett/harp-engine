@@ -53,7 +53,7 @@ public class Easer : Entity
 	{
 		IsEasing = false;
 		Finished?.Invoke();
-		Remove();
+		if (RemoveOnFinished) Remove();
 	}
 
 	public float EaseFloat(float from, float to)
