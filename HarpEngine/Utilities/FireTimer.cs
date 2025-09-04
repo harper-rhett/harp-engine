@@ -2,22 +2,20 @@
 
 public class FireTimer
 {
-	private float timeCooldown;
 	private float backloggedTime;
 	public delegate void FiredDelegate();
 	public event FiredDelegate Fired;
 
-	public FireTimer(float timeCooldown)
+	public FireTimer()
 	{
-		this.timeCooldown = timeCooldown;
 		Fired += OnFired;
 	}
 
-	public void Update(float frameTime)
+	public void Update(float frameTime, float cooldownTime)
 	{
 		backloggedTime += frameTime;
-		int backloggedActions = (int)MathF.Floor(backloggedTime / timeCooldown);
-		backloggedTime -= backloggedActions * timeCooldown;
+		int backloggedActions = (int)MathF.Floor(backloggedTime / cooldownTime);
+		backloggedTime -= backloggedActions * cooldownTime;
 
 		for (int actionNumber = 1; actionNumber <= backloggedActions; actionNumber++) Fired?.Invoke();
 	}
@@ -29,21 +27,24 @@ public class FireTimerEntity : Entity
 {
 	private FireTimer fireTimer;
 	private bool isStarted;
+	public float CooldownTime;
+
 	public event FireTimer.FiredDelegate Fired
 	{
 		add { fireTimer.Fired += value; }
 		remove { fireTimer.Fired -= value; }
 	}
 
-	public FireTimerEntity(Scene scene, float timeCooldown) : base(scene)
+	public FireTimerEntity(Scene scene, float cooldownTime) : base(scene)
 	{
-		fireTimer = new FireTimer(timeCooldown);
+		CooldownTime = cooldownTime;
+		fireTimer = new FireTimer();
 		Fired += OnFired;
 	}
 
 	public override void Update(float frameTime)
 	{
-		if (isStarted) fireTimer.Update(frameTime);
+		if (isStarted) fireTimer.Update(frameTime, CooldownTime);
 	}
 
 	public void Start()
