@@ -117,6 +117,22 @@ public class Entities : IEnumerable<Entity>
 		return (EntityType)latestEntities[type];
 	}
 
+	public void DrawDebug(int fontSize, int spacing)
+	{
+		int index = 0;
+		foreach (KeyValuePair<Type, object> entityListPair in entityLists)
+		{
+			Type type = entityListPair.Key;
+			IList entityList = (IList)entityListPair.Value;
+			string typeString = type.ToString();
+			int typeCount = entityList.Count;
+			string text = $"{typeString}: {typeCount}";
+			int y = spacing + index * (fontSize + spacing);
+			Text.Draw(text, spacing, y, fontSize, Colors.White);
+			index++;
+		}
+	}
+
 	public IEnumerator<Entity> GetEnumerator()
 	{
 		foreach (List<Entity> entityLayer in updateLayers.Values)
