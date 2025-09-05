@@ -6,24 +6,40 @@ public sealed class ParticleEngine2D : Entity
 {
 	// General
 	private Particle2D[] particles;
-	public IReadOnlyList<Particle2D> Particles;
 	private int count;
-	private const int defaultInitialCount = 100;
 	private ParticleRenderer2D particleRenderer = new ParticleRenderer2D.Circle(4);
 	private List<Particle2DInitializer> initializers = new();
 	private List<Particle2DModifier> modifiers = new();
 	private FireTimer fireTimer;
-	private Particle2D streamParticleTemplate;
 
-	// Lifespan
+	// Defaults
+	private const int defaultInitialCount = 100;
+	private const float defaultStreamCooldownTime = 0.1f;
+
+	// Interface
+	public IReadOnlyList<Particle2D> Particles;
 	public bool IsExhausted => count == 0;
+	public float StreamCooldownTime
+	{
+		get => fireTimer.CooldownTime;
+		set => fireTimer.CooldownTime = value;
+	}
+	public bool IsStreaming
+	{
+		get => fireTimer.IsUpdating;
+		set => fireTimer.IsUpdating = value;
+	}
+	public delegate void StreamFiredDelegate(out Particle2D particleTemplate);
+	public event StreamFiredDelegate StreamFired;
 
-	public ParticleEngine2D(Scene scene, int initialCount = defaultInitialCount) : base(scene)
+	public ParticleEngine2D(Scene scene, int initialCount = defaultInitialCount, float streamCooldownTime = defaultStreamCooldownTime) : base(scene)
 	{
 		particles = new Particle2D[initialCount];
 		Particles = particles.AsReadOnly();
-		fireTimer = new();
-		fireTimer.Fired += () => SpawnParticle(streamParticleTemplate);
+		fireTimer = new(scene, streamCooldownTime);
+		fireTimer.Fired += SpawnStream;
+		fireTimer.Start();
+		fireTimer.IsUpdating = false;
 	}
 
 	public override void Update(float frameTime)
@@ -108,10 +124,15 @@ public sealed class ParticleEngine2D : Entity
 			SpawnParticle(particleTemplate);
 	}
 
-	public void SpawnStream(Particle2D particleTemplate, float frameTime, float cooldownTime)
+	private void SpawnStream()
 	{
-		streamParticleTemplate = particleTemplate;
-		fireTimer.Update(frameTime, cooldownTime);
+		if (StreamFired is null) return;
+
+		foreach (StreamFiredDelegate streamFired in StreamFired.GetInvocationList())
+		{
+			streamFired(out Particle2D particleTemplate);
+			SpawnParticle(particleTemplate);
+		}
 	}
 
 	public void RemoveParticle(int particleIndex)
@@ -119,5 +140,10 @@ public sealed class ParticleEngine2D : Entity
 		count--;
 		particles[particleIndex] = particles[count];
 		particles[count] = default;
+	}
+
+	public override void OnRemove()
+	{
+		fireTimer.Remove();
 	}
 }

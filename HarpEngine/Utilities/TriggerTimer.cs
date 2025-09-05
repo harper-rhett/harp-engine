@@ -1,7 +1,5 @@
 ﻿namespace HarpEngine.Utilities;
 
-// This also needs a base version like FireTimer has
-
 public class TriggerTimer : Entity
 {
 	private float triggerTime;

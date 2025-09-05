@@ -1,55 +1,40 @@
 ﻿namespace HarpEngine.Utilities;
 
-public class FireTimer
+public class FireTimer : Entity
 {
+	public float CooldownTime;
 	private float backloggedTime;
+	private bool isStarted;
 	public delegate void FiredDelegate();
 	public event FiredDelegate Fired;
 
-	public FireTimer()
-	{
-		Fired += OnFired;
-	}
-
-	public void Update(float frameTime, float cooldownTime)
-	{
-		backloggedTime += frameTime;
-		int backloggedActions = (int)MathF.Floor(backloggedTime / cooldownTime);
-		backloggedTime -= backloggedActions * cooldownTime;
-
-		for (int actionNumber = 1; actionNumber <= backloggedActions; actionNumber++) Fired?.Invoke();
-	}
-
-	public virtual void OnFired() { }
-}
-
-public class FireTimerEntity : Entity
-{
-	private FireTimer fireTimer;
-	private bool isStarted;
-	public float CooldownTime;
-
-	public event FireTimer.FiredDelegate Fired
-	{
-		add { fireTimer.Fired += value; }
-		remove { fireTimer.Fired -= value; }
-	}
-
-	public FireTimerEntity(Scene scene, float cooldownTime) : base(scene)
+	public FireTimer(Scene scene, float cooldownTime) : base(scene)
 	{
 		CooldownTime = cooldownTime;
-		fireTimer = new FireTimer();
-		Fired += OnFired;
 	}
 
 	public override void Update(float frameTime)
 	{
-		if (isStarted) fireTimer.Update(frameTime, CooldownTime);
+		if (!isStarted) return;
+
+		backloggedTime += frameTime;
+		int backloggedActions = (int)MathF.Floor(backloggedTime / CooldownTime);
+		backloggedTime -= backloggedActions * CooldownTime;
+
+		for (int actionNumber = 1; actionNumber <= backloggedActions; actionNumber++) Fire();
 	}
+
+	public override void Draw() { }
 
 	public void Start()
 	{
 		isStarted = true;
+	}
+
+	private void Fire()
+	{
+		OnFired();
+		Fired?.Invoke();
 	}
 
 	public virtual void OnFired() { }
