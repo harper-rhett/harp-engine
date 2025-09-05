@@ -29,7 +29,7 @@ public class Transform2D
 		set
 		{
 			if (Parent is null) LocalRotation = value;
-			else LocalRotation = value - LocalRotation;
+			else LocalRotation = value - Parent.WorldRotation;
 		}
 	}
 
@@ -41,8 +41,11 @@ public class Transform2D
 	{
 		get
 		{
-			Matrix3x2 localToWorld = Matrix3x2.CreateRotation(float.DegreesToRadians(WorldRotation)) * Matrix3x2.CreateTranslation(WorldPosition);
-			return localToWorld;
+			Matrix3x2 translationMatrix = Matrix3x2.CreateTranslation(WorldPosition);
+			Matrix3x2 rotationMatrix = Matrix3x2.CreateRotation(float.DegreesToRadians(WorldRotation), WorldPosition);
+			Matrix3x2 localToWorld = translationMatrix * rotationMatrix;
+			if (Parent is null) return localToWorld;
+			else return Parent.Matrix * localToWorld;
 		}
 	}
 	public Matrix3x2 MatrixInverse
