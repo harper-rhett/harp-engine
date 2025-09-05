@@ -10,6 +10,7 @@ public sealed class ParticleEngine2D : Entity
 	private ParticleRenderer2D particleRenderer = new ParticleRenderer2D.Circle(4);
 	private List<Particle2DInitializer> initializers = new();
 	private List<Particle2DModifier> modifiers = new();
+	private List<Particle2DFinalizer> finalizers = new();
 	private FireTimer fireTimer;
 
 	// Defaults
@@ -52,6 +53,7 @@ public sealed class ParticleEngine2D : Entity
 			// Check if particle has died
 			if (scene.Time > particle.spawnTime + particle.Lifespan)
 			{
+				foreach (Particle2DFinalizer finalizer in finalizers) finalizer(particle, this);
 				RemoveParticle(particleIndex);
 				continue;
 			}
