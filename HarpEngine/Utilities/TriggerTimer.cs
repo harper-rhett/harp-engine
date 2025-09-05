@@ -34,7 +34,7 @@ public class TriggerTimer : Entity
 		Start();
 	}
 
-	private void Trigger()
+	protected void Trigger()
 	{
 		isTriggered = true;
 		Triggered?.Invoke();

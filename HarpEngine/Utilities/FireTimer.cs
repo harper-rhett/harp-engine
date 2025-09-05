@@ -37,5 +37,5 @@ public class FireTimer : Entity
 		Fired?.Invoke();
 	}
 
-	public virtual void OnFired() { }
+	protected virtual void OnFired() { }
 }
