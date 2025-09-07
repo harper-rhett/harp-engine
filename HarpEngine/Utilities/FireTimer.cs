@@ -11,6 +11,7 @@ public class FireTimer : Entity
 	public FireTimer(Scene scene, float cooldownTime) : base(scene)
 	{
 		CooldownTime = cooldownTime;
+		backloggedTime = cooldownTime;
 	}
 
 	public override void Update(float frameTime)

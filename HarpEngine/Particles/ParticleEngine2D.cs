@@ -92,15 +92,9 @@ public sealed class ParticleEngine2D : Entity
 		particleRenderer = new ParticleRenderer2D.Texture(texture2D);
 	}
 
-	public void AddInitializer(Particle2DInitializer initializer)
-	{
-		initializers.Add(initializer);
-	}
-
-	public void AddModifier(Particle2DModifier modifier)
-	{
-		modifiers.Add(modifier);
-	}
+	public void AddInitializer(Particle2DInitializer initializer) => initializers.Add(initializer);
+	public void AddModifier(Particle2DModifier modifier) => modifiers.Add(modifier);
+	public void AddFinalizer(Particle2DFinalizer finalizer) => finalizers.Add(finalizer);
 
 	private void ResizeParticles()
 	{
