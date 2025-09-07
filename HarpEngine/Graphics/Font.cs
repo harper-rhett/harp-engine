@@ -15,6 +15,22 @@ public unsafe struct Font
 	public Texture Texture;
 	public Rectangle* Recs;
 	public GlyphInfo* Glyphs;
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern Font GetFontDefault();
+	public static Font Default => GetFontDefault();
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern Font LoadFont(string fileName);
+	public static Font Load(string fileName) => LoadFont(fileName);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern Font LoadFontFromImage(Image image, Color key, int firstCharacter);
+	public static Font Load(Image image, Color key, int firstCharacter) => LoadFontFromImage(image, key, firstCharacter);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void UnloadFont(Font font);
+	public void Unload() => UnloadFont(this);
 }
 
 [StructLayout(LayoutKind.Sequential)]
