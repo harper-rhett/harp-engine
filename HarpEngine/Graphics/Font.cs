@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace HarpEngine.Graphics;
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct Font
+public unsafe struct Font : IDisposable
 {
 	public int BaseSize;
 	public int GlyphCount;
@@ -30,7 +27,11 @@ public unsafe struct Font
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void UnloadFont(Font font);
-	public void Unload() => UnloadFont(this);
+
+	public void Dispose()
+	{
+		UnloadFont(this);
+	}
 }
 
 [StructLayout(LayoutKind.Sequential)]

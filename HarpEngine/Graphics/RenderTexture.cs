@@ -1,7 +1,7 @@
 ﻿namespace HarpEngine.Graphics;
 
 [StructLayout(LayoutKind.Sequential)]
-public struct RenderTexture
+public struct RenderTexture : IDisposable
 {
 	public uint Id;
 	public Texture Texture;
@@ -18,4 +18,12 @@ public struct RenderTexture
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern RenderTexture LoadRenderTexture(int width, int height);
 	public static RenderTexture Load(int width, int height) => LoadRenderTexture(width, height);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void UnloadRenderTexture(RenderTexture renderTexture);
+
+	public void Dispose()
+	{
+		UnloadRenderTexture(this);
+	}
 }

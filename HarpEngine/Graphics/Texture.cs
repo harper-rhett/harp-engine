@@ -1,7 +1,7 @@
 ﻿namespace HarpEngine.Graphics;
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct Texture
+public unsafe struct Texture : IDisposable
 {
 	public uint Id;
 	public int Width;
@@ -25,4 +25,12 @@ public unsafe struct Texture
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void DrawTexturePro(Texture texture, Rectangle source, Rectangle destination, Vector2 origin, float rotation, Color tint);
 	public void Draw(Rectangle source, Rectangle destination, Vector2 origin, float rotation, Color tint) => DrawTexturePro(this, source, destination, origin, rotation, tint);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void UnloadTexture(Texture texture);
+
+	public void Dispose()
+	{
+		UnloadTexture(this);
+	}
 }

@@ -18,7 +18,7 @@ public enum UniformDataType
 }
 
 [StructLayout(LayoutKind.Sequential, Size = 16)]
-public unsafe struct Shader
+public unsafe struct Shader : IDisposable
 {
 	private uint ID;
 	private int* Locations;
@@ -92,5 +92,9 @@ public unsafe struct Shader
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void UnloadShader(Shader shader);
-	public void Unload() => UnloadShader(this);
+
+	public void Dispose()
+	{
+		UnloadShader(this);
+	}
 }
