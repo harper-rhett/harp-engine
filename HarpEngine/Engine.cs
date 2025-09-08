@@ -55,6 +55,7 @@ public static class Engine
 		float frameTime = GetFrameTime();
 		if (frameTime > 0.1f) frameTime = 0.1f;
 		game.Update(frameTime);
+		Window.Renderer.Update(gameRenderTexture);
 	}
 
 	private static void MasterDraw()

@@ -2,7 +2,7 @@
 
 public unsafe static class Window
 {
-	internal static WindowRenderer Renderer { get; private set; } = new UnclippedRenderer(Colors.Black);
+	internal static WindowRenderer Renderer { get; private set; } = new FullRenderer(Colors.Black);
 
 	private enum WindowFlags : uint
 	{
@@ -24,7 +24,7 @@ public unsafe static class Window
 		Interlaced = 0x00010000,
 	}
 
-	public static void SetUnclipped(Color borderColor) => Renderer = new UnclippedRenderer(borderColor);
+	public static void SetUnclipped(Color borderColor) => Renderer = new FullRenderer(borderColor);
 	public static void SetClipped() => Renderer = new ClippedRenderer();
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]

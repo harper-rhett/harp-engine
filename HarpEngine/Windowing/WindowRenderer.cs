@@ -12,6 +12,10 @@ internal abstract class WindowRenderer
 	protected int gameWidth;
 	protected int gameHeight;
 
+	// Mouse fields
+	internal abstract int MouseGameX { get; }
+	internal abstract int MouseGameY { get; }
+
 	protected bool DidResize
 	{
 		get
@@ -33,5 +37,6 @@ internal abstract class WindowRenderer
 	}
 
 	// Custom implementation for game sizing
+	internal abstract void Update(RenderTexture gameRenderTexture);
 	internal abstract void Draw(RenderTexture gameRenderTexture);
 }

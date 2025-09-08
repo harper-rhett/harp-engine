@@ -3,16 +3,27 @@
 internal class ClippedRenderer : WindowRenderer
 {
 	private Rectangle gameRectangle;
+	private Rectangle viewportRectangle;
 
-	internal override void Draw(RenderTexture gameRenderTexture)
+	private int mouseGameX;
+	internal override int MouseGameX => mouseGameX;
+
+	private int mouseGameY;
+	internal override int MouseGameY => mouseGameY;
+
+	internal override void Update(RenderTexture gameRenderTexture)
 	{
 		// Initialize
 		RefreshValues(gameRenderTexture);
-		Rectangle viewportRectangle = new(0, 0, windowWidth, windowHeight);
+		viewportRectangle = new(0, 0, windowWidth, windowHeight);
 
 		// Only calculate game rectangle if window has been resized
 		if (DidResize) CalculateGameRectangle(windowWidth, windowHeight, gameWidth, gameHeight);
+		CalculateMouse();
+	}
 
+	internal override void Draw(RenderTexture gameRenderTexture)
+	{
 		// Draw game clipped
 		gameRenderTexture.Texture.Draw(gameRectangle, viewportRectangle, Vector2.Zero, 0, Colors.White);
 	}
@@ -34,5 +45,10 @@ internal class ClippedRenderer : WindowRenderer
 			float xOffset = widthDifference / 2f;
 			gameRectangle = new(xOffset, 0, newGameWidth, -gameHeight);
 		}
+	}
+
+	private void CalculateMouse()
+	{
+
 	}
 }
