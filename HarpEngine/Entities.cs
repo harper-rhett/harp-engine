@@ -122,10 +122,16 @@ public class Entities : IEnumerable<Entity>
 		int index = 0;
 		foreach (KeyValuePair<Type, object> entityListPair in entityLists)
 		{
+			// Get type
 			Type type = entityListPair.Key;
-			IList entityList = (IList)entityListPair.Value;
 			string typeString = type.ToString();
+
+			// Convert to list
+			IList entityList = (IList)entityListPair.Value;
 			int typeCount = entityList.Count;
+			if (typeCount == 0) continue;
+
+			// Draw type
 			string text = $"{typeString}: {typeCount}";
 			int y = spacing + index * (fontSize + spacing);
 			Text.Draw(text, spacing, y, fontSize, Colors.White);
