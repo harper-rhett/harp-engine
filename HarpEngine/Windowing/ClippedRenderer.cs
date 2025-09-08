@@ -49,6 +49,10 @@ internal class ClippedRenderer : WindowRenderer
 
 	private void CalculateMouse()
 	{
-
+		float widthScale = gameRectangle.Width / viewportRectangle.Width;
+		mouseGameX = (int)(Mouse.WindowX * widthScale + gameRectangle.X);
+		
+		float heightScale = gameRectangle.Height / viewportRectangle.Height;
+		mouseGameY = (int)(Mouse.WindowY * heightScale + gameRectangle.Y);
 	}
 }

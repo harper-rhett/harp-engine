@@ -24,8 +24,8 @@ public unsafe static class Window
 		Interlaced = 0x00010000,
 	}
 
-	public static void SetUnclipped(Color borderColor) => Renderer = new FullRenderer(borderColor);
-	public static void SetClipped() => Renderer = new ClippedRenderer();
+	public static void SetFullRenderer(Color borderColor) => Renderer = new FullRenderer(borderColor);
+	public static void SetClippedRenderer() => Renderer = new ClippedRenderer();
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void InitWindow(int width, int height, string title);

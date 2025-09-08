@@ -47,14 +47,14 @@ internal class FullRenderer : WindowRenderer
 
 	private void CalculateMouse()
 	{
-		float widthRatio = viewportRectangle.Width / gameRectangle.Width;
+		float widthScale = gameRectangle.Width / viewportRectangle.Width;
 		float viewportX = float.Clamp(Mouse.WindowX - viewportRectangle.X, 0, viewportRectangle.Width);
-		float gameX = viewportX / widthRatio;
+		float gameX = viewportX * widthScale;
 		mouseGameX = (int)gameX;
 
-		float heightRatio = -viewportRectangle.Height / gameRectangle.Height;
+		float heightScale = gameRectangle.Height  / - viewportRectangle.Height;
 		float viewportY = float.Clamp(Mouse.WindowY - viewportRectangle.Y, 0, viewportRectangle.Height);
-		float gameY = viewportY / heightRatio;
+		float gameY = viewportY * heightScale;
 		mouseGameY = (int)gameY;
 	}
 }
