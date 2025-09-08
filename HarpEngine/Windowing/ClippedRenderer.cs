@@ -52,7 +52,7 @@ internal class ClippedRenderer : WindowRenderer
 		float widthScale = gameRectangle.Width / viewportRectangle.Width;
 		mouseGameX = (int)(Mouse.WindowX * widthScale + gameRectangle.X);
 		
-		float heightScale = gameRectangle.Height / viewportRectangle.Height;
+		float heightScale = gameRectangle.Height / -viewportRectangle.Height;
 		mouseGameY = (int)(Mouse.WindowY * heightScale + gameRectangle.Y);
 	}
 }
