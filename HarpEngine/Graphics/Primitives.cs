@@ -68,6 +68,35 @@ public static class Primitives
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	public static extern void DrawRingLines(Vector2 center, float innerRadius, float outerRadius, float startAngle, float endAngle, int segments, Color color);
 
+	// Rectangles
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	public static extern void DrawRectangle(int x, int y, int width, int height, Color color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void DrawRectangleV(Vector2 position, Vector2 size, Color color);
+	public static void DrawRectangle(Vector2 position, Vector2 size, Color color) => DrawRectangleV(position, size, color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void DrawRectangleRec(Rectangle rectangle, Color color);
+	public static void DrawRectangle(Rectangle rectangle, Color color) => DrawRectangleRec(rectangle, color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void DrawRectanglePro(Rectangle rectangle, Vector2 origin, float rotation, Color color);
+	public static void DrawRectangle(Rectangle rectangle, Vector2 origin, float rotation, Color color) => DrawRectanglePro(rectangle, origin, rotation, color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void DrawRectangleGradientV(int x, int y, int width, int height, Color topColor, Color bottomColor);
+	public static void DrawRectangleGradientVertical(int x, int y, int width, int height, Color topColor, Color bottomColor) => DrawRectangleGradientV(x, y, width, height, topColor, bottomColor);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void DrawRectangleGradientH(int x, int y, int width, int height, Color leftColor, Color rightColor);
+	public static void DrawRectangleGradientHorizontal(int x, int y, int width, int height, Color leftColor, Color rightColor) => DrawRectangleGradientH(x, y, width, height, leftColor, rightColor);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void DrawRectangleGradientEx(Rectangle rectangle, Color topLeftColor, Color bottomLeftColor, Color topRightColor, Color bottomRightColor);
+	public static void DrawRectangleGradient(Rectangle rectangle, Color topLeftColor, Color bottomLeftColor, Color topRightColor, Color bottomRightColor) => DrawRectangleGradient(rectangle, topLeftColor, bottomLeftColor, topRightColor, bottomRightColor);
+
 	// Polygons
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
