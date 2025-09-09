@@ -2,13 +2,17 @@
 
 namespace HarpEngine;
 
-public class Entities : IEnumerable<Entity>
+public class Entities
 {
 	// Entities
 	private List<EntityToAdd> entitiesToAdd = new();
-	private SortedList<int, List<Entity>> updateLayers = new();
-	private Dictionary<Entity, int> entityLayers = new();
 	private HashSet<Entity> entitiesToRemove = new();
+
+	// Layers
+	private SortedList<int, List<Entity>> updateLayers = new();
+	private Dictionary<Entity, int> entityUpdateLayers = new();
+	private SortedList<int, List<Entity>> drawLayers = new();
+	private Dictionary<Entity, int> entityDrawLayers = new();
 
 	// Registry
 	private Dictionary<Type, object> entityLists = new();
@@ -16,11 +20,13 @@ public class Entities : IEnumerable<Entity>
 
 	// Interface
 	public int NextUpdateLayer;
+	public int NextDrawLayer;
 
 	private struct EntityToAdd
 	{
 		public Entity Entity;
 		public int UpdateLayer;
+		public int DrawLayer;
 	}
 
 	internal void Add(Entity entity)
@@ -28,9 +34,11 @@ public class Entities : IEnumerable<Entity>
 		EntityToAdd entityToInsert = new()
 		{
 			Entity = entity,
-			UpdateLayer = NextUpdateLayer
+			UpdateLayer = NextUpdateLayer,
+			DrawLayer = NextDrawLayer
 		};
 		NextUpdateLayer = 0;
+		NextDrawLayer = 0;
 		entitiesToAdd.Add(entityToInsert);
 		Register(entity);
 	}
@@ -46,25 +54,47 @@ public class Entities : IEnumerable<Entity>
 	{
 		foreach (EntityToAdd entityToAdd in entitiesToAdd)
 		{
-			bool layerExists = updateLayers.TryGetValue(entityToAdd.UpdateLayer, out List<Entity> updateLayer);
-			if (!layerExists)
-			{
-				updateLayer = new();
-				updateLayers[entityToAdd.UpdateLayer] = updateLayer;
-			}
-			entityLayers[entityToAdd.Entity] = entityToAdd.UpdateLayer;
-			updateLayer.Add(entityToAdd.Entity);
+			AddToUpdateLayer(entityToAdd);
+			AddToDrawLayer(entityToAdd);
 		}
 		entitiesToAdd.Clear();
+	}
+
+	private void AddToUpdateLayer(EntityToAdd entityToAdd)
+	{
+		bool layerExists = updateLayers.TryGetValue(entityToAdd.UpdateLayer, out List<Entity> updateLayer);
+		if (!layerExists)
+		{
+			updateLayer = new();
+			updateLayers[entityToAdd.UpdateLayer] = updateLayer;
+		}
+		entityUpdateLayers[entityToAdd.Entity] = entityToAdd.UpdateLayer;
+		updateLayer.Add(entityToAdd.Entity);
+	}
+
+	private void AddToDrawLayer(EntityToAdd entityToAdd)
+	{
+		bool layerExists = drawLayers.TryGetValue(entityToAdd.DrawLayer, out List<Entity> drawLayer);
+		if (!layerExists)
+		{
+			drawLayer = new();
+			drawLayers[entityToAdd.DrawLayer] = drawLayer;
+		}
+		entityDrawLayers[entityToAdd.Entity] = entityToAdd.DrawLayer;
+		drawLayer.Add(entityToAdd.Entity);
 	}
 
 	internal void ProcessRemovals()
 	{
 		foreach (Entity entityToRemove in entitiesToRemove)
 		{
-			int updateLayer = entityLayers[entityToRemove];
-			entityLayers.Remove(entityToRemove);
+			int updateLayer = entityUpdateLayers[entityToRemove];
+			entityUpdateLayers.Remove(entityToRemove);
 			updateLayers[updateLayer].Remove(entityToRemove);
+
+			int drawLayer = entityDrawLayers[entityToRemove];
+			entityDrawLayers.Remove(entityToRemove);
+			drawLayers[drawLayer].Remove(entityToRemove);
 		}
 		entitiesToRemove.Clear();
 	}
@@ -139,12 +169,23 @@ public class Entities : IEnumerable<Entity>
 		}
 	}
 
-	public IEnumerator<Entity> GetEnumerator()
+	public IEnumerable<Entity> InUpdateOrder
 	{
-		foreach (List<Entity> entityLayer in updateLayers.Values)
-			foreach (Entity entity in entityLayer)
-				yield return entity;
+		get
+		{
+			foreach (List<Entity> entityLayer in updateLayers.Values)
+				foreach (Entity entity in entityLayer)
+					yield return entity;
+		}
 	}
 
-	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+	public IEnumerable<Entity> InDrawOrder
+	{
+		get
+		{
+			foreach (List<Entity> entityLayer in drawLayers.Values)
+				foreach (Entity entity in entityLayer)
+					yield return entity;
+		}
+	}
 }
