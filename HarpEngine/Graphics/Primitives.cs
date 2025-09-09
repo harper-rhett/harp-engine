@@ -11,10 +11,39 @@ public static class Primitives
 	public static extern void DrawPixelV(Vector2 position, Color color);
 	public static void DrawPixel(Vector2 position, Color color) => DrawPixelV(position, color);
 
+	// Lines
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	public static extern void DrawLine(int startX, int startY, int endX, int endY, Color color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void DrawLineV(Vector2 startPosition, Vector2 endPosition, Color color);
+	public static void DrawLine(Vector2 startPosition, Vector2 endPosition, Color color) => DrawLineV(startPosition, endPosition, color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void DrawLineStrip(Vector2[] positions, int positionCount, Color color);
+	public static void DrawLine(Vector2[] positions, Color color) => DrawLineStrip(positions, positions.Length, color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void DrawLineBezier(Vector2 startPosition, Vector2 endPosition, float thickness, Color color);
+	public static void DrawBezier(Vector2 startPosition, Vector2 endPosition, float thickness, Color color) => DrawLineBezier(startPosition, endPosition, thickness, color);
+
 	// Circles
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	public static extern void DrawCircle(int x, int y, float radius, Color color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void DrawCircleSector(Vector2 position, float radius, float startAngle, float endAngle, int segments, Color color);
+	public static void DrawArc(Vector2 position, float radius, float startAngle, float endAngle, int segments, Color color) => DrawCircleSector(position, radius, startAngle, endAngle, segments, color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void DrawCircleSectorLines(Vector2 position, float radius, float startAngle, float endAngle, int segments, Color color);
+	public static void DrawArcLines(Vector2 position, float radius, float startAngle, float endAngle, int segments, Color color) => DrawCircleSectorLines(position, radius, startAngle, endAngle, segments, color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void DrawCircleGradient(int x, int y, float radius, Color innerColor, Color outerColor);
+	public static void DrawCircle(int x, int y, float radius, Color innerColor, Color outerColor) => DrawCircleGradient(x, y, radius, innerColor, outerColor);
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void DrawCircleV(Vector2 position, float radius, Color color);
@@ -26,6 +55,12 @@ public static class Primitives
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void DrawCircleLinesV(Vector2 position, float radius, Color color);
 	public static void DrawCircleLines(Vector2 position, float radius, Color color) => DrawCircleLinesV(position, radius, color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	public static extern void DrawEllipse(int x, int y, float horizontalRadius, float verticalRadius, Color color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	public static extern void DrawEllipseLines(int x, int y, float horizontalRadius, float verticalRadius, Color color);
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	public static extern void DrawRing(Vector2 center, float innerRadius, float outerRadius, float startAngle, float endAngle, int segments, Color color);
