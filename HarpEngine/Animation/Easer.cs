@@ -40,7 +40,10 @@ public class Easer : Entity
 		CurveProgress = Curve(Progress);
 		if (Rewind) CurveProgress = float.Sin(CurveProgress * float.Pi);
 		Easing?.Invoke(this);
+		OnEasing();
 	}
+
+	protected virtual void OnEasing() { }
 
 	public void Start()
 	{

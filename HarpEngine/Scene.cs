@@ -28,7 +28,7 @@ public class Scene
 
 	private void UpdateEntities(float frameTime)
 	{
-		foreach (Entity entity in Entities)
+		foreach (Entity entity in Entities.InUpdateOrder)
 		{
 			if (entity.IsUpdating) entity.Update(frameTime);
 		}
@@ -43,7 +43,7 @@ public class Scene
 	private void DrawGame()
 	{
 		Camera.Begin();
-		foreach (Entity entity in Entities)
+		foreach (Entity entity in Entities.InDrawOrder)
 		{
 			if (entity.IsRendering) entity.Draw();
 		}
@@ -52,7 +52,7 @@ public class Scene
 
 	private void DrawGUI()
 	{
-		foreach (Entity entity in Entities)
+		foreach (Entity entity in Entities.InDrawOrder)
 		{
 			if (entity.IsRendering) entity.DrawGUI();
 		}
