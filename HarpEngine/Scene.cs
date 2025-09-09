@@ -4,16 +4,11 @@ public class Scene
 {
 	// Interface
 	public Entities Entities { get; private set; } = new();
-	public Camera Camera;
 	/// <summary>Seconds since creation that this world has been unpaused.</summary>
 	public float Time { get; private set; }
 	/// <summary>If the update loop is paused. The draw loop is unaffected/</summary>
 	public bool IsPaused;
-
-	public Scene()
-	{
-		Camera = new();
-	}
+	public Camera Camera;
 
 	public void Update(float frameTime)
 	{
@@ -23,7 +18,6 @@ public class Scene
 		Entities.ProcessAdditions();
 		UpdateEntities(frameTime);
 		Entities.ProcessRemovals();
-		Camera.Update(frameTime);
 	}
 
 	private void UpdateEntities(float frameTime)
@@ -42,12 +36,12 @@ public class Scene
 
 	private void DrawGame()
 	{
-		Camera.Begin();
+		if (Camera is not null) Camera.Begin();
 		foreach (Entity entity in Entities.InDrawOrder)
 		{
 			if (entity.IsRendering) entity.Draw();
 		}
-		Camera.End();
+		if (Camera is not null) Camera.End();
 	}
 
 	private void DrawGUI()

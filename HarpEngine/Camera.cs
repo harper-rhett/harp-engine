@@ -1,49 +1,12 @@
 ﻿namespace HarpEngine;
 
-public enum CameraMode
+public abstract class Camera : Entity
 {
-	RenderWindow,
-	RenderSpace2D,
-	RenderSpace3D
-}
-
-public sealed class Camera
-{
-	// General
-	internal CameraMode Mode;
-
-	// 2D
-	private Camera2D camera2D;
-	public Vector2 Position2D
+	public Camera(Scene scene, bool isActive = true) : base(scene)
 	{
-		get => camera2D.Target;
-		set => camera2D.Target = value;
+		if (isActive) scene.Camera = this;
 	}
 
-	public void RenderWindow()
-	{
-		Mode = CameraMode.RenderWindow;
-	}
-
-	public void RenderSpace2D()
-	{
-		Vector2 centeredOffset = new(Engine.HalfGameWidth, Engine.HalfGameHeight);
-		camera2D = new(centeredOffset, Vector2.Zero, 0, 1);
-		Mode = CameraMode.RenderSpace2D;
-	}
-
-	internal void Update(float frameTime)
-	{
-		if (Mode is CameraMode.RenderWindow) return;
-	}
-
-	internal void Begin()
-	{
-		if (Mode is CameraMode.RenderSpace2D) Camera2D.BeginRendering(camera2D);
-	}
-
-	internal void End()
-	{
-		if (Mode is CameraMode.RenderSpace2D) Camera2D.EndRendering();
-	}
+	internal abstract void Begin();
+	internal abstract void End();
 }
