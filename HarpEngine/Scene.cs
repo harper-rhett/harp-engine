@@ -9,11 +9,12 @@ public class Scene
 	/// <summary>If the update loop is paused. The draw loop is unaffected/</summary>
 	public bool IsPaused;
 	public Camera Camera;
+	public float SpeedModifier = 1;
 
 	public void Update(float frameTime)
 	{
 		if (IsPaused) return;
-		Time += frameTime;
+		Time += frameTime * SpeedModifier;
 
 		Entities.ProcessAdditions();
 		UpdateEntities(frameTime);
