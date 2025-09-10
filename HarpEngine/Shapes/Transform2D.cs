@@ -42,8 +42,8 @@ public class Transform2D
 		get
 		{
 			Matrix3x2 translationMatrix = Matrix3x2.CreateTranslation(WorldPosition);
-			Matrix3x2 rotationMatrix = Matrix3x2.CreateRotation(float.DegreesToRadians(WorldRotation), WorldPosition);
-			Matrix3x2 localToWorld = translationMatrix * rotationMatrix;
+			Matrix3x2 rotationMatrix = Matrix3x2.CreateRotation(float.DegreesToRadians(WorldRotation));
+			Matrix3x2 localToWorld = rotationMatrix * translationMatrix;
 			if (Parent is null) return localToWorld;
 			else return Parent.Matrix * localToWorld;
 		}

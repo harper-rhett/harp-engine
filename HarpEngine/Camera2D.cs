@@ -4,13 +4,19 @@ public class Camera2D : Camera
 {
 	// General
 	private RaylibCamera2D raylibCamera;
-	public Transform2D Transform;
+	public Transform2D Transform = new();
 
-	// Transitioning
-	private Vector2 originalPosition;
-	private Vector2 targetPosition;
+	// World space transitions
+	private Vector2 originalWorldPosition;
+	private Vector2 targetWorldPosition;
 	private float originalWorldRotation;
 	private float targetWorldRotation;
+
+	// Local space transitions
+	private Vector2 originalLocalPosition;
+	private Vector2 targetLocalPosition;
+	private float originalLocalRotation;
+	private float targetLocalRotation;
 
 	public Camera2D(Scene scene) : base(scene)
 	{
@@ -36,8 +42,8 @@ public class Camera2D : Camera
 
 	public void TransitionWorldPosition(Vector2 targetPosition, float seconds)
 	{
-		originalPosition = Transform.WorldPosition;
-		this.targetPosition = targetPosition;
+		originalWorldPosition = Transform.WorldPosition;
+		targetWorldPosition = targetPosition;
 
 		Easer easer = new(scene, seconds);
 		easer.Easing += EaseWorldPosition;
@@ -46,7 +52,7 @@ public class Camera2D : Camera
 
 	private void EaseWorldPosition(Easer easer)
 	{
-		Transform.WorldPosition = easer.EaseVector2(originalPosition, targetPosition);
+		Transform.WorldPosition = easer.EaseVector2(originalWorldPosition, targetWorldPosition);
 	}
 
 	public void TransitionWorldRotation(float targetRotation, float seconds)
@@ -62,5 +68,35 @@ public class Camera2D : Camera
 	private void EaseWorldRotation(Easer easer)
 	{
 		Transform.WorldRotation = easer.EaseFloat(originalWorldRotation, targetWorldRotation);
+	}
+
+	public void TransitionLocalPosition(Vector2 targetPosition, float seconds)
+	{
+		originalLocalPosition = Transform.LocalPosition;
+		targetLocalPosition = targetPosition;
+
+		Easer easer = new(scene, seconds);
+		easer.Easing += EaseLocalPosition;
+		easer.Start();
+	}
+
+	private void EaseLocalPosition(Easer easer)
+	{
+		Transform.LocalPosition = easer.EaseVector2(originalLocalPosition, targetLocalPosition);
+	}
+
+	public void TransitionLocalRotation(float targetRotation, float seconds)
+	{
+		originalLocalRotation = Transform.LocalRotation;
+		targetLocalRotation = targetRotation;
+
+		Easer easer = new(scene, seconds);
+		easer.Easing += EaseLocalRotation;
+		easer.Start();
+	}
+
+	private void EaseLocalRotation(Easer easer)
+	{
+		Transform.LocalRotation = easer.EaseFloat(originalLocalRotation, targetLocalRotation);
 	}
 }
