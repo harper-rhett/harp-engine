@@ -97,9 +97,46 @@ public static class Primitives
 	private static extern void DrawRectangleGradientEx(Rectangle rectangle, Color topLeftColor, Color bottomLeftColor, Color topRightColor, Color bottomRightColor);
 	public static void DrawRectangleGradient(Rectangle rectangle, Color topLeftColor, Color bottomLeftColor, Color topRightColor, Color bottomRightColor) => DrawRectangleGradient(rectangle, topLeftColor, bottomLeftColor, topRightColor, bottomRightColor);
 
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	public static extern void DrawRectangleLines(int x, int y, int width, int height, Color color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void DrawRectangleLinesEx(Rectangle rectangle, float lineThickness, Color color);
+	public static void DrawRectangleLines(Rectangle rectangle, float lineThickness, Color color) => DrawRectangleLinesEx(rectangle, lineThickness, color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	public static extern void DrawRectangleRounded(Rectangle rectangle, float roundness, int segments, Color color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	public static extern void DrawRectangleRoundedLines(Rectangle rectangle, float roundness, int segments, Color color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void DrawRectangleRoundedLinesEx(Rectangle rectangle, float roundness, int segments, float lineThickness, Color color);
+	public static void DrawRectangleRoundedLines(Rectangle rectangle, float roundness, int segments, float lineThickness, Color color) => DrawRectangleRoundedLinesEx(rectangle, roundness, segments, lineThickness, color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	public static extern void DrawTriangle(Vector2 cornerOne, Vector2 cornerTwo, Vector2 cornerThree, Color color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	public static extern void DrawTriangleLines(Vector2 cornerOne, Vector2 cornerTwo, Vector2 cornerThree, Color color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	public static extern void DrawTriangleFan(Vector2[] positions, int positionCount, Color color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	public static extern void DrawTriangleStrip(Vector2[] positions, int positionCount, Color color);
+
 	// Polygons
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void DrawPoly(Vector2 position, int sides, float radius, float rotation, Color color);
 	public static void DrawPolygon(Vector2 position, int sides, float radius, float rotation, Color color) => DrawPoly(position, sides, radius, rotation, color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void DrawPolyLines(Vector2 position, int sides, float radius, float rotation, Color color);
+	public static void DrawPolygonLines(Vector2 position, int sides, float radius, float rotation, Color color) => DrawPolyLines(position, sides, radius, rotation, color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void DrawPolyLinesEx(Vector2 position, int sides, float radius, float rotation, float lineThickness, Color color);
+	public static void DrawPolygonLines(Vector2 position, int sides, float radius, float rotation, float lineThickness, Color color) => DrawPolyLinesEx(position, sides, radius, rotation, lineThickness, color);
 }

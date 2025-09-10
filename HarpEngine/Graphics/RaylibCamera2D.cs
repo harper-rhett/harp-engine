@@ -1,14 +1,14 @@
 ﻿namespace HarpEngine.Graphics;
 
 [StructLayout(LayoutKind.Sequential)]
-internal struct Camera2D
+internal struct RaylibCamera2D
 {
 	public Vector2 Offset;
 	public Vector2 Target;
 	public float Rotation;
 	public float Zoom;
 
-	public Camera2D(Vector2 offset, Vector2 target, float rotation, float zoom)
+	public RaylibCamera2D(Vector2 offset, Vector2 target, float rotation, float zoom)
 	{
 		Offset = offset;
 		Target = target;
@@ -17,14 +17,14 @@ internal struct Camera2D
 	}
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
-	private static extern void BeginMode2D(Camera2D camera2D);
-	public static void BeginRendering(Camera2D camera2D) => BeginMode2D(camera2D);
+	private static extern void BeginMode2D(RaylibCamera2D camera2D);
+	public static void BeginRendering(RaylibCamera2D camera2D) => BeginMode2D(camera2D);
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void EndMode2D();
 	public static void EndRendering() => EndMode2D();
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
-	private static extern Matrix4x4 GetCameraMatrix2D(Camera2D camera2D);
+	private static extern Matrix4x4 GetCameraMatrix2D(RaylibCamera2D camera2D);
 	public Matrix4x4 Matrix => GetCameraMatrix2D(this);
 }
