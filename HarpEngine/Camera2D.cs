@@ -18,6 +18,10 @@ public class Camera2D : Camera
 	private float originalLocalRotation;
 	private float targetLocalRotation;
 
+	// Mouse
+	public float MouseWorldX => Mouse.GameX - Engine.HalfGameWidth + Transform.WorldPosition.X;
+	public float MouseWorldY => Mouse.GameY - Engine.HalfGameHeight + Transform.WorldPosition.Y;
+
 	public Camera2D(Scene scene) : base(scene)
 	{
 		Vector2 centeredOffset = new(Engine.HalfGameWidth, Engine.HalfGameHeight);
