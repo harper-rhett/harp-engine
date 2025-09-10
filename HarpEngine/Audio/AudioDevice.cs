@@ -1,20 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HarpEngine.Audio;
-
-[StructLayout(LayoutKind.Sequential)]
-public struct AudioStream
-{
-	public IntPtr Buffer;
-	public IntPtr Processor;
-	public uint SampleRate;
-	public uint SampleSize;
-	public uint Channels;
-}
+﻿namespace HarpEngine.Audio;
 
 public static class AudioDevice
 {
@@ -25,6 +9,10 @@ public static class AudioDevice
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void CloseAudioDevice();
 	internal static void Close() => CloseAudioDevice();
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void SetMasterVolume(float volume);
+	public static float Volume { set => SetMasterVolume(value); }
 
 	public static void Restart()
 	{
