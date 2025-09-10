@@ -2,36 +2,36 @@
 
 public class TriggerTimer : Entity
 {
-	private float triggerTime;
+	private float triggerSeconds;
 	private float startTime;
-	private float endTime = float.MaxValue;
+	private float triggerTime = float.MaxValue;
 	private bool isTriggered;
 	public bool RemoveOnTriggered = true;
 	public delegate void TriggeredDelegate();
 	public event TriggeredDelegate Triggered;
 
-	public TriggerTimer(Scene scene, float triggerTime) : base(scene)
+	public TriggerTimer(Scene scene, float triggerSeconds) : base(scene)
 	{
-		this.triggerTime = triggerTime;
+		this.triggerSeconds = triggerSeconds;
 	}
 
 	public override void Update(float frameTime)
 	{
 		if (isTriggered) return;
 
-		if (scene.Time >= endTime) Trigger();
+		if (scene.Time >= triggerTime) Trigger();
 	}
 
 	public void Start()
 	{
 		startTime = scene.Time;
-		endTime = startTime + triggerTime;
+		triggerTime = startTime + triggerSeconds;
+		isTriggered = false;
 	}
 
-	public void Restart()
+	public void Skip()
 	{
-		isTriggered = false;
-		Start();
+		triggerTime = scene.Time;
 	}
 
 	protected void Trigger()

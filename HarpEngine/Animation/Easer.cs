@@ -5,7 +5,7 @@ public class Easer : Entity
 	// General
 	private float startTime;
 	private float finishTime;
-	private float easeTime;
+	private float easeSeconds;
 
 	// Interface
 	public Curve Curve = Curves.Linear;
@@ -19,9 +19,9 @@ public class Easer : Entity
 	public bool RemoveOnFinished = true;
 	public bool Rewind;
 
-	public Easer(Scene scene, float easeTime) : base(scene)
+	public Easer(Scene scene, float easeSeconds) : base(scene)
 	{
-		this.easeTime = easeTime;
+		this.easeSeconds = easeSeconds;
 	}
 
 	public override void Update(float frameTime)
@@ -36,7 +36,7 @@ public class Easer : Entity
 
 	private void Ease()
 	{
-		Progress = (scene.Time - startTime) / easeTime;
+		Progress = (scene.Time - startTime) / easeSeconds;
 		CurveProgress = Curve(Progress);
 		if (Rewind) CurveProgress = float.Sin(CurveProgress * float.Pi);
 		Easing?.Invoke(this);
@@ -48,8 +48,13 @@ public class Easer : Entity
 	public void Start()
 	{
 		startTime = scene.Time;
-		finishTime = startTime + easeTime;
+		finishTime = startTime + easeSeconds;
 		IsEasing = true;
+	}
+
+	public void Skip()
+	{
+		finishTime = scene.Time;
 	}
 
 	private void Finish()
