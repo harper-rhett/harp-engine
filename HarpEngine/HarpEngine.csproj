@@ -10,17 +10,19 @@
 
 	<PropertyGroup>
 		<PackageId>HarpEngine</PackageId>
-		<Version>0.1.0</Version>
+		<Version>0.1.1</Version>
 		<Authors>Harper Rhett</Authors>
-		<Description>A utility-packed game framework built on Raylib-cs.</Description>
+		<Description>A utility-packed game framework built on Raylib.</Description>
 		<PackageTags>game framework csharp raylib graphics utility tool</PackageTags>
+		<PackageProjectUrl>https://github.com/harper-rhett/harp-engine</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/harper-rhett/harp-engine</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Update="raylib.dll">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
+		<None Update="raylib.dll" Pack="true" PackagePath="runtimes/win-x64/native">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 </Project>
