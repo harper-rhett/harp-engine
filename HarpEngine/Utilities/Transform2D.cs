@@ -1,4 +1,4 @@
-﻿namespace HarpEngine.Shapes;
+﻿namespace HarpEngine.Utilities;
 
 public class Transform2D
 {
