@@ -18,16 +18,8 @@ public class Entities
 	private Dictionary<Type, object> entityLists = new();
 	private Dictionary<Type, Entity> latestEntities = new();
 
-	// Interface
-	public int NextUpdateLayer;
-	public int NextDrawLayer;
-
 	internal void Add(Entity entity)
 	{
-		entity.UpdateLayer = NextUpdateLayer;
-		entity.DrawLayer = NextDrawLayer;
-		NextUpdateLayer = 0;
-		NextDrawLayer = 0;
 		entitiesToAdd.Add(entity);
 		Register(entity);
 	}

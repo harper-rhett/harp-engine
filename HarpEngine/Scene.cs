@@ -17,6 +17,7 @@ public class Scene
 		Time += frameTime * SpeedModifier;
 
 		Entities.ProcessAdditions();
+		Entities.ProcessMoves();
 		UpdateEntities(frameTime);
 		Entities.ProcessRemovals();
 	}
