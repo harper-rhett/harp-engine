@@ -19,9 +19,20 @@ Harp Engine is a (currently) 2D C# game development framework built on the [Rayl
 - Particle lifetime gradients (red fish, blue fish, red to blue to green fish)
 
 # Raylib Bindings
-If you are familiar with Raylib, the bindings I have created may seem somewhat alien to you. I have very carefully modernized them to align with a typical C# workflow. For instance, in pure Raylib you would call `LoadTexture(filePath)` and then `DrawTexture(myTexture, x, y, color)`. In HarpEngine, the same is accomplished with `using graphics`, `Texture.Load(filePath)`, and finally `Texture.Draw(x, y, color)`. Some bindings are less obvious than others, but designed to abstract C from C# development.
+If you are familiar with Raylib, the bindings I have created may feel somewhat alien to you. I have very carefully modernized them to align with a typical C# workflow. Drawing a texture, for instance:
+### In Raylib
+```c
+Texture myTexture = LoadTexture(filePath);
+DrawTexture(myTexture, x, y, color);
+```
+### In HarpEngine
+```c#
+using HarpEngine.Graphics;
+Texture myTexture = Texture.Load(filePath);
+myTexture.Draw(x, y, color);
+```
 
-Additionally, not all bindings are implemented. I will be adding more as requested and with care.
+Some bindings are less obvious than others, but designed to abstract C from C# development. Additionally, not all bindings are implemented. I will be adding more as requested and with care.
 
 # Getting Started
 
