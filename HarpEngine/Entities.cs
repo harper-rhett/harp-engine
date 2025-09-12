@@ -5,14 +5,14 @@ namespace HarpEngine;
 public class Entities
 {
 	// Entities
-	private List<EntityToAdd> entitiesToAdd = new();
+	private List<Entity> entitiesToAdd = new();
+	private List<Entity> entitiesToMoveUpdate = new();
+	private List<Entity> entitiesToMoveDraw = new();
 	private HashSet<Entity> entitiesToRemove = new();
 
 	// Layers
 	private SortedList<int, List<Entity>> updateLayers = new();
-	private Dictionary<Entity, int> entityUpdateLayers = new();
 	private SortedList<int, List<Entity>> drawLayers = new();
-	private Dictionary<Entity, int> entityDrawLayers = new();
 
 	// Registry
 	private Dictionary<Type, object> entityLists = new();
@@ -22,24 +22,13 @@ public class Entities
 	public int NextUpdateLayer;
 	public int NextDrawLayer;
 
-	private struct EntityToAdd
-	{
-		public Entity Entity;
-		public int UpdateLayer;
-		public int DrawLayer;
-	}
-
 	internal void Add(Entity entity)
 	{
-		EntityToAdd entityToInsert = new()
-		{
-			Entity = entity,
-			UpdateLayer = NextUpdateLayer,
-			DrawLayer = NextDrawLayer
-		};
+		entity.UpdateLayer = NextUpdateLayer;
+		entity.DrawLayer = NextDrawLayer;
 		NextUpdateLayer = 0;
 		NextDrawLayer = 0;
-		entitiesToAdd.Add(entityToInsert);
+		entitiesToAdd.Add(entity);
 		Register(entity);
 	}
 
@@ -52,51 +41,72 @@ public class Entities
 
 	internal void ProcessAdditions()
 	{
-		foreach (EntityToAdd entityToAdd in entitiesToAdd)
+		foreach (Entity entity in entitiesToAdd)
 		{
-			AddToUpdateLayer(entityToAdd);
-			AddToDrawLayer(entityToAdd);
+			AddToUpdateLayer(entity);
+			AddToDrawLayer(entity);
 		}
 		entitiesToAdd.Clear();
 	}
 
-	private void AddToUpdateLayer(EntityToAdd entityToAdd)
+	internal void ProcessMoves()
 	{
-		bool layerExists = updateLayers.TryGetValue(entityToAdd.UpdateLayer, out List<Entity> updateLayer);
-		if (!layerExists)
+		foreach (Entity entity in entitiesToMoveUpdate)
 		{
-			updateLayer = new();
-			updateLayers[entityToAdd.UpdateLayer] = updateLayer;
+			updateLayers[entity.lastUpdateLayer].Remove(entity);
+			updateLayers[entity.UpdateLayer].Add(entity);
 		}
-		entityUpdateLayers[entityToAdd.Entity] = entityToAdd.UpdateLayer;
-		updateLayer.Add(entityToAdd.Entity);
-	}
+		entitiesToMoveUpdate.Clear();
 
-	private void AddToDrawLayer(EntityToAdd entityToAdd)
-	{
-		bool layerExists = drawLayers.TryGetValue(entityToAdd.DrawLayer, out List<Entity> drawLayer);
-		if (!layerExists)
+		foreach (Entity entity in entitiesToMoveDraw)
 		{
-			drawLayer = new();
-			drawLayers[entityToAdd.DrawLayer] = drawLayer;
+			drawLayers[entity.lastDrawLayer].Remove(entity);
+			drawLayers[entity.DrawLayer].Add(entity);
 		}
-		entityDrawLayers[entityToAdd.Entity] = entityToAdd.DrawLayer;
-		drawLayer.Add(entityToAdd.Entity);
+		entitiesToMoveDraw.Clear();
 	}
 
 	internal void ProcessRemovals()
 	{
-		foreach (Entity entityToRemove in entitiesToRemove)
+		foreach (Entity entity in entitiesToRemove)
 		{
-			int updateLayer = entityUpdateLayers[entityToRemove];
-			entityUpdateLayers.Remove(entityToRemove);
-			updateLayers[updateLayer].Remove(entityToRemove);
-
-			int drawLayer = entityDrawLayers[entityToRemove];
-			entityDrawLayers.Remove(entityToRemove);
-			drawLayers[drawLayer].Remove(entityToRemove);
+			updateLayers[entity.UpdateLayer].Remove(entity);
+			drawLayers[entity.DrawLayer].Remove(entity);
 		}
 		entitiesToRemove.Clear();
+	}
+
+	private List<Entity> GetLayerEntities(SortedList<int, List<Entity>> layers, int layer)
+	{
+		bool layerExists = layers.TryGetValue(layer, out List<Entity> layerEntities);
+		if (!layerExists)
+		{
+			layerEntities = new();
+			layers[layer] = layerEntities;
+		}
+		return layerEntities;
+	}
+
+	private void AddToUpdateLayer(Entity entityToAdd)
+	{
+		List<Entity> updateLayerEntities = GetLayerEntities(updateLayers, entityToAdd.UpdateLayer);
+		updateLayerEntities.Add(entityToAdd);
+	}
+
+	private void AddToDrawLayer(Entity entityToAdd)
+	{
+		List<Entity> drawLayerEntities = GetLayerEntities(drawLayers, entityToAdd.DrawLayer);
+		drawLayerEntities.Add(entityToAdd);
+	}
+
+	public void MoveUpdateLayer(Entity entity)
+	{
+		entitiesToMoveUpdate.Add(entity);
+	}
+
+	public void MoveDrawLayer(Entity entity)
+	{
+		entitiesToMoveDraw.Add(entity);
 	}
 
 	internal void Register(Entity entity)

@@ -6,6 +6,31 @@ public abstract class Entity
 	public bool IsUpdating = true;
 	public bool IsRendering = true;
 
+	internal int lastUpdateLayer;
+	private int updateLayer;
+	public int UpdateLayer
+	{
+		get => updateLayer;
+		set
+		{
+			lastUpdateLayer = updateLayer;
+			updateLayer = value;
+			scene.Entities.MoveUpdateLayer(this);
+		}
+	}
+	internal int lastDrawLayer;
+	private int drawLayer;
+	public int DrawLayer
+	{
+		get => drawLayer;
+		set
+		{
+			lastDrawLayer = drawLayer;
+			drawLayer = value;
+			scene.Entities.MoveDrawLayer(this);
+		}
+	}
+
 	public Entity(Scene scene)
 	{
 		this.scene = scene;
