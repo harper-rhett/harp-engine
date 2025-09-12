@@ -10,6 +10,17 @@ public class Scene
 	public bool IsPaused;
 	public Camera Camera;
 	public float SpeedModifier = 1;
+	public Color BackgroundColor;
+
+	public Scene()
+	{
+		BackgroundColor = Colors.Black;
+	}
+
+	public Scene(Color backgroundColor)
+	{
+		BackgroundColor = backgroundColor;
+	}
 
 	public void Update(float frameTime)
 	{
@@ -38,6 +49,7 @@ public class Scene
 
 	private void DrawGame()
 	{
+		Drawing.Clear(BackgroundColor);
 		if (Camera is not null) Camera.Begin();
 		foreach (Entity entity in Entities.InDrawOrder)
 		{
