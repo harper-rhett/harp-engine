@@ -2,7 +2,7 @@
 # HarpEngine
 Harp Engine is a (currently) 2D C# game development framework built on the [Raylib Graphics Library](https://www.raylib.com/). It is outfitted with tools designed to make prototyping simple, projects scalable, and scope-creep manageable.
 
-Currently the only support is for x64 systems, but I can promise you that will change. I just need to add the raylib executables for other runtimes to the project. I will get around to it.
+Currently there is only support for x64 systems, but I can promise you that will change. I just need to add the raylib executables for other runtimes to the project. I will get around to it.
 
 # Features
 - Scene management system (with entities, update loops, and layers)
