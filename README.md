@@ -40,13 +40,13 @@ Some bindings are less obvious than others, but designed to abstract C from C# d
 # Getting Started
 HarpEngine was created in Visual Studio, and I would recommend using Visual Studio. Other IDEs should work just fine, but I do not know how other IDEs work so I can not help you there.
 
-I would recommend starting with the [template](https://github.com/harper-rhett/harp-engine-template) to see how a basic project is set up and then jumping into the [wiki](https://github.com/harper-rhett/harp-engine/wiki) for more information. If you'd like to start a project from scratch, I promise you it's stupid simple. Install the [NuGet package](https://www.nuget.org/packages/HarpEngine) and maybe take inspiration from the [examples](https://github.com/harper-rhett/harp-engine-examples) I've put together. Ultimately, you will need the [wiki](https://github.com/harper-rhett/harp-engine/wiki) though. The engine may currently be small, but the codebase is starting to get quite large.
+I would recommend starting with the [template](https://github.com/harper-rhett/harp-engine-template) to see how a basic project is set up and then jumping into the [documentation](https://app.readthedocs.org/projects/harp-engine/builds/29567953/) for more information. If you'd like to start a project from scratch, I promise you it's stupid simple. Install the [NuGet package](https://www.nuget.org/packages/HarpEngine) and maybe take inspiration from the [examples](https://github.com/harper-rhett/harp-engine-examples) I've put together. Ultimately, you will need the [documentation](https://app.readthedocs.org/projects/harp-engine/builds/29567953/). The engine may currently be small, but the codebase is starting to get quite large.
 
 ### Resources
 - [NuGet Package](https://www.nuget.org/packages/HarpEngine)
 - [Template](https://github.com/harper-rhett/harp-engine-template)
 - [Examples](https://github.com/harper-rhett/harp-engine-examples)
-- [Wiki](https://github.com/harper-rhett/harp-engine/wiki)
+- [Documentation](https://app.readthedocs.org/projects/harp-engine/builds/29567953/)
 
 ### Minimal Example
 In `Program.cs`:
