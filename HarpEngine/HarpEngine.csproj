@@ -17,12 +17,17 @@
 		<PackageProjectUrl>https://github.com/harper-rhett/harp-engine</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/harper-rhett/harp-engine</RepositoryUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageIcon>logo.png</PackageIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<None Update="raylib.dll" Pack="true" PackagePath="runtimes/win-x64/native">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="../logo.png" Pack="true" PackagePath="" />
 	</ItemGroup>
 
 </Project>
