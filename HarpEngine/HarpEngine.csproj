@@ -10,7 +10,7 @@
 
 	<PropertyGroup>
 		<PackageId>HarpEngine</PackageId>
-		<Version>0.1.1</Version>
+		<Version>0.1.2</Version>
 		<Authors>Harper Rhett</Authors>
 		<Description>A utility-packed game framework built on Raylib.</Description>
 		<PackageTags>game framework csharp raylib graphics utility tool</PackageTags>
