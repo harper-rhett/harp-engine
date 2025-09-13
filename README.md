@@ -36,9 +36,19 @@ myTexture.Draw(x, y, color);
 Some bindings are less obvious than others, but designed to abstract C from C# development. Additionally, not all bindings are implemented. I will be adding more as requested and with care.
 
 # Getting Started
-[NuGet](https://www.nuget.org/packages/HarpEngine)
+HarpEngine was created in Visual Studio, and I would recommend using Visual Studio. Other IDEs should work just fine, but I do not know how other IDEs work so I can not help you there.
 
-# Examples
+I would recommend starting with the [template](https://github.com/harper-rhett/harp-engine-template) to see how a basic project is set up and then jumping into the [wiki](https://github.com/harper-rhett/harp-engine/wiki) for more information. If you'd like to start a project from scratch, I promise you it's stupid simple. Install the [NuGet package](https://www.nuget.org/packages/HarpEngine) and maybe take inspiration from the [examples](https://github.com/harper-rhett/harp-engine-examples) I've put together. Ultimately, you will need the [wiki](https://github.com/harper-rhett/harp-engine/wiki) though. The engine may currently be small, but the codebase is starting to get quite large.
 
+### Resources
+- [NuGet Package](https://www.nuget.org/packages/HarpEngine)
+- [Template](https://github.com/harper-rhett/harp-engine-template)
+- [Examples](https://github.com/harper-rhett/harp-engine-examples)
+- [Wiki](https://github.com/harper-rhett/harp-engine/wiki)
 
-# Building
+### Minimal Example
+
+### Building
+
+# Contributing
+I am open to suggestions and criticisms, but __I am not open to pull requests__. This is a learning opportunity, and so building this framework line-by-line is important to me. In the very distant future I may even replace Raylib with my own graphics library, and perhaps Jolt (which I plan to use) with my own physics engine. Along the way, I would like to make 2D and 3D level editors, and possibly node-based shader and texture editors as well. If you are frustrated with my progress, I encourage you to submit an issue. I plan to listen to every soul that even bounces off of my code.
