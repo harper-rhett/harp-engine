@@ -36,7 +36,7 @@ myTexture.Draw(x, y, color);
 Some bindings are less obvious than others, but designed to abstract C from C# development. Additionally, not all bindings are implemented. I will be adding more as requested and with care.
 
 # Getting Started
-
+[NuGet](https://www.nuget.org/packages/HarpEngine)
 
 # Examples
 
