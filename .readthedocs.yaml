@@ -6,4 +6,4 @@ build:
     python: "3.13"
 
 mkdocs:
-   configuration: docs/mkdocs.yml
+   configuration: mkdocs.yml
