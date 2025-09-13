@@ -3,3 +3,4 @@ nav:
   - Home: index.md
 theme:
   name: readthedocs
+docs_dir: .
