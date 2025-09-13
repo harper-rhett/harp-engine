@@ -2,6 +2,8 @@
 # HarpEngine
 Harp Engine is a (currently) 2D C# game development framework built on the [Raylib Graphics Library](https://www.raylib.com/). It is outfitted with tools designed to make prototyping simple, projects scalable, and scope-creep manageable.
 
+Currently the only support is for x64 systems, but I can promise you that will change. I just need to add the raylib executables for other runtimes to the project. I will get around to it.
+
 # Features
 - Scene management system (with entities, update loops, and layers)
 - Window resolution management (scale or clip game content automatically)
@@ -49,6 +51,7 @@ I would recommend starting with the [template](https://github.com/harper-rhett/h
 ### Minimal Example
 
 ### Building
+A basic build for your own machine is simple. Just press F5. For a release build, however, there is a few more steps. Right click on your project in the Solution Explorer, and click publish. For the build target, choose folder. Set the output location to whatever you desire. Congratulations! You now have a publish profile. Click "show all settings" and change the configuration to "release" and the deployment mode to "self-contained." Drop down "file publish options" and enable "produce single file" and "trim unused code." Now save your changes and slap that big ol' "publish" button. The build folder should be generated in the location you defined, and you can zip it up and send it out!
 
 # Contributing
 I am open to suggestions and criticisms, but __I am not open to pull requests__. This is a learning opportunity, and so building this framework line-by-line is important to me. In the very distant future I may even replace Raylib with my own graphics library, and perhaps Jolt (which I plan to use) with my own physics engine. Along the way, I would like to make 2D and 3D level editors, and possibly node-based shader and texture editors as well. If you are frustrated with my progress, I encourage you to submit an issue. I plan to listen to every soul that even bounces off of my code.
