@@ -1,5 +1,5 @@
 site_name: HarpEngine
 nav:
-  - Home: home.md
+  - Home: index.md
 theme:
   name: readthedocs
