@@ -2,6 +2,23 @@ docs_dir: .
 site_name: HarpEngine
 nav:
   - Home: index.md
+  - Engine:
+    - Engine: engine/engine.md
+    - Game: engine/game.md
+    - Scene: engine/scene.md
+    - Entity: engine/entity.md
+    - Camera: engine/camera.md
+  - Windowing: windowing/windowing.md
+  - Graphics: graphics/graphics.md
+  - Audio: audio/audio.md
+  - Input: input/input.md
+  - Utilities:
+    - Timers: timers.md
+    - Randomization: randomization.md
+    - Transforms: transforms.md
+    - Collision: collision.md
+  - Particles: particles/particles.md
+  - Shapes: shapes/shapes.md
 theme:
   name: material
   palette:
