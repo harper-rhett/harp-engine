@@ -25,7 +25,7 @@ Currently there is only support for x64 systems, but I can promise you that will
 If you are familiar with Raylib, the bindings I have created may feel somewhat alien to you. I have very carefully modernized them to align with a typical C# workflow. Drawing a texture, for instance:
 ### In Raylib
 ```c
-Texture myTexture = LoadTexture(filePath);
+Texture2D myTexture = LoadTexture(filePath);
 DrawTexture(myTexture, x, y, color);
 ```
 ### In HarpEngine
