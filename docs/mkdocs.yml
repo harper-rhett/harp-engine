@@ -1,3 +1,4 @@
+docs_dir: .
 site_name: HarpEngine
 nav:
   - Home: index.md
@@ -11,4 +12,7 @@ theme:
   font:
     text: Roboto
     code: Roboto Mono
-docs_dir: .
+markdown_extensions:
+  - codehilite:
+      guess_lang: false
+      linenums: true
