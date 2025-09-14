@@ -13,10 +13,10 @@ nav:
   - Audio: audio/audio.md
   - Input: input/input.md
   - Utilities:
-    - Timers: timers.md
-    - Randomization: randomization.md
-    - Transforms: transforms.md
-    - Collision: collision.md
+    - Timers: utilities/timers.md
+    - Randomization: utilities/randomization.md
+    - Transforms: utilities/transforms.md
+    - Collision: utilities/collision.md
   - Particles: particles/particles.md
   - Shapes: shapes/shapes.md
 theme:
