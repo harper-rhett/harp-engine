@@ -6,6 +6,7 @@ theme:
   name: material
   features:
     - toc.integrate
+    - navigation.expand
   palette:
     - scheme: slate
       primary: deep-purple
