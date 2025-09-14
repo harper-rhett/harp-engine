@@ -2,7 +2,7 @@
 # HarpEngine
 Harp Engine is a (currently) 2D C# game development framework built on the [Raylib Graphics Library](https://www.raylib.com/). It is outfitted with tools designed to make prototyping simple, projects scalable, and scope-creep manageable.
 
-Currently there is only support for x64 systems, but I can promise you that will change. I just need to add the raylib executables for other runtimes to the project. I will get around to it.
+Currently there is only support for x64 systems, but that will change. Raylib executables for other runtimes just need to be added to the project.
 
 # Features
 - Scene management system (with entities, update loops, and layers)
@@ -22,7 +22,7 @@ Currently there is only support for x64 systems, but I can promise you that will
 - Particle lifetime gradients (red fish, blue fish, red to blue to green fish)
 
 # Raylib Bindings
-If you are familiar with Raylib, the bindings I have created may feel somewhat alien to you. I have very carefully modernized them to align with a typical C# workflow. Drawing a texture, for instance:
+If you are familiar with Raylib, the bindings may feel somewhat alien to you. They have been carefully adapted to align with a typical C# workflow. Drawing a texture, for instance:
 ### In Raylib
 ```c
 Texture2D myTexture = LoadTexture(filePath);
@@ -35,12 +35,12 @@ Texture myTexture = Texture.Load(filePath);
 myTexture.Draw(x, y, color);
 ```
 
-Some bindings are less obvious than others, but designed to abstract C from C# development. Additionally, not all bindings are implemented. I will be adding more as requested and with care.
+Some bindings are less obvious than others. Not all bindings are implemented. Check the documenation and source code.
 
 # Getting Started
-HarpEngine was created in Visual Studio, and I would recommend using Visual Studio. Other IDEs should work just fine, but I do not know how other IDEs work so I can not help you there.
+HarpEngine was created in Visual Studio, and so it is recommended you use Visual Studio. Other IDEs should work just fine, but there is not a recommended set up process for them.
 
-I would recommend starting with the [template](https://github.com/harper-rhett/harp-engine-template) to see how a basic project is set up and then jumping into the [documentation](https://app.readthedocs.org/projects/harp-engine/builds/29567953/) for more information. If you'd like to start a project from scratch, I promise you it's stupid simple. Install the [NuGet package](https://www.nuget.org/packages/HarpEngine) and maybe take inspiration from the [examples](https://github.com/harper-rhett/harp-engine-examples) I've put together. Ultimately, you will need the [documentation](https://app.readthedocs.org/projects/harp-engine/builds/29567953/). The engine may currently be small, but the codebase is starting to get quite large.
+The best way to start is probably with the [template](https://github.com/harper-rhett/harp-engine-template) to see how a basic project is set up and then jumping into the [documentation](https://app.readthedocs.org/projects/harp-engine/builds/29567953/) for more information. If you'd like to start a project from scratch, I promise you it's stupid simple. Install the [NuGet package](https://www.nuget.org/packages/HarpEngine) and maybe take a look at the [examples](https://github.com/harper-rhett/harp-engine-examples). Ultimately, you will need the [documentation](https://app.readthedocs.org/projects/harp-engine/builds/29567953/). The engine may currently be small, but the codebase is becoming quite large.
 
 ### Resources
 - [NuGet Package](https://www.nuget.org/packages/HarpEngine)
@@ -64,6 +64,8 @@ Engine.Start(myGame);
 
 In `MyGame.cs`:
 ```csharp
+using HarpEngine;
+
 internal class MyGame : Game // the game class handles scenes
 {
 	Scene scene = new(); // the scene class handles entities (their layers, update loops, and registry)
