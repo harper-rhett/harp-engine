@@ -9,7 +9,7 @@ public class Scene
 	/// <summary>If the update loop is paused. The draw loop is unaffected/</summary>
 	public bool IsPaused;
 	public Camera Camera;
-	public float SpeedModifier = 1;
+	public float TimeModifier = 1;
 	public Color BackgroundColor;
 
 	public Scene()
@@ -25,7 +25,7 @@ public class Scene
 	public void Update(float frameTime)
 	{
 		if (IsPaused) return;
-		Time += frameTime * SpeedModifier;
+		Time += frameTime * TimeModifier;
 
 		Entities.ProcessAdditions();
 		Entities.ProcessMoves();
