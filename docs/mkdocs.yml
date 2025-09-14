@@ -4,6 +4,8 @@ nav:
   - Home: index.md
 theme:
   name: material
+  features:
+    - toc.integrate
   palette:
     - scheme: slate
       primary: deep-purple
@@ -14,9 +16,6 @@ theme:
     code: Roboto Mono
 markdown_extensions:
   - pymdownx.highlight:
-      anchor_linenums: true
-      line_spans: __span
       pygments_lang_class: true
   - pymdownx.inlinehilite
-  - pymdownx.snippets
   - pymdownx.superfences
