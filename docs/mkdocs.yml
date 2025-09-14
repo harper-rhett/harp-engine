@@ -2,5 +2,5 @@ site_name: HarpEngine
 nav:
   - Home: index.md
 theme:
-  name: readthedocs
+  name: material
 docs_dir: .
