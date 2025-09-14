@@ -6,8 +6,8 @@ theme:
   name: material
   palette:
     - scheme: slate
-      primary: deep-purple
-      accent: purple
+      primary: blue
+      accent: amber
       toggle: false
   font:
     text: Roboto
