@@ -15,6 +15,5 @@ theme:
 markdown_extensions:
   - pymdownx.highlight:
       pygments_lang_class: true
-      pygments_dark_style: monokai
   - pymdownx.inlinehilite
   - pymdownx.superfences
