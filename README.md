@@ -40,13 +40,13 @@ Some bindings are less obvious than others. Not all bindings are implemented. Ch
 # Getting Started
 HarpEngine was created in Visual Studio, and so it is recommended you use Visual Studio. Other IDEs should work just fine, but there is not a recommended set up process for them.
 
-The best way to start is probably with the [template](https://github.com/harper-rhett/harp-engine-template) to see how a basic project is set up and then jumping into the [documentation](https://app.readthedocs.org/projects/harp-engine/builds/29567953/) for more information. If you'd like to start a project from scratch, I promise you it's stupid simple. Install the [NuGet package](https://www.nuget.org/packages/HarpEngine) and maybe take a look at the [examples](https://github.com/harper-rhett/harp-engine-examples). Ultimately, you will need the [documentation](https://app.readthedocs.org/projects/harp-engine/builds/29567953/). The engine may currently be small, but the codebase is becoming quite large.
+The best way to start is probably with the [template](https://github.com/harper-rhett/harp-engine-template) to see how a basic project is set up and then jumping into the [documentation](https://app.readthedocs.org/projects/harp-engine/builds/29567953/) for more information. If you'd like to start a project from scratch, I promise you it's stupid simple. Install the [NuGet package](https://www.nuget.org/packages/HarpEngine) and maybe take a look at the [examples](https://github.com/harper-rhett/harp-engine-examples). Ultimately, you will need the [documentation](https://harp-engine.readthedocs.io/en/latest/). The engine may currently be small, but the codebase is becoming quite large.
 
 ### Resources
 - [NuGet Package](https://www.nuget.org/packages/HarpEngine)
 - [Template](https://github.com/harper-rhett/harp-engine-template)
 - [Examples](https://github.com/harper-rhett/harp-engine-examples)
-- [Documentation](https://app.readthedocs.org/projects/harp-engine/builds/29567953/)
+- [Documentation](https://harp-engine.readthedocs.io/en/latest/)
 
 ### Minimal Example
 In `Program.cs`:
