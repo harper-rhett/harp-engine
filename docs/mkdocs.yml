@@ -3,4 +3,14 @@ nav:
   - Home: index.md
 theme:
   name: material
+  palette:
+    - scheme: default
+      primary: deep-purple
+      accent: purple
+    - scheme: slate
+      primary: deep-purple
+      accent: purple
+  font:
+    text: Roboto
+    code: Roboto Mono
 docs_dir: .
