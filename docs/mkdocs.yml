@@ -4,9 +4,6 @@ nav:
   - Home: index.md
 theme:
   name: material
-  features:
-    - toc.integrate
-    - navigation.sections
   palette:
     - scheme: slate
       primary: deep-purple
@@ -18,6 +15,6 @@ theme:
 markdown_extensions:
   - pymdownx.highlight:
       pygments_lang_class: true
-      pygments_style: monokai
+      pygments_dark_style: monokai
   - pymdownx.inlinehilite
   - pymdownx.superfences
