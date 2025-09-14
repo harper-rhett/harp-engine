@@ -6,7 +6,6 @@ theme:
   name: material
   features:
     - toc.integrate
-    - navigation.expand
     - navigation.sections
   palette:
     - scheme: slate
