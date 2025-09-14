@@ -3,5 +3,22 @@ site_name: HarpEngine
 nav:
   - Home: index.md
 theme:
-  name: mkdocs
-  color_mode: dark
+  name: material
+  features:
+    - toc.integrate
+    - navigation.expand
+    - navigation.sections
+  palette:
+    - scheme: slate
+      primary: deep-purple
+      accent: purple
+      toggle: false
+  font:
+    text: Roboto
+    code: Roboto Mono
+markdown_extensions:
+  - pymdownx.highlight:
+      pygments_lang_class: true
+      pygments_style: monokai
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
