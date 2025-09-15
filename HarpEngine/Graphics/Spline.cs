@@ -6,23 +6,23 @@ public static class Spline
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void DrawSplineLinear(Vector2[] positions, int positionCount, float thickness, Color color);
-	public static void DrawLinear(Vector2[] positions, int positionCount, float thickness, Color color) => DrawSplineLinear(positions, positionCount, thickness, color);
+	public static void DrawLinear(Vector2[] positions, float thickness, Color color) => DrawSplineLinear(positions, positions.Length, thickness, color);
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void DrawSplineBasis(Vector2[] positions, int positionCount, float thickness, Color color);
-	public static void DrawBasis(Vector2[] positions, int positionCount, float thickness, Color color) => DrawSplineBasis(positions, positionCount, thickness, color);
+	public static void DrawBasis(Vector2[] positions, float thickness, Color color) => DrawSplineBasis(positions, positions.Length, thickness, color);
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void DrawSplineCatmullRom(Vector2[] positions, int positionCount, float thickness, Color color);
-	public static void DrawCatmullRom(Vector2[] positions, int positionCount, float thickness, Color color) => DrawSplineCatmullRom(positions, positionCount, thickness, color);
+	public static void DrawCatmullRom(Vector2[] positions, float thickness, Color color) => DrawSplineCatmullRom(positions, positions.Length, thickness, color);
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void DrawSplineBezierQuadratic(Vector2[] positions, int positionCount, float thickness, Color color);
-	public static void DrawBezierQuadratic(Vector2[] positions, int positionCount, float thickness, Color color) => DrawSplineBezierQuadratic(positions, positionCount, thickness, color);
+	public static void DrawBezierQuadratic(Vector2[] positions, float thickness, Color color) => DrawSplineBezierQuadratic(positions, positions.Length, thickness, color);
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void DrawSplineBezierCubic(Vector2[] positions, int positionCount, float thickness, Color color);
-	public static void DrawBezierCubic(Vector2[] positions, int positionCount, float thickness, Color color) => DrawSplineBezierCubic(positions, positionCount, thickness, color);
+	public static void DrawBezierCubic(Vector2[] positions, float thickness, Color color) => DrawSplineBezierCubic(positions, positions.Length, thickness, color);
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void DrawSplineSegmentLinear(Vector2 startPosition, Vector2 endPosition, float thickness, Color color);
