@@ -3,13 +3,14 @@ site_name: HarpEngine
 nav:
   - Home: index.md
   - ...
-  - API Reference: api/
+  - API Reference: api
 theme:
   name: material
   palette:
     - scheme: slate
       primary: blue
       accent: amber
+      foreground: "#FFFAFA"
       toggle: false
   font:
     text: Roboto
