@@ -16,3 +16,5 @@ markdown_extensions:
       pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.superfences
+plugins:
+  - awesome-pages
