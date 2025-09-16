@@ -1,3 +1,5 @@
+> `using HarpEngine.Input;`
+
 # Input
 Input is as simple as any game developer could hope it would be! Check out a keyboard pressed check:
 
