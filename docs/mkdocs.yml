@@ -1,6 +1,9 @@
 docs_dir: .
 site_name: HarpEngine
-
+nav:
+  - Home: index.md
+  - ...
+  - API Reference: api/
 theme:
   name: material
   palette:
@@ -17,4 +20,4 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.superfences
 plugins:
-  - awesome-pages
+- awesome-pages
