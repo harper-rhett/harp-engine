@@ -3,7 +3,7 @@ site_name: HarpEngine
 nav:
   - Home: index.md
   - ...
-  - API Reference
+  - api
 theme:
   name: material
   palette:
