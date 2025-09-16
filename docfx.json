@@ -1,0 +1,14 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": [ "HarpEngine/HarpEngine.csproj" ],
+          "cwd": "."
+        }
+      ],
+	  "outputFormat": "markdown",
+      "dest": "docs/api"
+    }
+  ]
+}
