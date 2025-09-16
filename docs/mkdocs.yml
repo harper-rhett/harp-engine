@@ -19,6 +19,7 @@ nav:
     - Collision: utilities/collision.md
   - Particles: particles/particles.md
   - Shapes: shapes/shapes.md
+  - API Reference: api/
 theme:
   name: material
   palette:
