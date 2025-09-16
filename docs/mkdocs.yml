@@ -21,3 +21,4 @@ markdown_extensions:
   - pymdownx.superfences
 plugins:
 - awesome-pages
+  collapse_single_pages: true
