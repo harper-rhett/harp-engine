@@ -1,7 +1,5 @@
 docs_dir: .
 site_name: HarpEngine
-nav:
-  - Home: index.md
 
 theme:
   name: material
