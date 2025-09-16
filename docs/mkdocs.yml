@@ -20,5 +20,5 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.superfences
 plugins:
-- awesome-pages
-  collapse_single_pages: true
+  - awesome-pages:
+      collapse_single_pages: true
