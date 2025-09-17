@@ -56,3 +56,5 @@ This example is ripped directly from one of the examples hosted on GitHub. It is
 - `ApplyMovement` Modifier: Tells the particle to move according to its position and velocity. Otherwise, particles will be static.
 - `AdjustColor` Modifier: To be updated when `ColorGradient` is introduced, this modifier changes the particles color from one to another over its lifetime.
 - `CreateBurst` Finalizer: Creates a burst of particles from another particle engine at death.
+
+If you find the built in customizations are not enough, they are all based on delegates and you can design your own.
