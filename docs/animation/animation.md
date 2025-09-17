@@ -4,13 +4,10 @@
 Currently, the animation namespace is solely a home for `Easer` and `Curves`, which work together intimately. The easer class is a very useful utility, created for simple programatic animations. Check it out:
 
 ```csharp
-void SomeMethod()
-{
-	Easer starEaser = new Easer(scene, easeSeconds);
-	starEaser.Curve = Curves.SmoothStep;
-	starEaser.Easing += EaseShootingStar;
-	starEaser.Start();
-}
+Easer starEaser = new Easer(scene, easeSeconds);
+starEaser.Curve = Curves.SmoothStep;
+starEaser.Easing += EaseShootingStar;
+starEaser.Start();
 
 void EaseShootingStar(Easer easer)
 {
