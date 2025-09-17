@@ -4,7 +4,13 @@ Harp Engine is a (currently) 2D C# game development framework built on the [Rayl
 
 Currently there is only support for x64 systems, but that will change. Raylib executables for other runtimes just need to be added to the project.
 
-# Features
+## Resources
+- [NuGet Package](https://www.nuget.org/packages/HarpEngine)
+- [Template](https://github.com/harper-rhett/harp-engine-template)
+- [Examples](https://github.com/harper-rhett/harp-engine-examples)
+- [Documentation](https://harp-engine.readthedocs.io/en/latest/)
+
+## Features
 - Scene management system (with entities, update loops, and layers)
 - Window resolution management (scale or clip game content automatically)
 - Particle engine (simple, manageable, and extendible)
@@ -13,7 +19,7 @@ Currently there is only support for x64 systems, but that will change. Raylib ex
 - Easing tools (interpolation has never been simpler)
 - Transforms (opt-in parent-child system)
 
-# Coming Soon
+## Coming Soon
 - 3D (1.5x more dimensions!)
 - Physics engine (boing, clank, smack)
 - Collision helpers (shape hug testers)
@@ -21,7 +27,7 @@ Currently there is only support for x64 systems, but that will change. Raylib ex
 - Noise generation (Simplex, Perlin, Cellular, Drum and Bass)
 - Particle lifetime gradients (red fish, blue fish, red to blue to green fish)
 
-# Raylib Bindings
+## Raylib Bindings
 If you are familiar with Raylib, the bindings may feel somewhat alien to you. They have been carefully adapted to align with a typical C# workflow. Drawing a texture, for instance:
 ### In Raylib
 ```c
@@ -37,18 +43,12 @@ myTexture.Draw(x, y, color);
 
 Some bindings are less obvious than others. Not all bindings are implemented. Check the documenation and source code.
 
-# Getting Started
+## Getting Started
 HarpEngine was created in Visual Studio, and so it is recommended you use Visual Studio. Other IDEs should work just fine, but there is not a recommended set up process for them.
 
 The best way to start is probably with the [template](https://github.com/harper-rhett/harp-engine-template) to see how a basic project is set up and then jumping into the [documentation](https://app.readthedocs.org/projects/harp-engine/builds/29567953/) for more information. If you'd like to start a project from scratch, I promise you it's stupid simple. Install the [NuGet package](https://www.nuget.org/packages/HarpEngine) and maybe take a look at the [examples](https://github.com/harper-rhett/harp-engine-examples). Ultimately, you will need the [documentation](https://harp-engine.readthedocs.io/en/latest/). The engine may currently be small, but the codebase is becoming quite large.
 
-### Resources
-- [NuGet Package](https://www.nuget.org/packages/HarpEngine)
-- [Template](https://github.com/harper-rhett/harp-engine-template)
-- [Examples](https://github.com/harper-rhett/harp-engine-examples)
-- [Documentation](https://harp-engine.readthedocs.io/en/latest/)
-
-### Minimal Example
+## Minimal Example
 In `Program.cs`:
 ```csharp
 using HarpEngine;
@@ -95,12 +95,12 @@ internal class MyGame : Game // the game class handles scenes
 }
 ```
 
-### Building
+## Building
 A basic build for your own machine is simple. Just press F5. For a release build, however, there are a few more steps.
 
 Right click on your project in the Solution Explorer, and click publish. For the build target, choose folder. Set the output location to whatever you desire. Congratulations! You have just created a publish profile.
 
 Click "show all settings" and change the configuration to "release" and the deployment mode to "self-contained." Drop down "file publish options" and enable "produce single file" and "trim unused code." Now save your changes and slap that big ol' "publish" button. The build folder should be generated in the location you defined, and you can zip the folder up and send it out!
 
-# Contributing
+## Contributing
 I am open to suggestions and criticisms, but __I am not open to pull requests__. This is a learning opportunity, and so building this framework line-by-line is important to me. In the very distant future I may even replace Raylib with my own graphics library, and perhaps Jolt (which I plan to use) with my own physics engine. Along the way, I would like to make 2D and 3D level editors, and possibly node-based shader and texture editors as well. If you are frustrated with my progress, I encourage you to submit an issue. I plan to listen to every soul that even bounces off of my code.
