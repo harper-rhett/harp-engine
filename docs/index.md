@@ -7,6 +7,7 @@ Welcome to the documentation! On this home page, you will find a basic introduct
 Yes, it is a framework. Why is it a framework and what does that mean?
 
 The reason HarpEngine exists is becasue most game development tools are missing at least one of these features:
+
 - Dedicated 2D and 3D modes
 - Immediate-mode drawing
 - UI-free development
@@ -79,6 +80,7 @@ At this point, you could go ahead and start programming your game. But then you 
 
 ## Scenes
 A scene is essentially a collection of entities with several features:
+
 - Layering: Modify entity update and draw order.
 - Registry: High performance look up of entities.
 - Timing: Pausing and timer/animation synchronicity.

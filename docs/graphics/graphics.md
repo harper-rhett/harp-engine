@@ -51,6 +51,7 @@ myRenderTexture.Texture.Draw(x, y, Colors.White);
 And finally, don't forget to clean up your textures! Remember, Raylib is written in C, so these structures have no garbage collection. You must call `texture.Dispose()` or else the memory will not be release until the game exits.
 
 Check out the source code to find out more information about this namespace. Other features include:
+
 - Shaders
 - Images
 - Blend modes

@@ -2,17 +2,20 @@
 > `using HarpEngine.Particles`
 
 The particle system is made to be completely modular and incredibly customizable. A system is configured in 3 separate steps:
+
 - Initializers: Define the initial state of the particles.
 - Modifiers: Define the update loop of the particles.
 - Finalizers: Define what happens when particles die.
 
 Particles also have many rendering options:
+
 - Pixel
 - Circle
 - Polygon
 - Texture
 
 But a particle itself only has a few fields:
+
 - Position
 - Rotation
 - Rotation speed
@@ -20,6 +23,7 @@ But a particle itself only has a few fields:
 - Color (soon to be replaced with `ColorGradient`)
 
 And a particle can be spawned in several ways:
+
 - One at a time
 - In a burst
 - In a stream
@@ -49,6 +53,7 @@ fireworks.SpawnParticle(firework);
 ```
 
 This example is ripped directly from one of the examples hosted on GitHub. It is firework shell, and is simply shot upwards at an angle to explode into more particles. Let's break it down step-by-step:
+
 - `ConicDirection` Initializer: Perhaps in need of a name revision, this sets the direction of particles to a upwards cone with an arc of 30 degrees.
 - `SetSpeed` Initializer: Having the direction set in the previous step, this initializer launches the particles in their existing direction.
 - `OverrideLifespan` Initializer: Particle properties like lifespan can be set when the particle is created, but sometimes it is more readable to do so with initializers.
