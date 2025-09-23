@@ -31,10 +31,10 @@ public abstract class Game
 }
 ```
 
-It is recommended that the `Game` class be treated as a scene management system, as opposed to hosting any actual game logic. Most of your game logic will be written into entities. More on this in [Scene](scene.md) and [Entity](entity.md).
-
-A side note is that frame time is the time between frames, often called delta time. It's a useful variable for syncing actions and animations with frame rate. Though, you will primarily use it when writing entities. For instance:
+Frame time is the time between frames, often called delta time. It's a useful variable for syncing actions and animations with frame rate. Though, you will primarily use it when writing entities. For instance:
 
 ```csharp
 position += velocity * frameTime;
 ```
+
+It is recommended that the `Game` class be treated as a scene management system, as opposed to hosting any actual game logic. Most of your game logic will be written into entities. More on this in the [scene](scene.md) and [entity](entity.md) docs.

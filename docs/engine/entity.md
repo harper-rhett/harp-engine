@@ -53,7 +53,7 @@ public override void Update(float frameTime)
 ```
 
 Finally, `Entity` has several very useful public properties:
-- `Entity.IsUpdating`
-- `Entity.IsRendering`
-- `Entity.UpdateLayer`
-- `Entity.DrawLayer`
+- `Entity.IsUpdating`: Pause the update loop.
+- `Entity.IsRendering`: Pause the draw loop.
+- `Entity.UpdateLayer`: Change the update layer.
+- `Entity.DrawLayer`: Change the draw layer.
