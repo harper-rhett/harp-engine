@@ -1,5 +1,5 @@
 # Entity
-Entities are where all of your core game logic will exist. It is an object that exists physically in your game. Entities can be a player, or a wall, or a magic potion. The implementation is pretty simple, and leaves all of the fun work up to you:
+An entity is an object that exists physically in your game. Entities can be a player, or a wall, or a magic potion. The implementation is pretty simple, and leaves all of the fun work up to you:
 
 ```csharp
 public class CustomEntity : Entity
@@ -26,7 +26,7 @@ public class CustomEntity : Entity
 }
 ```
 
-It's important to note that the entities [scene](scene.md) can be accessed from here! For instance:
+It's important to note that the entities [scene](scene.md) can be accessed from inside the class. For instance:
 
 ```csharp
 public override void Update(float frameTime)
@@ -35,7 +35,7 @@ public override void Update(float frameTime)
 }
 ```
 
-If your entity is host to a custom scene with useful methods, it might be a good idea to save that reference:
+If your entity belongs to a custom scene with useful methods, it might be a good idea to save the scene's reference for later:
 
 ```csharp
 private GameScene gameScene;
@@ -53,7 +53,7 @@ public override void Update(float frameTime)
 ```
 
 Finally, `Entity` has several very useful public properties:
-- Entity.IsUpdating
-- Entity.IsRendering
-- Entity.UpdateLayer
-- Entity.DrawLayer
+- `Entity.IsUpdating`
+- `Entity.IsRendering`
+- `Entity.UpdateLayer`
+- `Entity.DrawLayer`

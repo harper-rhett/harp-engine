@@ -18,4 +18,4 @@ dreamMusic.Update(); // should be called in update...
 dreamMusic.Position = 10; // sets the position to 10 seconds
 ```
 
-Don't forget to call `Dispose()` on these types when you are finished with them to release them from memory!
+Make sure to call `Dispose()` on these types when you are finished using them to release them from memory!
