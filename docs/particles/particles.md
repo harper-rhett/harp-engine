@@ -1,34 +1,34 @@
 # Particles
 > `using HarpEngine.Particles`
 
-The particle system is made to be completely modular and incredibly customizable. A system is configured in 3 separate steps:
+Particles themselves are simple, where each particle is a `struct` with the following fields:
 
-- Initializers: Define the initial state of the particles.
-- Modifiers: Define the update loop of the particles.
-- Finalizers: Define what happens when particles die.
+- Position
+- Rotation
+- Rotation speed
+- Lifespan
+- Color (soon to be replaced with `ColorGradient` to allow more controlled transitions)
 
-Particles also have many rendering options:
+This is probably no surprise to you if you have used particles in other engines. What makes particles special is the system that controls them. `ParticleEngine2D` has several rendering options:
 
 - Pixel
 - Circle
 - Polygon
 - Texture
 
-But a particle itself only has a few fields:
-
-- Position
-- Rotation
-- Rotation speed
-- Lifespan
-- Color (soon to be replaced with `ColorGradient`)
-
-And a particle can be spawned in several ways:
+And particles can be spawned in several ways:
 
 - One at a time
 - In a burst
 - In a stream
 
-HarpEngine comes with several pre-built particle customizations for convenience, which can be found in `ParticleInitializers`, `ParticleModifiers`, and `ParticleFinalizers`. Here is an example:
+But what truly sets the engine apart is how the particle behavior is defined in 3 steps:
+
+- Initializers: Define the initial state of the particles.
+- Modifiers: Define the update loop of the particles.
+- Finalizers: Define what happens when particles die.
+
+HarpEngine comes with several pre-built particle customizations for convenience, which can be found in `ParticleInitializers`, `ParticleModifiers`, and `ParticleFinalizers`. Here is an example of a firework shell that launched into the air at a random angle and spawns a firework explosion on death:
 
 ```csharp
 ParticleEngine2D fireworks = new(scene);
@@ -52,7 +52,7 @@ Particle2D firework = new()
 fireworks.SpawnParticle(firework);
 ```
 
-This example is ripped directly from one of the examples hosted on GitHub. It is firework shell, and is simply shot upwards at an angle to explode into more particles. Let's break it down step-by-step:
+This example is ripped directly from one of the examples hosted on GitHub. Let's break it down step-by-step:
 
 - `ConicDirection` Initializer: Perhaps in need of a name revision, this sets the direction of particles to a upwards cone with an arc of 30 degrees.
 - `SetSpeed` Initializer: Having the direction set in the previous step, this initializer launches the particles in their existing direction.
@@ -62,4 +62,16 @@ This example is ripped directly from one of the examples hosted on GitHub. It is
 - `AdjustColor` Modifier: To be updated when `ColorGradient` is introduced, this modifier changes the particles color from one to another over its lifetime.
 - `CreateBurst` Finalizer: Creates a burst of particles from another particle engine at death.
 
-If you find the built in customizations are not enough, they are all based on delegates and you can design your own.
+The included customizations were not designed to be thorough, because the particle system is intended to be customized by the scripter. Customizations are based on delegates which are easy enough to design. Here's what the included velocity modifier looks like:
+
+```csharp
+public static Particle2DModifier AddVelocity(Vector2 velocity)
+{
+	return (ref Particle2D particle, float time, float frameTime) =>
+	{
+		particle.Velocity += velocity * frameTime;
+	};
+}
+```
+
+More included particle customizations will be added in the future.

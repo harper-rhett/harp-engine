@@ -1,13 +1,13 @@
 > `using HarpEngine.Input;`
 
 # Input
-Input is as simple as any game developer could hope it would be! Check out a keyboard pressed check:
+Input is as simple as any game developer could hope for! Check out a keyboard pressed check:
 
 ```csharp
 if (Keyboard.IsKeyPressed(KeyboardKey.Space)) Jump();
 ```
 
-Ah... so simple! Mouse input is roughly the same, though there are many ways to get the mouse position:
+Ah... so simple! Mouse input is roughly the same, though there are many varieties of mouse positions:
 
 ```csharp
 int mouseWindowX = Mouse.WindowX; // mouse x relative to the window
