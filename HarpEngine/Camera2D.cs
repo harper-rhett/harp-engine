@@ -28,7 +28,7 @@ public class Camera2D : Camera
 		raylibCamera = new(centeredOffset, Vector2.Zero, 0, 1);
 	}
 
-	public override void Update(float frameTime)
+	public override void Update()
 	{
 		raylibCamera.Target = Transform.WorldPosition;
 		raylibCamera.Rotation = Transform.WorldRotation;

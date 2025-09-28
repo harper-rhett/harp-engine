@@ -24,6 +24,7 @@ public static class Engine
 	public static int GameHeight => settings.GameHeight;
 	public static int HalfGameWidth { get; private set; }
 	public static int HalfGameHeight { get; private set; }
+	public static float FrameTime {  get; private set; }
 
 	public static void Initialize(EngineSettings engineSettings)
 	{
@@ -53,9 +54,9 @@ public static class Engine
 
 	private static void MasterUpdate()
 	{
-		float frameTime = GetFrameTime();
-		if (frameTime > 0.1f) frameTime = 0.1f;
-		game.Update(frameTime);
+		FrameTime = GetFrameTime();
+		if (FrameTime > 0.1f) FrameTime = 0.1f;
+		game.Update();
 		Window.Renderer.Update(gameRenderTexture);
 	}
 

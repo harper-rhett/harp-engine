@@ -37,7 +37,7 @@ public abstract class Entity
 		scene.Entities.Add(this);
 	}
 
-	public virtual void Update(float frameTime) { }
+	public virtual void Update() { }
 	public virtual void Draw() { }
 	public virtual void DrawGUI() { }
 
