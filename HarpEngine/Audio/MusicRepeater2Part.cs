@@ -20,11 +20,11 @@ public class MusicRepeater2Part : Entity
 		this.repeatedMusic = repeatedMusic;
 	}
 
-	public override void Update(float frameTime)
+	public override void Update()
 	{
 		if (isStarted && !isPaused)
 		{
-			timePlayed += frameTime;
+			timePlayed += Engine.FrameTime;
 			bool wasPlayingInitial = playingInitial;
 			playingInitial = timePlayed <= initialMusicEndTime;
 			if (wasPlayingInitial != playingInitial) repeatedMusic.Play();

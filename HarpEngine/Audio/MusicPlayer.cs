@@ -17,11 +17,11 @@ public class MusicPlayer : Entity
 		musicDuration = music.Duration;
 	}
 
-	public override void Update(float frameTime)
+	public override void Update()
 	{
 		if (isStarted && !isPaused)
 		{
-			timePlayed += frameTime;
+			timePlayed += Engine.FrameTime;
 			music.Update();
 			if (timePlayed > endTime) Finish();
 		}

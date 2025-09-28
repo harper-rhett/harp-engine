@@ -43,7 +43,7 @@ public sealed class ParticleEngine2D : Entity
 		fireTimer.IsUpdating = false;
 	}
 
-	public override void Update(float frameTime)
+	public override void Update()
 	{
 		for (int particleIndex = count - 1; particleIndex >= 0; particleIndex--)
 		{
@@ -59,7 +59,7 @@ public sealed class ParticleEngine2D : Entity
 			}
 
 			// Apply modifiers
-			foreach (Particle2DModifier modifier in modifiers) modifier(ref particle, scene.Time, frameTime);
+			foreach (Particle2DModifier modifier in modifiers) modifier(ref particle, scene.Time, Engine.FrameTime);
 		}
 	}
 

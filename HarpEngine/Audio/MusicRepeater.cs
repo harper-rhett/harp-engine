@@ -11,7 +11,7 @@ public class MusicRepeater : Entity
 		this.music = music;
 	}
 
-	public override void Update(float frameTime)
+	public override void Update()
 	{
 		if (isStarted && !isPaused) music.Update();
 	}

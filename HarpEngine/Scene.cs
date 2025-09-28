@@ -22,22 +22,22 @@ public class Scene
 		BackgroundColor = backgroundColor;
 	}
 
-	public void Update(float frameTime)
+	public void Update()
 	{
 		if (IsPaused) return;
-		Time += frameTime * TimeModifier;
+		Time += Engine.FrameTime * TimeModifier;
 
 		Entities.ProcessAdditions();
 		Entities.ProcessMoves();
-		UpdateEntities(frameTime);
+		UpdateEntities();
 		Entities.ProcessRemovals();
 	}
 
-	private void UpdateEntities(float frameTime)
+	private void UpdateEntities()
 	{
 		foreach (Entity entity in Entities.InUpdateOrder)
 		{
-			if (entity.IsUpdating) entity.Update(frameTime);
+			if (entity.IsUpdating) entity.Update();
 		}
 	}
 
