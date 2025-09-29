@@ -64,7 +64,7 @@ internal class MyGame : Game
 
 	}
 
-	public override void Update(float frameTime)
+	public override void Update()
 	{
 		
 	}
@@ -97,9 +97,9 @@ internal class MyGame : Game
 		new CustomEntity(scene); // a new CustomEntity object is added to the scene
 	}
 
-	public override void Update(float frameTime)
+	public override void Update()
 	{
-		scene.Update(frameTime);
+		scene.Update();
 	}
 
 	public override void Draw()
@@ -153,9 +153,9 @@ internal class MyGame : Game
 		activeScene = new MenuScene();
 	}
 
-	public override void Update(float frameTime)
+	public override void Update()
 	{
-		activeScene.Update(frameTime);
+		activeScene.Update();
 	}
 
 	public override void Draw()

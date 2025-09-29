@@ -13,9 +13,9 @@ internal class MyGame : Game
 		new CustomEntity(scene); // inherits from entity and is added to scene
 	}
 
-	public override void Update(float frameTime)
+	public override void Update()
 	{
-		scene.Update(frameTime);
+		scene.Update();
 	}
 
 	public override void Draw()
