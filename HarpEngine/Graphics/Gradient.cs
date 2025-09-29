@@ -52,8 +52,11 @@ public class Gradient
 		float firstPosition = firstPoint.Position;
 		float secondPosition = secondPoint.Position;
 		float range = secondPosition - firstPosition;
-		
-		return Color.Lerp(firstPoint.Color, secondPoint.Color, x);
+
+		float offset = position - firstPosition;
+		float progress = offset / range;
+
+		return Color.Lerp(firstPoint.Color, secondPoint.Color, progress);
 	}
 
 	private struct ColorPoint : IComparable<ColorPoint>
