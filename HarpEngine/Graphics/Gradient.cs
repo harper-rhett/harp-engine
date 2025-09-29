@@ -37,9 +37,10 @@ public class Gradient
 		{
 			ColorPoint nextColorPoint = colors[index];
 
-			if (position < nextColorPoint.Position)
+			if (position <= nextColorPoint.Position)
 			{
-				return SamplePoints(previousColorPoint, nextColorPoint, position);
+				if (index == 0) return previousColorPoint.Color;
+				else return SamplePoints(previousColorPoint, nextColorPoint, position);
 			}
 
 			previousColorPoint = nextColorPoint;
