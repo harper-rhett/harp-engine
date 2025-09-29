@@ -1,17 +1,21 @@
-﻿namespace HarpEngine.Graphics;
+﻿using System.Runtime.CompilerServices;
+
+namespace HarpEngine.Graphics;
 
 public class Gradient
 {
-	private List<ColorPoint> colors = new();
+	private List<ColorPoint> colorPoints = new();
 
-	public Gradient(Color color, float colorPosition)
+	public Gradient(params Color[] colors)
 	{
-		ColorPoint colorPoint = new()
+		float spacing = 1f / (colors.Length - 1);
+		for (int colorIndex = 0; colorIndex < colors.Length; colorIndex++)
 		{
-			Color = color,
-			Position = colorPosition
-		};
-		colors.Add(colorPoint);
+			Color color = colors[colorIndex];
+			float position = colorIndex * spacing;
+			ColorPoint colorPoint = new(color, position);
+			colorPoints.Add(colorPoint);
+		}
 	}
 
 	public void AddColor(Color color, float position)
@@ -21,31 +25,41 @@ public class Gradient
 			Color = color,
 			Position = position
 		};
-		int insertIndex = colors.BinarySearch(newColorPoint);
+		int insertIndex = colorPoints.BinarySearch(newColorPoint);
 		if (insertIndex < 0) insertIndex = ~insertIndex;
-		colors.Insert(insertIndex, newColorPoint);
+		colorPoints.Insert(insertIndex, newColorPoint);
 	}
 
 	public Color Sample(float position)
 	{
+		// If no color, return white
+		if (colorPoints.Count == 0) return Colors.White;
+
 		// If only one color, return that color
-		ColorPoint previousColorPoint = colors[0];
-		if (colors.Count == 1) return previousColorPoint.Color;
+		ColorPoint previousColorPoint = colorPoints[0];
+		if (colorPoints.Count == 1) return previousColorPoint.Color;
 
 		// If multiple colors, search for the right range
-		for (int index = 0; index < colors.Count; index++)
+		for (int index = 0; index < colorPoints.Count; index++)
 		{
-			ColorPoint nextColorPoint = colors[index];
+			ColorPoint nextColorPoint = colorPoints[index];
 
 			if (position <= nextColorPoint.Position)
 			{
 				if (index == 0) return previousColorPoint.Color;
 				else return SamplePoints(previousColorPoint, nextColorPoint, position);
 			}
+			else
+			{
+				ColorPoint lastColorPoint = colorPoints.Last();
+				if (position > lastColorPoint.Position) return lastColorPoint.Color;
+			}
 
 			previousColorPoint = nextColorPoint;
 		}
-		return Colors.Clear;
+
+		// If for some reason we reach this point, return white
+		return Colors.White;
 	}
 
 	private Color SamplePoints(ColorPoint firstPoint, ColorPoint secondPoint, float position)
@@ -64,6 +78,12 @@ public class Gradient
 	{
 		public Color Color;
 		public float Position;
+
+		public ColorPoint(Color color, float position)
+		{
+			Color = color;
+			Position = position;
+		}
 
 		public int CompareTo(ColorPoint otherColorPoint)
 		{
