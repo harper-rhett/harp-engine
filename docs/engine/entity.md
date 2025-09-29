@@ -9,7 +9,7 @@ public class CustomEntity : Entity
 		// Initialize
 	}
 
-	public override void Update(float frameTime)
+	public override void Update()
 	{
 		// Movement, animation, input, etc.
 	}
@@ -29,7 +29,7 @@ public class CustomEntity : Entity
 It's important to note that the entities [scene](scene.md) can be accessed from inside the class. For instance:
 
 ```csharp
-public override void Update(float frameTime)
+public override void Update()
 {
 	if (scene.Time > 5) Explode();
 }
@@ -46,7 +46,7 @@ public CustomEntity(GameScene gameScene) : base(gameScene)
 	this.gameScene = gameScene;
 }
 
-public override void Update(float frameTime)
+public override void Update()
 {
 	if (health <= 0) gameScene.GameOver();
 }

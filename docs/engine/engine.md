@@ -22,5 +22,12 @@ The `Engine` class also has some useful public properties and methods you can us
 - `Engine.GameHeight`
 - `Engine.HalfGameWidth`
 - `Engine.HalfGameHeight`
+- `Engine.FrameTime`
 - `Engine.SetTargetFPS(int fps)`
 - `Engine.TakeScreenshot(string fileName)`
+
+Frame time is the time between frames, often called delta time. It's a useful variable for syncing actions and animations with frame rate. Though, you will primarily use it when writing entities. For instance:
+
+```csharp
+myEntity.position += velocity * Engine.FrameTime;
+```

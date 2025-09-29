@@ -4,11 +4,18 @@ internal abstract class ParticleRenderer2D
 {
 	public abstract void Draw(Particle2D particle);
 
+	private Color GetParticleColor(Particle2D particle)
+	{
+		float progress = 1 - (particle.timeToDeath / particle.Lifespan);
+		return particle.Gradient.Sample(progress);
+	}
+
 	public class Pixel : ParticleRenderer2D
 	{
 		public override void Draw(Particle2D particle)
 		{
-			Primitives.DrawPixel(particle.Position, particle.Color);
+			Color color = GetParticleColor(particle);
+			Primitives.DrawPixel(particle.Position, color);
 		}
 	}
 
@@ -23,7 +30,8 @@ internal abstract class ParticleRenderer2D
 
 		public override void Draw(Particle2D particle)
 		{
-			Primitives.DrawCircle(particle.Position, radius, particle.Color);
+			Color color = GetParticleColor(particle);
+			Primitives.DrawCircle(particle.Position, radius, color);
 		}
 	}
 
@@ -40,7 +48,8 @@ internal abstract class ParticleRenderer2D
 
 		public override void Draw(Particle2D particle)
 		{
-			Primitives.DrawPolygon(particle.Position, sides, radius, particle.Rotation, particle.Color);
+			Color color = GetParticleColor(particle);
+			Primitives.DrawPolygon(particle.Position, sides, radius, particle.Rotation, color);
 		}
 	}
 
@@ -60,7 +69,8 @@ internal abstract class ParticleRenderer2D
 		public override void Draw(Particle2D particle)
 		{
 			Rectangle drawRectangle = new(particle.Position, texture2D.Width, texture2D.Height);
-			texture2D.Draw(particleRectangle, drawRectangle, textureOrigin, particle.Rotation, particle.Color);
+			Color color = GetParticleColor(particle);
+			texture2D.Draw(particleRectangle, drawRectangle, textureOrigin, particle.Rotation, color);
 		}
 	}
 }

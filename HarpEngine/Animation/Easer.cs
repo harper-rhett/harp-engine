@@ -24,7 +24,7 @@ public class Easer : Entity
 		this.easeSeconds = easeSeconds;
 	}
 
-	public override void Update(float frameTime)
+	public override void Update()
 	{
 		if (!IsEasing) return;
 

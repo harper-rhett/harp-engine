@@ -13,8 +13,8 @@ public struct Particle2D
 	public float Rotation;
 	public float RotationSpeed;
 	public float Lifespan;
-	public Color Color;
-	internal float spawnTime;
+	public Gradient Gradient = new();
+	internal float timeToDeath;
 
 	public Particle2D()
 	{

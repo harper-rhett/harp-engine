@@ -26,14 +26,28 @@ public static partial class ParticleInitializers
 		return (ref Particle2D particle) => particle.RotationSpeed = rotationSpeed;
 	}
 
-	public static Particle2DInitializer OverrideColor(Color color)
+	public static Particle2DInitializer OverrideGradient(Gradient gradient)
 	{
-		return (ref Particle2D particle) => particle.Color = color;
+		return (ref Particle2D particle) => particle.Gradient = gradient;
 	}
 
 	public static Particle2DInitializer OverrideLifespan(float lifespan)
 	{
 		return (ref Particle2D particle) => particle.Lifespan = lifespan;
+	}
+
+	public static Particle2DInitializer SetColor(Color color)
+	{
+		return (ref Particle2D particle) => particle.Gradient = new(color);
+	}
+
+	public static Particle2DInitializer SetColors(params Color[] colors)
+	{
+		return (ref Particle2D particle) =>
+		{
+			Gradient gradient = new(colors);
+			particle.Gradient = gradient;
+		};
 	}
 
 	public static Particle2DInitializer AddVelocity(Vector2 velocity)

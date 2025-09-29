@@ -83,9 +83,9 @@ internal class MyGame : Game // the game class handles scenes
     // Though, that would defeat the purpose of this framework.
 	}
 
-	public override void Update(float frameTime)
+	public override void Update()
 	{
-		scene.Update(frameTime);
+		scene.Update();
 	}
 
 	public override void Draw()

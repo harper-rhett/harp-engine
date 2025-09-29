@@ -14,11 +14,11 @@ public class FireTimer : Entity
 		backloggedTime = cooldownTime;
 	}
 
-	public override void Update(float frameTime)
+	public override void Update()
 	{
 		if (!isStarted) return;
 
-		backloggedTime += frameTime;
+		backloggedTime += Engine.FrameTime;
 		int backloggedActions = (int)MathF.Floor(backloggedTime / CooldownTime);
 		backloggedTime -= backloggedActions * CooldownTime;
 
