@@ -1,12 +1,12 @@
 ﻿namespace HarpEngine.Shapes;
 
-public class Circle : Entity
+public class CircleShape : Entity
 {
 	public Transform2D Transform = new();
 	public float Radius;
 	public Color Color;
 
-	public Circle(Scene scene, float radius, Color color) : base(scene)
+	public CircleShape(Scene scene, float radius, Color color) : base(scene)
 	{
 		Radius = radius;
 		Color = color;

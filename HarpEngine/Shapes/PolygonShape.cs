@@ -1,6 +1,6 @@
 ﻿namespace HarpEngine.Shapes;
 
-public class Polygon : Entity
+public class PolygonShape : Entity
 {
 	// General
 	public Transform2D Transform = new();
@@ -8,7 +8,7 @@ public class Polygon : Entity
 	public float Radius;
 	public Color Color;
 
-	public Polygon(Scene scene, float radius, int sideCount, Color color) : base(scene)
+	public PolygonShape(Scene scene, float radius, int sideCount, Color color) : base(scene)
 	{
 		Radius = radius;
 		SideCount = sideCount;
