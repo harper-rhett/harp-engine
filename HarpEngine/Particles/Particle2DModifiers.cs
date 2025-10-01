@@ -27,14 +27,4 @@ public partial class ParticleModifiers
 			particle.Velocity += velocity * frameTime;
 		};
 	}
-
-	// Will replace this where the input is only a curve when color gradients are added to the particle struct
-	public static Particle2DModifier AdjustColor(Color startColor, Color endColor, Curve curve)
-	{
-		return (ref Particle2D particle, float time, float frameTime) =>
-		{
-			float amount = (time - particle.spawnTime) / particle.Lifespan;
-			particle.Color = Color.Lerp(startColor, endColor, curve(amount));
-		};
-	}
 }

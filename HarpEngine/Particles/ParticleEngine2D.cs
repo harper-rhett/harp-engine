@@ -51,12 +51,13 @@ public sealed class ParticleEngine2D : Entity
 			ref Particle2D particle = ref particles[particleIndex];
 
 			// Check if particle has died
-			if (scene.Time > particle.spawnTime + particle.Lifespan)
+			if (particle.timeToDeath <= 0)
 			{
 				foreach (Particle2DFinalizer finalizer in finalizers) finalizer(particle, this);
 				RemoveParticle(particleIndex);
 				continue;
 			}
+			particle.timeToDeath -= Engine.FrameTime;
 
 			// Apply modifiers
 			foreach (Particle2DModifier modifier in modifiers) modifier(ref particle, scene.Time, Engine.FrameTime);
@@ -110,7 +111,7 @@ public sealed class ParticleEngine2D : Entity
 
 		// Array business
 		if (count == particles.Length) ResizeParticles();
-		particleTemplate.spawnTime = scene.Time;
+		particleTemplate.timeToDeath = particleTemplate.Lifespan;
 		particles[count++] = particleTemplate;
 	}
 

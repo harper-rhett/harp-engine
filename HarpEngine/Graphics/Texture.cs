@@ -25,6 +25,10 @@ public unsafe struct Texture : IDisposable
 	private static extern void UnloadTexture(Texture texture);
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void SetTextureFilter(Texture texture, TextureFilter textureFilter);
+	public void SetFilter(TextureFilter textureFilter) => SetTextureFilter(this, textureFilter);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void DrawTexture(Texture texture, int x, int y, Color tint);
 	public void Draw(int x, int y, Color tint) => DrawTexture(this, x, y, tint);
 	public void Draw(Vector2 position, Color tint) => DrawTexture(this, (int)float.Round(position.X), (int)float.Round(position.Y), tint);
