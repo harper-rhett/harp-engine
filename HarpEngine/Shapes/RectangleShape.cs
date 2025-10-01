@@ -15,11 +15,6 @@ public class RectangleShape : Entity
 		Color = color;
 	}
 
-	public override void Update()
-	{
-		
-	}
-
 	public override void Draw()
 	{
 		Rectangle rectangle = new(Transform.WorldPosition, Width, Height);

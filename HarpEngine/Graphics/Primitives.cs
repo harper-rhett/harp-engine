@@ -21,6 +21,10 @@ public static class Primitives
 	public static void DrawLine(Vector2 startPosition, Vector2 endPosition, Color color) => DrawLineV(startPosition, endPosition, color);
 
 	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void DrawLineEx(Vector2 startPosition, Vector2 endPosition, float thickness, Color color);
+	public static void DrawLine(Vector2 startPosition, Vector2 endPosition, float thickness, Color color) => DrawLineEx(startPosition, endPosition, thickness, color);
+
+	[DllImport("raylib.dll", CallingConvention = CallingConvention.Cdecl)]
 	private static extern void DrawLineStrip(Vector2[] positions, int positionCount, Color color);
 	public static void DrawLine(Vector2[] positions, Color color) => DrawLineStrip(positions, positions.Length, color);
 
